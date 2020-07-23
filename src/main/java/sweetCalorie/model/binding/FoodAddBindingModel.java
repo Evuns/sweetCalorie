@@ -1,17 +1,17 @@
-package sweetCalorie.model.entity;
+package sweetCalorie.model.binding;
+
+import sweetCalorie.model.entity.FoodCategory;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.Table;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-@Entity
-@Table(name = "foods")
-public class Food extends BaseEntity {
+public class FoodAddBindingModel {
 
     private String name;
-    private FoodCategory category;
+    private String category;
     private String imageUrl;
     private double calories;
     private double proteins;
@@ -19,10 +19,10 @@ public class Food extends BaseEntity {
     private double sugars;
     private double fats;
 
-    public Food() {
+    public FoodAddBindingModel() {
     }
 
-    @Column(nullable = false)
+    @NotNull
     public String getName() {
         return name;
     }
@@ -31,17 +31,16 @@ public class Food extends BaseEntity {
         this.name = name;
     }
 
-    @Column(nullable = false)
-    @Enumerated
-    public FoodCategory getCategory() {
+    @NotNull
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(FoodCategory category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
-    @Column(name = "image")
+    @Pattern(regexp = "(.*.jpg)|(.*.png)")
     public String getImageUrl() {
         return imageUrl;
     }
@@ -50,7 +49,7 @@ public class Food extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    @Column(nullable = false)
+    @NotNull
     @Min(0)
     public double getCalories() {
         return calories;
@@ -60,7 +59,7 @@ public class Food extends BaseEntity {
         this.calories = calories;
     }
 
-    @Column(nullable = false)
+    @NotNull
     @Min(0)
     public double getProteins() {
         return proteins;
@@ -70,7 +69,7 @@ public class Food extends BaseEntity {
         this.proteins = proteins;
     }
 
-    @Column(nullable = false)
+    @NotNull
     @Min(0)
     public double getCarbohydrates() {
         return carbohydrates;
@@ -80,17 +79,6 @@ public class Food extends BaseEntity {
         this.carbohydrates = carbohydrates;
     }
 
-    @Column(nullable = false)
-    @Min(0)
-    public double getFats() {
-        return fats;
-    }
-
-    public void setFats(double fats) {
-        this.fats = fats;
-    }
-
-    @Column
     @Min(0)
     public double getSugars() {
         return sugars;
@@ -98,5 +86,15 @@ public class Food extends BaseEntity {
 
     public void setSugars(double sugars) {
         this.sugars = sugars;
+    }
+
+    @NotNull
+    @Min(0)
+    public double getFats() {
+        return fats;
+    }
+
+    public void setFats(double fats) {
+        this.fats = fats;
     }
 }

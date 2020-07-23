@@ -1,7 +1,11 @@
 package sweetCalorie.model.entity;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Past;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,9 +16,11 @@ public class UserProfile extends BaseEntity {
     private User user;
     private int height;
     private List<Double> weight;
-    private String gender;
+    private Gender gender;
+    private LocalDate dateOfBirth;
     private int age;
     private ActivityLevel activityLevel;
+    private List<Recipe> recipes;
 
     public UserProfile() {
         this.weight = new LinkedList<>();
@@ -49,14 +55,26 @@ public class UserProfile extends BaseEntity {
         this.weight = weight;
     }
 
-    public String getGender() {
+    @Enumerated
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
+    @Column
+    @Past
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    @Formula(value = "date_part('year', age(dateOfBirth))")
     public int getAge() {
         return age;
     }
@@ -65,11 +83,21 @@ public class UserProfile extends BaseEntity {
         this.age = age;
     }
 
+    @Enumerated
     public ActivityLevel getActivityLevel() {
         return activityLevel;
     }
 
     public void setActivityLevel(ActivityLevel activityLevel) {
         this.activityLevel = activityLevel;
+    }
+
+    @OneToMany
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
     }
 }

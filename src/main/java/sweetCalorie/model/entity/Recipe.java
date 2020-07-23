@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -13,8 +14,11 @@ import java.util.Map;
 @Table(name = "recipes")
 public class Recipe extends BaseEntity {
 
+
     private String title;
     private String description;
+    private String imageUrl;
+    private LocalDate postDate;
     private List<Ingredient> ingredients;
     private List<Comment> comments;
 
@@ -38,6 +42,24 @@ public class Recipe extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Column(name = "image")
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    @Column(name = "post_date")
+    public LocalDate getPostDate() {
+        return postDate;
+    }
+
+    public void setPostDate(LocalDate postDate) {
+        this.postDate = postDate;
     }
 
     @ManyToMany
