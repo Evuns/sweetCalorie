@@ -1,5 +1,5 @@
 package sweetCalorie.model.entity;
 
 public enum Gender {
-    MALE, FEMALE
+    МЪЖ, ЖЕНА
 }

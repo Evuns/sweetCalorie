@@ -40,7 +40,7 @@ public class FoodAddBindingModel {
         this.category = category;
     }
 
-    @Pattern(regexp = "(.*.jpg)|(.*.png)")
+
     public String getImageUrl() {
         return imageUrl;
     }

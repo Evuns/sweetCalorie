@@ -1,18 +1,18 @@
 [
   {
     "name": "Кока кола",
-    "category": "DRINKS",
-    "imageUrl": "https://cdn.pixabay.com/photo/2014/09/12/18/20/coca-cola-443123_960_720.png",
+    "category": "НАПИТКИ",
+    "imageUrl": "https://images.pexels.com/photos/2668308/pexels-photo-2668308.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "calories": 44,
     "proteins": 0,
     "carbohydrates": 10.9,
-    "sugars": null,
+    "sugars": 0,
     "fats": 0
   },
   {
     "name": "Сода",
-    "category": "DRINKS",
-    "imageUrl": "https://cdn.pixabay.com/photo/2016/07/21/11/17/mineral-water-1532300_960_720.jpg",
+    "category": "НАПИТКИ",
+    "imageUrl": "https://images.pexels.com/photos/4021879/pexels-photo-4021879.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "calories": 40,
     "proteins": 0.07,
     "carbohydrates": 10.24,
@@ -20,9 +20,9 @@
     "fats": 0.1
   },
   {
-    "name": "Фанта",
-    "category": "DRINKS",
-    "imageUrl": "https://media.istockphoto.com/photos/fanta-orange-plastic-bottle-picture-id513393326",
+    "name": "Портокалов сок",
+    "category": "НАПИТКИ",
+    "imageUrl": "https://images.pexels.com/photos/1337824/pexels-photo-1337824.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "calories": 30,
     "proteins": 0,
     "carbohydrates": 7.1,
@@ -31,12 +31,222 @@
   },
   {
     "name": "Кафе",
-    "category": "DRINKS",
-    "imageUrl": "https://cdn.pixabay.com/photo/2017/09/04/18/39/coffee-2714970__340.jpg",
+    "category": "НАПИТКИ",
+    "imageUrl": "https://images.pexels.com/photos/130865/pexels-photo-130865.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "calories": 1,
     "proteins": 0.12,
     "carbohydrates": 0.04,
     "sugars": 0,
     "fats": 0.02
+  },
+  {
+    "name": "Домати",
+    "category": "ЗЕЛЕНЧУЦИ",
+    "imageUrl": "https://images.pexels.com/photos/209401/pexels-photo-209401.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 18,
+    "proteins": 0.88,
+    "carbohydrates": 3.92,
+    "sugars": 2.63,
+    "fats": 0.2
+  },
+  {
+    "name": "Тиквички",
+    "category": "ЗЕЛЕНЧУЦИ",
+    "imageUrl": "https://images.pexels.com/photos/128420/pexels-photo-128420.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 16,
+    "proteins": 1.21,
+    "carbohydrates": 3.35,
+    "sugars": 1.73,
+    "fats": 0.18
+  },
+  {
+    "name": "Краставици",
+    "category": "ЗЕЛЕНЧУЦИ",
+    "imageUrl": "https://images.pexels.com/photos/3568039/pexels-photo-3568039.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 16,
+    "proteins": 1.21,
+    "carbohydrates": 3.35,
+    "sugars": 1.73,
+    "fats": 0.18
+  },
+  {
+    "name": "Картофи",
+    "category": "ЗЕЛЕНЧУЦИ",
+    "imageUrl": "https://images.pexels.com/photos/273825/pexels-photo-273825.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 70,
+    "proteins": 1.68,
+    "carbohydrates": 15.71,
+    "sugars": 1.15,
+    "fats": 0.1
+  },
+  {
+    "name": "Бонбони",
+    "category": "СЛАДКИ",
+    "imageUrl": "https://images.pexels.com/photos/4618548/pexels-photo-4618548.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 566,
+    "proteins": 7,
+    "carbohydrates": 51,
+    "sugars": 47,
+    "fats": 36
+  },
+  {
+    "name": "Сладолед",
+    "category": "СЛАДКИ",
+    "imageUrl": "https://images.pexels.com/photos/1893566/pexels-photo-1893566.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 208,
+    "proteins": 3,
+    "carbohydrates": 33,
+    "sugars": 22.3,
+    "fats": 7
+  },
+  {
+    "name": "Шоколад",
+    "category": "СЛАДКИ",
+    "imageUrl": "https://images.pexels.com/photos/65882/chocolate-dark-coffee-confiserie-65882.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 535,
+    "proteins": 7.65,
+    "carbohydrates": 59.4,
+    "sugars": 51.5,
+    "fats": 29.66
+  },
+  {
+    "name": "Ябълка",
+    "category": "ПЛОДОВЕ",
+    "imageUrl": "https://images.pexels.com/photos/347926/pexels-photo-347926.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 52,
+    "proteins": 0.26,
+    "carbohydrates": 13.81,
+    "sugars": 10.39,
+    "fats": 0.17
+  },
+  {
+    "name": "Банан",
+    "category": "ПЛОДОВЕ",
+    "imageUrl": "https://images.pexels.com/photos/1093038/pexels-photo-1093038.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 89,
+    "proteins": 1.09,
+    "carbohydrates": 22.84,
+    "sugars": 12.23,
+    "fats": 0.33
+  },
+  {
+    "name": "Праскова",
+    "category": "ПЛОДОВЕ",
+    "imageUrl": "https://images.pexels.com/photos/2889197/pexels-photo-2889197.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 39,
+    "proteins": 0.91,
+    "carbohydrates": 9.54,
+    "sugars": 8.39,
+    "fats": 0.25
+  },
+  {
+    "name": "Хляб",
+    "category": "ТЕСТЕНИ",
+    "imageUrl": "https://images.pexels.com/photos/5802/bread-food-cooking.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 174,
+    "proteins": 8.8,
+    "carbohydrates": 51.9,
+    "sugars": 0.24,
+    "fats": 3
+  },
+  {
+    "name": "Спагети",
+    "category": "ТЕСТЕНИ",
+    "imageUrl": "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 157,
+    "proteins": 5.76,
+    "carbohydrates": 30.68,
+    "sugars": 0.56,
+    "fats": 0.92
+  },
+  {
+    "name": "Кисело мляко",
+    "category": "МЛЕЧНИ",
+    "imageUrl": "https://images.pexels.com/photos/373882/pexels-photo-373882.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 56,
+    "proteins": 3.4,
+    "carbohydrates": 4.2,
+    "sugars": 4.2,
+    "fats": 2.9
+  },
+  {
+    "name": "Сирене",
+    "category": "МЛЕЧНИ",
+    "imageUrl": "https://images.freeimages.com/images/large-previews/86a/white-cheese-1321655.jpg",
+    "calories": 244,
+    "proteins": 13,
+    "carbohydrates": 1.4,
+    "sugars": 0,
+    "fats": 20
+  },
+  {
+    "name": "Кашкавал",
+    "category": "МЛЕЧНИ",
+    "imageUrl": "https://images.pexels.com/photos/821365/pexels-photo-821365.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 357,
+    "proteins": 28,
+    "carbohydrates": 0.6,
+    "sugars": 0,
+    "fats": 27
+  },
+  {
+    "name": "Пилешко",
+    "category": "МЕСНИ",
+    "imageUrl": "https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 237,
+    "proteins": 27.07,
+    "carbohydrates": 0,
+    "sugars": 0,
+    "fats": 13.49
+  },
+  {
+    "name": "Свинско",
+    "category": "МЕСНИ",
+    "imageUrl": "https://images.pexels.com/photos/361184/asparagus-steak-veal-steak-veal-361184.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 271,
+    "proteins": 27.34,
+    "carbohydrates": 0.6,
+    "sugars": 0,
+    "fats": 17.04
+  },
+  {
+    "name": "Телешко",
+    "category": "МЕСНИ",
+    "imageUrl": "https://images.pexels.com/photos/1251208/pexels-photo-1251208.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 276,
+    "proteins": 25.35,
+    "carbohydrates": 0,
+    "sugars": 0,
+    "fats": 18.58
+  },
+  {
+    "name": "Кренвирш",
+    "category": "МЕСНИ",
+    "imageUrl": "https://images.freeimages.com/images/small-previews/384/wurst-1323975.jpg",
+    "calories": 230,
+    "proteins": 11,
+    "carbohydrates": 3.4,
+    "sugars": 0,
+    "fats": 19
+  },
+  {
+    "name": "Скумрия",
+    "category": "РИБА",
+    "imageUrl": "https://images.pexels.com/photos/3650159/pexels-photo-3650159.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 167,
+    "proteins": 19.32,
+    "carbohydrates": 0,
+    "sugars": 0,
+    "fats": 9.36
+  },
+  {
+    "name": "Пъстърва",
+    "category": "РИБА",
+    "imageUrl": "https://images.freeimages.com/images/small-previews/3a8/ingredients-for-a-meal-1324588.jpg",
+    "calories": 188,
+    "proteins": 24.37,
+    "carbohydrates": 0.41,
+    "sugars": 0.09,
+    "fats": 9.16
   }
 ]

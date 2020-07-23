@@ -50,16 +50,11 @@ public class FoodServiceImpl implements FoodService {
 
         for (FoodAddBindingModel foodAdd : foodAddBindingModels) {
             if (this.validationUtil.isValid(foodAdd)) {
-
                 if (this.foodRepository.findByName(foodAdd.getName()) == null) {
                     Food food = this.modelMapper.map(foodAdd, Food.class);
-
                     this.foodRepository.saveAndFlush(food);
-
                 }
-
             }
-
         }
     }
 }

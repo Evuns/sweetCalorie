@@ -8,7 +8,11 @@ import sweetCalorie.service.FoodService;
 @Component
 public class DataInitializer implements CommandLineRunner {
 
-    private FoodService foodService;
+    private final FoodService foodService;
+
+    public DataInitializer(FoodService foodService) {
+        this.foodService = foodService;
+    }
 
     @Override
     public void run(String... args) throws Exception {

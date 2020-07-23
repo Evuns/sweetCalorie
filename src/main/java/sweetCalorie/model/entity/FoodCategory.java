@@ -2,5 +2,5 @@ package sweetCalorie.model.entity;
 
 
 public enum FoodCategory {
-    DRINK, FRUIT, VEGETABLE, SWEETS, PASTA, DAIRY, MEAT, FISH
+    НАПИТКИ, ПЛОДОВЕ, ЗЕЛЕНЧУЦИ, СЛАДКИ, ТЕСТЕНИ, МЛЕЧНИ, МЕСНИ, РИБА
 }
