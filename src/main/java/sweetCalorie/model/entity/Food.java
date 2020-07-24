@@ -22,6 +22,19 @@ public class Food extends BaseEntity {
     public Food() {
     }
 
+    public Food( String name, String category, String imageUrl,
+                 double calories, double proteins, double carbohydrates,
+                 double sugars, double fats){
+        this.name = name;
+        this.category = FoodCategory.valueOf(category.toUpperCase());
+        this.imageUrl = imageUrl;
+        this.calories = calories;
+        this.proteins = proteins;
+        this.carbohydrates = carbohydrates;
+        this.sugars = sugars;
+        this.fats = fats;
+    }
+
     @Column(nullable = false)
     public String getName() {
         return name;

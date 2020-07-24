@@ -3,12 +3,8 @@ package sweetCalorie.model.entity;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Table(name = "recipes")
@@ -19,6 +15,7 @@ public class Recipe extends BaseEntity {
     private String description;
     private String imageUrl;
     private LocalDate postDate;
+    private LocalDate updateDate;
     private List<Ingredient> ingredients;
     private List<Comment> comments;
 
@@ -62,7 +59,16 @@ public class Recipe extends BaseEntity {
         this.postDate = postDate;
     }
 
-    @ManyToMany
+    @Column(name = "update_date")
+    public LocalDate getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDate updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    @OneToMany
     public List<Ingredient> getIngredients() {
         return ingredients;
     }

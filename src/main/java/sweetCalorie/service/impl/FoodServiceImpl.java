@@ -13,8 +13,6 @@ import sweetCalorie.util.ValidationUtil;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 @Service
 public class FoodServiceImpl implements FoodService {
@@ -37,14 +35,9 @@ public class FoodServiceImpl implements FoodService {
         return this.foodRepository.count() > 0;
     }
 
-    @Override
-    public String readFoodFileContent() throws IOException {
-        return Files.readString(Path.of(GlobalConstants.FOODS_FILE_PATH));
-    }
 
     @Override
     public void importFoods() throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
         FoodAddBindingModel[] foodAddBindingModels = gson.fromJson(
                 new FileReader(GlobalConstants.FOODS_FILE_PATH), FoodAddBindingModel[].class);
 
@@ -56,5 +49,18 @@ public class FoodServiceImpl implements FoodService {
                 }
             }
         }
+    }
+
+    @Override
+    public Food findByName(String name) {
+        return this.foodRepository.findByName(name);
+    }
+
+    @Override
+    public void addNewFood(String name, String category, String imageUrl,
+                           double calories, double proteins, double carbohydrates,
+                           double sugars, double fats) {
+        Food food = new Food(name, category, imageUrl, calories,
+                proteins, carbohydrates, sugars, fats);
     }
 }

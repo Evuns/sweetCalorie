@@ -80,6 +80,26 @@
     "fats": 0.1
   },
   {
+    "name": "Лук",
+    "category": "ЗЕЛЕНЧУЦИ",
+    "imageUrl": "https://images.pexels.com/photos/4197445/pexels-photo-4197445.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 42,
+    "proteins": 0.92,
+    "carbohydrates": 10.11,
+    "sugars": 4.28,
+    "fats": 0.08
+  },
+  {
+    "name": "Чушки",
+    "category": "ЗЕЛЕНЧУЦИ",
+    "imageUrl": "https://images.pexels.com/photos/128536/pexels-photo-128536.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 26,
+    "proteins": 0.99,
+    "carbohydrates": 6.03,
+    "sugars": 4.2,
+    "fats": 0.3
+  },
+  {
     "name": "Бонбони",
     "category": "СЛАДКИ",
     "imageUrl": "https://images.pexels.com/photos/4618548/pexels-photo-4618548.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
@@ -191,7 +211,7 @@
   },
   {
     "name": "Пилешко",
-    "category": "МЕСНИ",
+    "category": "ЖИВОТИНСКИ",
     "imageUrl": "https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "calories": 237,
     "proteins": 27.07,
@@ -201,7 +221,7 @@
   },
   {
     "name": "Свинско",
-    "category": "МЕСНИ",
+    "category": "ЖИВОТИНСКИ",
     "imageUrl": "https://images.pexels.com/photos/361184/asparagus-steak-veal-steak-veal-361184.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "calories": 271,
     "proteins": 27.34,
@@ -211,7 +231,7 @@
   },
   {
     "name": "Телешко",
-    "category": "МЕСНИ",
+    "category": "ЖИВОТИНСКИ",
     "imageUrl": "https://images.pexels.com/photos/1251208/pexels-photo-1251208.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "calories": 276,
     "proteins": 25.35,
@@ -221,13 +241,23 @@
   },
   {
     "name": "Кренвирш",
-    "category": "МЕСНИ",
+    "category": "ЖИВОТИНСКИ",
     "imageUrl": "https://images.freeimages.com/images/small-previews/384/wurst-1323975.jpg",
     "calories": 230,
     "proteins": 11,
     "carbohydrates": 3.4,
     "sugars": 0,
     "fats": 19
+  },
+  {
+    "name": "Яйца",
+    "category": "ЖИВОТИНСКИ",
+    "imageUrl": "https://images.pexels.com/photos/1631180/pexels-photo-1631180.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    "calories": 143,
+    "proteins": 12.5,
+    "carbohydrates": 0.7,
+    "sugars": 0,
+    "fats": 9.5
   },
   {
     "name": "Скумрия",
