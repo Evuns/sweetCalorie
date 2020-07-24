@@ -1,6 +1,7 @@
 package sweetCalorie.model.entity;
 
 import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -15,15 +16,15 @@ public class UserProfile extends BaseEntity {
 
     private User user;
     private int height;
-    private List<Double> weight;
+    private WeightCalendar weightCalendar;
     private Gender gender;
     private LocalDate dateOfBirth;
     private int age;
     private ActivityLevel activityLevel;
     private List<Recipe> recipes;
+    private List<Comment> comments;
 
     public UserProfile() {
-        this.weight = new LinkedList<>();
     }
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -45,14 +46,13 @@ public class UserProfile extends BaseEntity {
         this.height = height;
     }
 
-    @ElementCollection
-    @Min(0)
-    public List<Double> getWeight() {
-        return weight;
+    @OneToOne(cascade = CascadeType.ALL)
+    public WeightCalendar getWeightCalendar() {
+        return weightCalendar;
     }
 
-    public void setWeight(List<Double> weight) {
-        this.weight = weight;
+    public void setWeightCalendar(WeightCalendar weightCalendar) {
+        this.weightCalendar = weightCalendar;
     }
 
     @Enumerated
@@ -99,5 +99,14 @@ public class UserProfile extends BaseEntity {
 
     public void setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
+    }
+
+    @OneToMany
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }

@@ -4,7 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Pattern;
+
 import org.hibernate.validator.constraints.Length;
+import sweetCalorie.constant.GlobalConstants;
 
 @Entity
 @Table(name = "users")
@@ -13,12 +16,15 @@ public class User extends BaseEntity{
     private String username;
     private String password;
     private String email;
+    private Role role;
+
 
     public User() {
     }
 
     @Column(unique = true, nullable = false, updatable = false)
     @Length(min = 5, max = 20)
+    @Pattern(regexp = "^[\\p{L}\\d\\w]+$")
     public String getUsername() {
         return username;
     }
@@ -28,7 +34,7 @@ public class User extends BaseEntity{
     }
 
     @Column(nullable = false)
-    @Length(min = 8)
+    @Length(min = 8, max = 20)
     public String getPassword() {
         return password;
     }
@@ -45,5 +51,14 @@ public class User extends BaseEntity{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Column(nullable = false)
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

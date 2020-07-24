@@ -1,9 +1,11 @@
 package sweetCalorie.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -14,7 +16,7 @@ public class Recipe extends BaseEntity {
     private String title;
     private String description;
     private String imageUrl;
-    private LocalDate postDate;
+    private Date postDate;
     private LocalDate updateDate;
     private List<Ingredient> ingredients;
     private List<Comment> comments;
@@ -51,15 +53,17 @@ public class Recipe extends BaseEntity {
     }
 
     @Column(name = "post_date")
-    public LocalDate getPostDate() {
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    public Date getPostDate() {
         return postDate;
     }
 
-    public void setPostDate(LocalDate postDate) {
+    public void setPostDate(Date postDate) {
         this.postDate = postDate;
     }
 
     @Column(name = "update_date")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public LocalDate getUpdateDate() {
         return updateDate;
     }

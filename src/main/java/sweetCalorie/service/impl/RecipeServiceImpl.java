@@ -18,6 +18,7 @@ import sweetCalorie.util.ValidationUtil;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -73,7 +74,7 @@ public class RecipeServiceImpl implements RecipeService {
                         }
                     }
                     recipe.setIngredients(ingredients);
-                    recipe.setPostDate(LocalDate.now());
+                    recipe.setPostDate(new Date());
                     this.recipeRepository.saveAndFlush(recipe);
                 }
             }
