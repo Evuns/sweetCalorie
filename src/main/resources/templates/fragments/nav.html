@@ -1,0 +1,33 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block>
+    <div class="wrapper">
+    <div class="topnav" id="myTopnav">
+        <div class="logo-container">
+            <img height="20" width="141" src="../images/logo.png" alt="Sweetcalories logo" />
+        </div>
+        <div>
+            <a href="#home" class="active">Начало</a>
+            <a href="#news">За нас</a>
+            <a href="#contact">статий</a>
+            <a href="#about">Храни</a>
+            <a href="#about">калкулатори</a>
+            <a href="#about">контакти</a>
+            <th:block th:if="${session.isEmpty()}">
+                <a href="#about" class="sign-in">вход</a>
+                <a href="#about" class="nav-button">регистрация</a>
+            </th:block>
+            <th:block th:unless="${session.isEmpty()}">
+                <a href="#about" class="user-profile">профил</a>
+                <a href="#about" class="sign-out">изход</a>
+            </th:block>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <img height="14" width="20" src="../images/burger-icon.svg" alt="Burger Icon" />
+            </a>
+            <a href="" class="user_icon">
+                <img height="22" width="22" src="../images/user_icon.svg" alt="User Icon" />
+            </a>
+        </div>
+    </div>
+</div>
+</th:block>
