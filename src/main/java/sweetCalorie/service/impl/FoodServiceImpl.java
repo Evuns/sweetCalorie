@@ -13,6 +13,7 @@ import sweetCalorie.util.ValidationUtil;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public class FoodServiceImpl implements FoodService {
@@ -62,5 +63,11 @@ public class FoodServiceImpl implements FoodService {
                            double sugars, double fats) {
         Food food = new Food(name, category, imageUrl, calories,
                 proteins, carbohydrates, sugars, fats);
+    }
+
+    @Override
+    public List<Food> findAllFoods() {
+        return this.foodRepository.findAll();
+
     }
 }

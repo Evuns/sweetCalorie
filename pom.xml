@@ -12,7 +12,7 @@
     <artifactId>sweetcalorie</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>sweetCalorie</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Site with recipes and foods` macros in which you can track your weight, set goal and track your progress. </description>
 
     <properties>
         <java.version>11</java.version>
@@ -29,11 +29,15 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+       <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.thymeleaf.extras</groupId>
+            <artifactId>thymeleaf-extras-springsecurity5</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
