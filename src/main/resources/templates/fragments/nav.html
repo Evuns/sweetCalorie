@@ -2,31 +2,31 @@
 
 <th:block>
     <div class="wrapper">
-    <div class="topnav" id="myTopnav">
-        <div class="logo-container">
-            <img height="20" width="141" src="../images/logo.png" alt="Sweetcalories logo" />
-        </div>
-        <div>
-            <a href="/" class="active">Начало</a>
-            <a href="#news">За нас</a>
-            <a href="#about">Храни</a>
-            <a href="#about">Kалкулатори</a>
-            <a href="#about">Kонтакти</a>
-            <th:block th:if="${session.isEmpty()}">
-                <a href="/users/login" class="sign-in">Вход</a>
-                <a href="/users/register" class="nav-button">Регистрация</a>
-            </th:block>
-            <th:block th:unless="${session.isEmpty()}">
-                <a href="users/profile" class="user-profile">Профил</a>
-                <a href="/" class="sign-out">Изход</a>
-            </th:block>
-            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                <img height="14" width="20" src="../images/burger-icon.svg" alt="Burger Icon" />
-            </a>
-            <a href="" class="user_icon">
-                <img height="22" width="22" src="../images/user_icon.svg" alt="User Icon" />
-            </a>
+        <div class="topnav" id="myTopnav">
+            <div class="logo-container">
+                <img height="20" width="141" src="../images/logo.png" alt="Sweetcalories logo"/>
+            </div>
+            <div>
+                <a href="/" class="active">Начало</a>
+                <a href="#news">За нас</a>
+                <a href="#about">Храни</a>
+                <a href="#about">Kалкулатори</a>
+                <a href="#about">Kонтакти</a>
+                <th:block th:if="${session.isEmpty()}">
+                    <a href="/users/login" class="sign-in">Вход</a>
+                    <a href="/users/register" class="nav-button">Регистрация</a>
+                </th:block>
+                <th:block th:unless="${session.isEmpty()}">
+                    <a href="users/profile" class="user-profile">Профил</a>
+                    <a th:href="@{/logout}" class="sign-out">Изход</a>
+                </th:block>
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <img height="14" width="20" src="../images/burger-icon.svg" alt="Burger Icon"/>
+                </a>
+                <a href="" class="user_icon">
+                    <img height="22" width="22" src="../images/user_icon.svg" alt="User Icon"/>
+                </a>
+            </div>
         </div>
     </div>
-</div>
 </th:block>

@@ -36,9 +36,34 @@ public class UsersController {
     }
 
     @PreAuthorize("isAnonymous()")
+    @GetMapping("/register")
+    public String register(Model model) {
+        if (!model.containsAttribute("userRegisterBindingModel")) {
+            model.addAttribute("userRegisterBindingModel", new UserRegisterBindingModel());
+        }
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerConfirm(@Valid @ModelAttribute("userRegisterBindingModel")
+                                          UserRegisterBindingModel userRegisterBindingModel,
+                                  BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        this.userRegisterValidator.validate(userRegisterBindingModel, bindingResult);
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
+            return "redirect:register";
+        }
+
+        this.userService.register(this.modelMapper
+                .map(userRegisterBindingModel, UserServiceModel.class));
+        return "redirect:login";
+    }
+
+    @PreAuthorize("isAnonymous()")
     @GetMapping("/login")
     public String login(Model model) {
-
         if (!model.containsAttribute("userLoginBindingModel")) {
             model.addAttribute("userLoginBindingModel", new UserLoginBindingModel());
         }
@@ -67,40 +92,4 @@ public class UsersController {
         return "redirect:home";
     }
 
-    @PreAuthorize("isAnonymous()")
-    @GetMapping("/register")
-    public String register(Model model) {
-
-        if (!model.containsAttribute("userRegisterBindingModel")) {
-            model.addAttribute("userRegisterBindingModel", new UserRegisterBindingModel());
-        }
-        return "register";
-    }
-
-    @PostMapping("/register")
-    public String registerConfirm(@Valid @ModelAttribute("userRegisterBindingModel")
-                                          UserRegisterBindingModel userRegisterBindingModel,
-                                  BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-
-        this.userRegisterValidator.validate(userRegisterBindingModel, bindingResult);
-
-        if (bindingResult.hasErrors() || !userRegisterBindingModel.getPassword()
-                .equals(userRegisterBindingModel.getConfirmPassword())) {
-            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
-            return "redirect:register";
-        }
-
-
-        this.userService.register(this.modelMapper
-                .map(userRegisterBindingModel, UserServiceModel.class));
-        return "redirect:login";
-    }
-
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/logout")
-    public String logout(HttpSession httpSession) {
-        httpSession.invalidate();
-        return "redirect:/";
-    }
 }

@@ -853,6 +853,7 @@ header.sticky {
   top: 50%;
   margin-top: -1.375rem;
   background-color: #222222;
+    z-index: 999;
 }
 
 .banner .button-big:hover {
