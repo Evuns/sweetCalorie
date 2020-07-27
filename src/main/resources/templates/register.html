@@ -1,0 +1,81 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Регистрация</title>
+    <th:block th:include=" ~{fragments/head}"></th:block>
+</head>
+
+<body>
+
+
+<div class="empty"></div>
+<header class="nav-container" id="navbar">
+    <th:block th:include="~{fragments/nav}"></th:block>
+</header>
+<svg class="cards-bgr" width="1440" height="668" viewBox="0 0 1440 668" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="-39.5" cy="417.5" r="92.5" fill="#C1E5E8"/>
+    <circle cx="-39.5" cy="417.5" r="80.5" fill="white"/>
+    <circle cx="964" cy="-10" r="60" fill="#C1E5E8"/>
+    <circle cx="964" cy="-10" r="52.2162" fill="white"/>
+    <circle cx="1445" cy="254" r="60" fill="#C1E5E8"/>
+    <circle cx="1445" cy="254" r="52.2162" fill="white"/>
+    <circle cx="1023.5" cy="575.5" r="92.5" fill="#C1E5E8"/>
+    <circle cx="1023.5" cy="575.5" r="80.5" fill="white"/>
+</svg>
+
+<div class="login-register-conteiner">
+    <main class="login-register">
+        <h1 class="">Регистрация</h1>
+        <hr class=""/>
+        <form class=""
+              th:object="${userRegisterBindingModel}" th:action="@{/users/register}" method="POST">
+            <div class="">
+                <div class="">
+                    <label for="username" class="">Потребителско име</label>
+                </div>
+                <input th:field="*{username}" th:errorclass="bg-danger" type="text" class="" id="username"
+                       name="username"/>
+                <small th:each="e : ${#fields.errors('username')}" th:text="${e}" class="text-danger">Грешен
+                    потребител</small>
+            </div>
+            <div class="form-group">
+                <div class="">
+                    <label for="email" class="">Имейл</label>
+                </div>
+                <input th:field="*{email}" th:errorclass="bg-danger" type="email" class="form-control" id="email"
+                       name="email"/>
+
+                <small th:each="e : ${#fields.errors('email')}" th:text="${e}" class="text-danger">Грешен имейл</small>
+            </div>
+            <div class="form-group">
+                <div class="">
+                    <label for="password" class="h4 mb-2">Парола</label>
+                </div>
+                <input th:field="*{password}" th:errorclass="bg-danger" type="password" class="form-control"
+                       id="password" name="password"/>
+                <small th:each="e : ${#fields.errors('password')}" th:text="${e}" class="text-danger">Грешна
+                    парола</small>
+            </div>
+            <div class="form-group">
+                <div class="">
+                    <label for="confirmPassword" class="">Потвърди парола</label>
+                </div>
+                <input type="password" class="form-control" id="confirmPassword"
+                       name="confirmPassword"/>
+            </div>
+
+            <div class="">
+                <button type="submit" class="  mb-3" value="Register">Регистация</button>
+            </div>
+        </form>
+    </main>
+</div>
+
+
+<footer class="footer">
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>
