@@ -34,7 +34,7 @@ public class User extends BaseEntity{
     }
 
     @Column(nullable = false)
-    @Length(min = 8, max = 20)
+    @Length(min = 8)
     public String getPassword() {
         return password;
     }

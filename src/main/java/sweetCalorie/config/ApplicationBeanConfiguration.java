@@ -5,9 +5,7 @@ import com.google.gson.GsonBuilder;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import sweetCalorie.util.ValidationUtil;
 import sweetCalorie.util.ValidationUtilImpl;
 
@@ -32,8 +30,8 @@ public class ApplicationBeanConfiguration {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new Argon2PasswordEncoder(); }
+    public BCryptPasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
-
 

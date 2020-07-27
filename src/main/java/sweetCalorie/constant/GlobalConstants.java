@@ -17,4 +17,6 @@ public class GlobalConstants {
     public static final String PASSWORD_LENGTH = "Паролата трябва да е между 8 и 20 символа!";
 
     public static final String COMMENT_LENGTH = "Коментарът трябва да е с дължина от 2 до 500 символа!";
+    public static final String EMAIL_IN_DB = "Вече има регистриран потребител с този емайл адрес.";
+    public static final String PASSWORD_EQUALITY = "Паролите трябва да съвпадат!";
 }
