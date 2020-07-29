@@ -3,6 +3,7 @@ package sweetCalorie.web;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,33 +12,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sweetCalorie.model.binding.UserLoginBindingModel;
 import sweetCalorie.model.binding.UserRegisterBindingModel;
 import sweetCalorie.model.service.UserServiceModel;
 import sweetCalorie.service.UserService;
 import sweetCalorie.validation.UserRegisterValidator;
-
-
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/users")
-public class UsersController {
+public class UsersRegisterController {
 
     private final UserService userService;
     private final ModelMapper modelMapper;
     private final UserRegisterValidator userRegisterValidator;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
-    public UsersController(UserService userService, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UsersRegisterController(UserService userService, ModelMapper modelMapper,
+                                   BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;
         this.modelMapper = modelMapper;
         this.userRegisterValidator = new UserRegisterValidator(this.userService);
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @PreAuthorize("isAnonymous()")
@@ -76,25 +76,27 @@ public class UsersController {
     }
 
     @PostMapping("/login")
-    public String loginConfirm(@Valid @ModelAttribute
+    public ModelAndView loginConfirm(@Valid @ModelAttribute
             ("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
-                               BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                               HttpSession httpSession) {
-
+                                     @AuthenticationPrincipal Principal principal,
+                                     BindingResult bindingResult,
+                                     RedirectAttributes redirectAttributes,
+                                     ModelAndView modelAndView) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
-            return "redirect:login?error=true";
+            modelAndView.setViewName("redirect:login?error=true");
         }
 
         UserServiceModel user = this.userService.findByUsername(userLoginBindingModel.getUsername());
-//        if (user == null || !user.getPassword().equals(userLoginBindingModel.getPassword())) {
-        if (user == null || !bCryptPasswordEncoder.matches(userLoginBindingModel.getPassword() , user.getPassword())) {
+        if (user == null || !bCryptPasswordEncoder.matches(userLoginBindingModel.getPassword(), user.getPassword())) {
             redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
             redirectAttributes.addFlashAttribute("notFound", true);
-            return "redirect:login?error=true";
+            modelAndView.setViewName("redirect:login?error=true");
+        } else {
+            modelAndView.addObject("user", principal);
+            modelAndView.setViewName("redirect:/");
         }
-        httpSession.setAttribute("user", user);
-        return "redirect:/";
+        return modelAndView;
     }
 }
