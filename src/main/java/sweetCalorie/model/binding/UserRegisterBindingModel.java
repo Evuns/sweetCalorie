@@ -38,7 +38,7 @@ public class UserRegisterBindingModel {
         this.email = email;
     }
 
-    @NotNull(message = GlobalConstants.EMPTY_PASSWORD)
+    @NotNull(message = GlobalConstants.PASSWORD_NEEDED)
     @Length(min = 8, max = 20, message = GlobalConstants.PASSWORD_LENGTH)
     public String getPassword() {
         return password;

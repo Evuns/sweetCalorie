@@ -1,5 +1,11 @@
 package sweetCalorie.model.service;
 
+import sweetCalorie.constant.GlobalConstants;
+import sweetCalorie.model.entity.Role;
+
+import javax.validation.constraints.NotNull;
+import java.util.Set;
+
 public class UserServiceModel {
 
     private String username;
@@ -9,6 +15,7 @@ public class UserServiceModel {
     public UserServiceModel() {
     }
 
+    @NotNull(message = GlobalConstants.USERNAME_NEEDED)
     public String getUsername() {
         return username;
     }
@@ -18,6 +25,7 @@ public class UserServiceModel {
     }
 
 
+    @NotNull(message = GlobalConstants.PASSWORD_NEEDED)
     public String getPassword() {
         return password;
     }
@@ -26,6 +34,7 @@ public class UserServiceModel {
         this.password = password;
     }
 
+    @NotNull(message = GlobalConstants.EMAIL_NEEDED)
     public String getEmail() {
         return email;
     }
@@ -33,4 +42,5 @@ public class UserServiceModel {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

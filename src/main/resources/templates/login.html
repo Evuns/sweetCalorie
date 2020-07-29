@@ -5,47 +5,39 @@
 </head>
 
 <body>
-
 <div class="empty"></div>
 <header class="nav-container" id="navbar">
     <th:block th:include="~{fragments/nav}"></th:block>
 </header>
 
-<svg class="cards-bgr" width="1440" height="668" viewBox="0 0 1440 668" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="-39.5" cy="417.5" r="92.5" fill="#C1E5E8"/>
-    <circle cx="-39.5" cy="417.5" r="80.5" fill="white"/>
-    <circle cx="964" cy="-10" r="60" fill="#C1E5E8"/>
-    <circle cx="964" cy="-10" r="52.2162" fill="white"/>
-    <circle cx="1445" cy="254" r="60" fill="#C1E5E8"/>
-    <circle cx="1445" cy="254" r="52.2162" fill="white"/>
-    <circle cx="1023.5" cy="575.5" r="92.5" fill="#C1E5E8"/>
-    <circle cx="1023.5" cy="575.5" r="80.5" fill="white"/>
-</svg>
+<th:block th:include="~{fragments/background}"></th:block>
+
 <div class="login-register-conteiner">
     <main class="login-register">
         <h1 class=""><span class="">Вход</span></h1>
         <hr class="">
-        <form class="" th:object="${userLoginBindingModel}" th:action="@{/users/login}" method="POST">
-            <small class="">Съобщение за грешка</small>
-            <br>
-            <small th:if="${notFound}" class="text-danger">Грешна парола или потребителско име!</small>
-            <div class="form-group">
-                <div class="">
-                    <label for="username" class="">Потребителско име</label>
+        <form class="" th:action="@{/users/login}" method="POST">
+            <div class="login-form offset-lg-3 col-lg-6">
+                <div class="form-group">
+                    <label for="username">Потребителско име</label>
+                    <input type="text" class="form-control" id="username" placeholder="Потребителско име"
+                           name="username"
+                           required>
                 </div>
-                <input th:field="*{username}" th:errorclass="bg-danger" type="text" class="form-control" id="username"
-                       name="username">
-            </div>
-            <div class="">
-                <div class="">
-                    <label for="password" class="h3 mb-2">Парола</label>
+                <th:block th:if="${param.error}">
+                    <div class="text-danger">
+                        Грешна парола или потребителско име!
+                    </div>
+                </th:block>
+                <div class="form-group">
+                    <label for="password">Парола</label>
+
+                    <input type="password" class="form-control" id="password" placeholder="Парола" name="password"
+                           required>
                 </div>
-                <input th:field="*{password}" th:errorclass="bg-danger" type="password" class="" id="password"
-                       name="password">
-            </div>
-            <div class="">
-            <input name="remember" type="checkbox">Запомни</input>
-                <button type="submit" class="">Влез</button>
+                <button onclick="window.history.back()" type="submit">Назад</button>
+                <input name="remember" type="checkbox">Запомни</input>
+                <button type="submit">Влез</button>
             </div>
         </form>
     </main>
@@ -54,7 +46,6 @@
 <footer class="footer">
     <th:block th:include="~{fragments/footer}"></th:block>
 </footer>
-
 
 <th:block th:include="~{fragments/function}"></th:block>
 

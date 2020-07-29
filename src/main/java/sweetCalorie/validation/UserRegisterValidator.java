@@ -1,4 +1,4 @@
-package validation;
+package sweetCalorie.validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,4 +43,3 @@ public class UserRegisterValidator implements org.springframework.validation.Val
         }
     }
 }
-

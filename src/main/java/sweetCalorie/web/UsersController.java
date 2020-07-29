@@ -3,6 +3,7 @@ package sweetCalorie.web;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,7 +16,8 @@ import sweetCalorie.model.binding.UserLoginBindingModel;
 import sweetCalorie.model.binding.UserRegisterBindingModel;
 import sweetCalorie.model.service.UserServiceModel;
 import sweetCalorie.service.UserService;
-import validation.UserRegisterValidator;
+import sweetCalorie.validation.UserRegisterValidator;
+
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -26,10 +28,13 @@ public class UsersController {
 
     private final UserService userService;
     private final ModelMapper modelMapper;
-    private UserRegisterValidator userRegisterValidator;
+    private final UserRegisterValidator userRegisterValidator;
 
     @Autowired
-    public UsersController(UserService userService, ModelMapper modelMapper) {
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
+    public UsersController(UserService userService, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;
         this.modelMapper = modelMapper;
         this.userRegisterValidator = new UserRegisterValidator(this.userService);
@@ -79,17 +84,17 @@ public class UsersController {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
-            return "redirect:login";
+            return "redirect:login?error=true";
         }
 
         UserServiceModel user = this.userService.findByUsername(userLoginBindingModel.getUsername());
-        if (user == null || !user.getPassword().equals(userLoginBindingModel.getPassword())) {
+//        if (user == null || !user.getPassword().equals(userLoginBindingModel.getPassword())) {
+        if (user == null || !bCryptPasswordEncoder.matches(userLoginBindingModel.getPassword() , user.getPassword())) {
             redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
             redirectAttributes.addFlashAttribute("notFound", true);
-            return "redirect:login";
+            return "redirect:login?error=true";
         }
         httpSession.setAttribute("user", user);
-        return "redirect:home";
+        return "redirect:/";
     }
-
 }

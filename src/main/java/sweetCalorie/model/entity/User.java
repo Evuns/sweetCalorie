@@ -1,17 +1,18 @@
 package sweetCalorie.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
-import sweetCalorie.constant.GlobalConstants;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
 
     private String username;
     private String password;
@@ -53,7 +54,7 @@ public class User extends BaseEntity{
         this.email = email;
     }
 
-    @Column(nullable = false)
+    @Enumerated
     public Role getRole() {
         return role;
     }
