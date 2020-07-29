@@ -3,6 +3,7 @@ package sweetCalorie.web;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,7 @@ import sweetCalorie.validation.UserRegisterValidator;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/users")
@@ -79,7 +81,8 @@ public class UsersController {
     public String loginConfirm(@Valid @ModelAttribute
             ("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
                                BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                               HttpSession httpSession) {
+                               HttpSession httpSession,
+    @AuthenticationPrincipal Principal principal) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
@@ -88,7 +91,6 @@ public class UsersController {
         }
 
         UserServiceModel user = this.userService.findByUsername(userLoginBindingModel.getUsername());
-//        if (user == null || !user.getPassword().equals(userLoginBindingModel.getPassword())) {
         if (user == null || !bCryptPasswordEncoder.matches(userLoginBindingModel.getPassword() , user.getPassword())) {
             redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
             redirectAttributes.addFlashAttribute("notFound", true);
