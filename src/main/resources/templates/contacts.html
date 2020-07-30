@@ -1,0 +1,70 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Get in touch with us</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+
+<body>
+<div class="empty"></div>
+<header class="nav-container" id="navbar">
+    <th:block th:include="~{fragments/nav}"></th:block>
+</header>
+
+<div class="contact-bg-image"></div>
+
+<div class="login-register-conteiner">
+    <main class="login-register">
+        <h1 class="">Свържи се с нас</h1>
+        <hr class=""/>
+        <form class="contact100-form validate-form">
+            <p class="normal-text">
+                Не се колебайте да се свържете с нас ако имате въпроси или нужда от помощ.
+            </p>
+            <div class="">
+                <label for="email" class="">Вашето име</label>
+            </div>
+            <div class="" data-validate="Name is required">
+                <input class="" type="text" name="name" placeholder="Мария">
+                <span class=""></span>
+                <span class=""></span>
+            </div>
+            <div class="">
+                <label for="email" class="">Вашият имейл</label>
+            </div>
+            <div class="" data-validate="Valid email is required: ex@abc.xyz">
+                <input class="" type="text" name="email" placeholder="Мария@gmail.com">
+                <span class=""></span>
+                <span class=""></span>
+            </div>
+            <div class="">
+                <label for="email" class="">Вашето съобщение</label>
+            </div>
+            <div class="" data-validate="Message is required">
+                <textarea class="" name="message" placeholder="..."></textarea>
+                <span class=""></span>
+                <span class=""></span>
+            </div>
+            <div class="contact-form-checkbox">
+                <input class="input-checkbox" id="ckb1" type="checkbox" name="copy-mail">
+                <label class="label-checkbox" for="ckb1">
+                    Изпрати копие до моята поща
+                </label>
+            </div>
+            <div class="container-contact100-form-btn">
+                <button class="contact100-form-btn">
+                    Изпрати
+                </button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<footer class="footer">
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>
