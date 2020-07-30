@@ -1,26 +1,19 @@
 package sweetCalorie.model.service;
 
 import sweetCalorie.constant.GlobalConstants;
+
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-public class UserServiceModel {
+public class UserEmailServiceModel {
 
-    private String id;
     private String username;
-    private String password;
     private String email;
+    private String message;
+    private boolean sendEmailToME;
 
-    public UserServiceModel() {
+    public UserEmailServiceModel() {
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     @NotNull(message = GlobalConstants.USERNAME_NEEDED)
     public String getUsername() {
         return username;
@@ -30,16 +23,7 @@ public class UserServiceModel {
         this.username = username;
     }
 
-
-    @NotNull(message = GlobalConstants.PASSWORD_NEEDED)
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    @Email
     @NotNull(message = GlobalConstants.EMAIL_NEEDED)
     public String getEmail() {
         return email;
@@ -49,4 +33,20 @@ public class UserServiceModel {
         this.email = email;
     }
 
+    @NotNull(message = GlobalConstants.MESSAGE_NEEDED)
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public boolean isSendEmailToME() {
+        return sendEmailToME;
+    }
+
+    public void setSendEmailToME(boolean sendEmailToME) {
+        this.sendEmailToME = sendEmailToME;
+    }
 }

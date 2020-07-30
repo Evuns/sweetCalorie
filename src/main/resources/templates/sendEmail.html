@@ -1,0 +1,36 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Get in touch with us</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+
+<body>
+<div class="empty"></div>
+<header class="nav-container" id="navbar">
+    <th:block th:include="~{fragments/nav}"></th:block>
+</header>
+
+<div class="contact-bg-image"></div>
+
+<div class="login-register-conteiner">
+    <main class="login-register">
+        <h1 class="">Вашето запитване беше изпратено успешно. При първа възможност екипа ни ще се свърже с вас. Благодарим ви!</h1>
+        <hr class=""/>
+            <form class="contact100-form validate-form">
+                <p class="normal-text">
+                    Ако имате въпроси или нужда от помощ, не се колебайте да се свържете с нас а.
+                </p>
+                <button onclick="window.history.back()" type="submit">Назад</button>
+            </form>
+    </main>
+</div>
+
+<footer class="footer">
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>

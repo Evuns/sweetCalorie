@@ -17,46 +17,47 @@
     <main class="login-register">
         <h1 class="">Свържи се с нас</h1>
         <hr class=""/>
-        <form class="contact100-form validate-form">
-            <p class="normal-text">
-                Не се колебайте да се свържете с нас ако имате въпроси или нужда от помощ.
-            </p>
-            <div class="">
-                <label for="email" class="">Вашето име</label>
-            </div>
-            <div class="" data-validate="Name is required">
-                <input class="" type="text" name="name" placeholder="Мария">
-                <span class=""></span>
-                <span class=""></span>
-            </div>
-            <div class="">
-                <label for="email" class="">Вашият имейл</label>
-            </div>
-            <div class="" data-validate="Valid email is required: ex@abc.xyz">
-                <input class="" type="text" name="email" placeholder="Мария@gmail.com">
-                <span class=""></span>
-                <span class=""></span>
-            </div>
-            <div class="">
-                <label for="email" class="">Вашето съобщение</label>
-            </div>
-            <div class="" data-validate="Message is required">
-                <textarea class="" name="message" placeholder="..."></textarea>
-                <span class=""></span>
-                <span class=""></span>
-            </div>
-            <div class="contact-form-checkbox">
-                <input class="input-checkbox" id="ckb1" type="checkbox" name="copy-mail">
-                <label class="label-checkbox" for="ckb1">
-                    Изпрати копие до моята поща
-                </label>
-            </div>
-            <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn">
-                    Изпрати
-                </button>
-            </div>
-        </form>
+            <form class="contact100-form validate-form" th:object="${userEmailServiceModel}" th:action="@{/contacts}" method="POST">
+                <p class="normal-text">
+                    Ако имате въпроси или нужда от помощ, не се колебайте да се свържете с нас а.
+                </p>
+                <div class="">
+                    <label for="username" class="">Вашето име</label>
+                </div>
+                <div class="" data-validate="Name is required">
+                    <input th:field="*{username}" th:errorclass="bg-danger" type="text" class="" id="username" name="username" placeholder="Име">
+                    <span class=""></span>
+                    <span class=""></span>
+                </div>
+                <div class="">
+                    <label for="email" class="">Вашият имейл</label>
+                </div>
+                <div class="" data-validate="Valid email is required: ex@abc.xyz">
+                    <input th:field="*{email}" th:errorclass="bg-danger" type="text" class="" id="email" name="email" placeholder="Емайл">
+                    <span class=""></span>
+                    <span class=""></span>
+                </div>
+                <div class="">
+                    <label for="message" class="">Вашето съобщение</label>
+                </div>
+                <div class="" data-validate="Message is required">
+                    <textarea th:field="*{message}" th:errorclass="bg-danger" type="text" class="" id="message"
+                              name="message" placeholder="..."></textarea>
+                    <span class=""></span>
+                    <span class=""></span>
+                </div>
+                <div class="contact-form-checkbox">
+                    <input th:field="*{sendEmailToME}" class="input-checkbox" id="ckb1" type="checkbox" name="copy-mail">
+                    <label class="label-checkbox" for="ckb1">
+                        Изпрати копие до моята поща
+                    </label>
+                </div>
+                <div class="container-contact100-form-btn">
+                    <button type="submit" class="contact100-form-btn">
+                        Изпрати
+                    </button>
+                </div>
+            </form>
     </main>
 </div>
 

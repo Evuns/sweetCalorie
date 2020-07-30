@@ -21,4 +21,7 @@ public class GlobalConstants {
     public static final String PASSWORD_EQUALITY = "Паролите трябва да съвпадат!";
     public static final String USERNAME_PASSWORD = "Грешно потреботелско име или парола!";
     public static final String USERNAME_NOT_FOUND = "Няма регистриран потребител с такова потребителско име";
+    public static final String MESSAGE_NEEDED = "Това поле е задължително.";
+    public static final String AUTOMATION_EMAIL = "Това е автоматичен емаил, съдържащ вашето запитване";
+    public static final String EMAIL_REQUEST = "Въпрос от потребител ";
 }

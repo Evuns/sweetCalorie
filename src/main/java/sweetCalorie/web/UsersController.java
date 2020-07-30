@@ -31,8 +31,7 @@ public class UsersController {
     private final UserRegisterValidator userRegisterValidator;
 
     @Autowired
-    public UsersController(UserService userService, ModelMapper modelMapper,
-                           BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UsersController(UserService userService, ModelMapper modelMapper) {
         this.userService = userService;
         this.modelMapper = modelMapper;
         this.userRegisterValidator = new UserRegisterValidator(this.userService);
