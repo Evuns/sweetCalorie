@@ -1094,7 +1094,10 @@ textarea:-webkit-autofill:focus {
     margin-left: 30px;
 }
 
-
+.login-register .heading_form_Successful{
+    font-size: 1.6em;
+    text-transform: none;
+}
 /* Mouse SCroll Down Icon Animated
    ========================================================================== */
 
