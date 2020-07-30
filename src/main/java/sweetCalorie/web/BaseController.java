@@ -7,10 +7,8 @@ import java.security.Principal;
 
 public abstract class BaseController {
 
-    private final UserService userService;
 
-    public BaseController(UserService userService) {
-        this.userService = userService;
+    public BaseController() {
     }
 
     protected ModelAndView view(String view, ModelAndView modelAndView) {
@@ -28,7 +26,5 @@ public abstract class BaseController {
         return this.view("redirect:" + url);
     }
 
-//    protected UserServiceModel getUsername(Principal principal) {
-//        return this.userService.findUserByUserName(principal.getName());
-//    }
+
 }
