@@ -12,13 +12,13 @@
                 <a href="#about">Храни</a>
                 <a href="#about">Kалкулатори</a>
                 <a href="#about">Kонтакти</a>
-                <th:block th:if="${session.isEmpty()}">
+                <th:block sec:authorize="isAnonymous()">
                     <a href="/users/login" class="sign-in">Вход</a>
                     <a href="/users/register" class="nav-button">Регистрация</a>
                 </th:block>
-                <th:block th:unless="${session.isEmpty()}">
+                <th:block sec:authorize="isAuthenticated()">
                     <a href="users/profile" class="user-profile">Профил</a>
-                    <a th:href="@{/logout}" class="sign-out">Изход</a>
+                    <a th:href="@{/users/logout}" class="sign-out">Изход</a>
                 </th:block>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <img height="14" width="20" src="../images/burger-icon.svg" alt="Burger Icon"/>

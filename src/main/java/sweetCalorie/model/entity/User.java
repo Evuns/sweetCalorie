@@ -5,22 +5,31 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
+public class User extends BaseEntity implements UserDetails {
 
     private String username;
     private String password;
     private String email;
-    private Role role;
+
+    private boolean isAccountNonExpired;
+    private boolean isAccountNonLocked;
+    private boolean isCredentialsNonExpired;
+    private boolean isEnabled;
+    private Set<Role> authorities;
 
 
     public User() {
+        this.authorities = new HashSet<>();
     }
 
     @Column(unique = true, nullable = false, updatable = false)
@@ -54,12 +63,53 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-    @Enumerated
-    public Role getRole() {
-        return role;
+    @Override
+    @Column(name = "is_account_non_expired")
+    public boolean isAccountNonExpired() {
+        return isAccountNonExpired;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
+    }
+
+    @Override
+    @Column(name = "is_account_non_locked")
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
+    }
+
+    @Override
+    @Column(name = "is_credentials_non_expired")
+    public boolean isCredentialsNonExpired() {
+        return isCredentialsNonExpired;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
+    }
+
+    @Override
+    @Column(name = "is_enabled")
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
+
+    @Override
+    @ManyToMany(fetch = FetchType.EAGER)
+    public Set<Role> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Role> authorities) {
+        this.authorities = authorities;
     }
 }

@@ -1,13 +1,11 @@
 package sweetCalorie.model.service;
 
 import sweetCalorie.constant.GlobalConstants;
-import sweetCalorie.model.entity.Role;
-
 import javax.validation.constraints.NotNull;
-import java.util.Set;
 
 public class UserServiceModel {
 
+    private String id;
     private String username;
     private String password;
     private String email;
@@ -15,6 +13,13 @@ public class UserServiceModel {
     public UserServiceModel() {
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     @NotNull(message = GlobalConstants.USERNAME_NEEDED)
     public String getUsername() {
         return username;

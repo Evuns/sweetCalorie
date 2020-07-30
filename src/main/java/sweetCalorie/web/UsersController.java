@@ -3,7 +3,6 @@ package sweetCalorie.web;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,6 @@ import sweetCalorie.validation.UserRegisterValidator;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 @RequestMapping("/users")
@@ -33,10 +31,8 @@ public class UsersController {
     private final UserRegisterValidator userRegisterValidator;
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
-    public UsersController(UserService userService, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UsersController(UserService userService, ModelMapper modelMapper,
+                           BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userService = userService;
         this.modelMapper = modelMapper;
         this.userRegisterValidator = new UserRegisterValidator(this.userService);
@@ -63,7 +59,7 @@ public class UsersController {
             return "redirect:register";
         }
 
-        this.userService.register(this.modelMapper
+        this.userService.registerUser(this.modelMapper
                 .map(userRegisterBindingModel, UserServiceModel.class));
         return "redirect:login";
     }
@@ -76,27 +72,10 @@ public class UsersController {
         }
         return "login";
     }
-
-    @PostMapping("/login")
-    public String loginConfirm(@Valid @ModelAttribute
-            ("userLoginBindingModel") UserLoginBindingModel userLoginBindingModel,
-                               BindingResult bindingResult, RedirectAttributes redirectAttributes,
-                               HttpSession httpSession,
-    @AuthenticationPrincipal Principal principal) {
-
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLoginBindingModel", bindingResult);
-            return "redirect:login?error=true";
-        }
-
-        UserServiceModel user = this.userService.findByUsername(userLoginBindingModel.getUsername());
-        if (user == null || !bCryptPasswordEncoder.matches(userLoginBindingModel.getPassword() , user.getPassword())) {
-            redirectAttributes.addFlashAttribute("userLoginBindingModel", userLoginBindingModel);
-            redirectAttributes.addFlashAttribute("notFound", true);
-            return "redirect:login?error=true";
-        }
-        httpSession.setAttribute("user", user);
-        return "redirect:/";
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/logout")
+    public String logout(HttpSession httpSession){
+        httpSession.invalidate();
+        return "redirect:/users/login";
     }
 }

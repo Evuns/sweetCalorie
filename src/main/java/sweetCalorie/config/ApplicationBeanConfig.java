@@ -10,7 +10,7 @@ import sweetCalorie.util.ValidationUtil;
 import sweetCalorie.util.ValidationUtilImpl;
 
 @Configuration
-public class ApplicationBeanConfiguration {
+public class ApplicationBeanConfig {
 
     @Bean
     public Gson gson() {

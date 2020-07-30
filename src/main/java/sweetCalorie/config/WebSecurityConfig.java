@@ -1,38 +1,37 @@
 package sweetCalorie.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import sweetCalorie.service.impl.UserDetailsServiceImpl;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    UserDetailsServiceImpl userDetailsService;
-
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .csrf().disable()
                 .cors().disable()
-                .authorizeRequests()
-                .antMatchers("/", "/users/login", "/users/register").anonymous()
+                .csrf()
+                .csrfTokenRepository(csrfTokenRepository())
                 .and()
-                .exceptionHandling().accessDeniedPage("/")
-                .and().formLogin()
-                .loginProcessingUrl("/j_spring_security_check") // Submit URL
-                .loginPage("/login")//
-                .failureUrl("/login?error=true")//
-                .usernameParameter("username")//
+                .authorizeRequests()
+                .antMatchers( "/css/**", "/images/**").permitAll()
+                .antMatchers("/", "/users/register", "/users/login").anonymous()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/users/login")
+                .usernameParameter("username")
                 .passwordParameter("password")
+                .defaultSuccessUrl("/home", true)
                 .and()
                 .rememberMe()
                 .rememberMeParameter("remember")
@@ -41,13 +40,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .tokenValiditySeconds(2678400)
                 .and()
                 .logout()
+                .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
-                .and()
-                .logout()
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/")
+                .logoutSuccessUrl("/users/login")
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage("/");
     }
+
+   private CsrfTokenRepository csrfTokenRepository(){
+       HttpSessionCsrfTokenRepository repository =
+               new HttpSessionCsrfTokenRepository();
+       repository.setSessionAttributeName("_csrf");
+       return repository;
+   }
 }
