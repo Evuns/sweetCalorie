@@ -12,6 +12,7 @@ public abstract class BaseCalculatorServiceModel {
     private double weight;
     private int height;
     private DecimalFormat decimalFormat;
+    private String Description;
 
     protected BaseCalculatorServiceModel() {
         this.decimalFormat = new DecimalFormat("##.##");
@@ -43,5 +44,13 @@ public abstract class BaseCalculatorServiceModel {
 
     public void setDecimalFormat(DecimalFormat decimalFormat) {
         this.decimalFormat = decimalFormat;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
     }
 }

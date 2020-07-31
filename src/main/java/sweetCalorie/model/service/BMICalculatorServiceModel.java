@@ -14,6 +14,7 @@ private static final int WEIGHT_MORBID = 40;
 
 
     public BMICalculatorServiceModel() {
+        super.setDescription(GlobalConstants.BMI_DESCRIPTION);
     }
 
     private double getBMI() {
@@ -30,36 +31,35 @@ private static final int WEIGHT_MORBID = 40;
 
     public String[] getRange() {
         String [] stateMessage = new String[3];
-        String state;
+        String weightCategory;
         String message;
         if (BMI < WEIGHT_UNDER) {
-            state = "Подноремено тегло";
+            weightCategory = "Подноремено тегло";
             message = GlobalConstants.WEIGHT_UNDER;
         } else if (BMI < WEIGHT_IDEAL) {
-            state = "Нормално (Здравословно) тегло";
+            weightCategory = "Нормално (Здравословно) тегло";
             message = GlobalConstants.WEIGHT_IDEAL;
         } else if (BMI < WEIGHT_OVER) {
-            state = "Наднормено тегло";
+            weightCategory = "Наднормено тегло";
             message = GlobalConstants.WEIGHT_OVER;
         } else if (BMI < WEIGHT_OBESITY) {
-            state = "Умерено затлъстяване";
+            weightCategory = "Умерено затлъстяване";
             message = GlobalConstants.WEIGHT_OBESE;
         } else if (BMI < WEIGHT_MORBID) {
-            state = "Сериозно затлъстяване";
+            weightCategory = "Сериозно затлъстяване";
             message = GlobalConstants.WEIGHT_OBESE;
         } else {
-            state = "Болестно състочние";
+            weightCategory = "Болестно състочние";
             message = GlobalConstants.WEIGHT_OBESE;
         }
         String minHealthyWeight = super.getDecimalFormat().format(WEIGHT_UNDER * Math.pow(super.getHeight(), 2));
         String maxHealthyWeight = super.getDecimalFormat().format(WEIGHT_IDEAL * Math.pow(super.getHeight(), 2));
 
-        stateMessage[0] = state;
+        stateMessage[0] = weightCategory;
         stateMessage[1] = message;
         stateMessage[2] = String.format(GlobalConstants.WEIGHT_BOUNDARIES +
                 "%d см, за да сте в нормите трябва да тежите между %s и %s.",
                 super.getHeight(), minHealthyWeight, maxHealthyWeight);
         return stateMessage;
     }
-
 }

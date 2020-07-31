@@ -1,0 +1,43 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Вход</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+
+<body>
+<div class="empty"></div>
+<header class="nav-container" id="navbar">
+    <th:block th:include="~{fragments/nav}"></th:block>
+</header>
+
+<th:block th:include="~{fragments/background}"></th:block>
+
+<div class="section">
+<div class="wrapper">
+<div class="container-fluid">
+    <h2 class="category_heading">Храни<span class="paint-pen">
+        </span></h2>
+    <div class="food-images">
+        <div class="food-images__image" th:each= "food : ${foodServiceModelList}" th:object="${food}">
+            <a th:href="@{/foods/details/(id = *{id})}">
+                <div class="card-img-top-wrapper">
+                    <img class="food_icon" th:src="*{imageUrl}" alt="image">
+                </div>
+                <div class="card-body pb-1">
+                    <h5 class="card-title text-center" th:text="*{name}"></h5>
+                </div>
+
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<footer class="footer">
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>

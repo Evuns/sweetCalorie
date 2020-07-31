@@ -10,7 +10,7 @@ public class UserLoginBindingModel {
     public UserLoginBindingModel() {
     }
 
-    @Length(min = 5, max = 20, message = GlobalConstants.USERNAME_LENGTH)
+    @Length(min = 5, max = 20)
     public String getUsername() {
         return username;
     }
@@ -19,7 +19,7 @@ public class UserLoginBindingModel {
         this.username = username;
     }
 
-    @Length(min = 8, max = 20, message = GlobalConstants.PASSWORD_LENGTH)
+    @Length(min = 8, max = 20)
     public String getPassword() {
         return password;
     }
