@@ -6,7 +6,7 @@ public class GlobalConstants {
     public static final String RECIPES_FILE_PATH = "src/main/resources/files/json/recipe.json";
 
 
-    public static final String USERNAME_NEEDED = "Потребителското име е задълвително!";
+    public static final String USERNAME_NEEDED = "Потребителското име е задължително!";
     public static final String USERNAME_LENGTH = "Потребителското име трябва да е с дължина от 5 до 20 символа!";
     public static final String USERNAME_SYMBOLS = "Потребителското име трябва да съдържа единствено букви, цифри и _!";
 
@@ -30,4 +30,5 @@ public class GlobalConstants {
     public static final String WEIGHT_IDEAL = "Вашето тегло е в деалните граници. Продължавайте да се храните здравословно и да спортувате, за да го поддържате и за напред така. В нашия сайт ще намерите полезни савети и рецепти с които да поддържате добрата си форма.";
     public static final String WEIGHT_UNDER = "Вашето тегло е под препоръчителните норми. Опитайте се да повишите калорийния си прием и добавете силови тренировки 1-2 пъти седмично.";
     public static final String WEIGHT_BOUNDARIES = "Индексът на телесна маса показва цялостното ви телесно състояние. Здравословното тегло влиза в границите от 18,5 до 25 кг/м^2. На вашата виисочина от ";
+    public static final String BMI_DESCRIPTION = "Индексът на телесната маса (съкратено ИТМ, на английски: body mass index, (BMI) e медико-биологичен показател, който служи за определяне на нормалното, здравословно тегло при хора с различен ръст и за диагностициране на затлъстяване и недохранване. Индексът на телесната маса се измерва в килограми на квадратен метър и се определя в зависимост от килограмите и височината на човека.";
 }

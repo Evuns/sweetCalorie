@@ -46,7 +46,7 @@ public class ContactsController {
 
         try {
             this.emailService.sendEmail(userEmailServiceModel);
-            return "redirect:sendEmail";
+            return "sendEmail";
         } catch (MailException e) {
             e.getCause();
             return "error";

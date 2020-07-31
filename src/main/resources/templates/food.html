@@ -1,0 +1,50 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Хранителни стойности</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+
+<body data-ng-controller="bmiController">
+<div class="container">
+
+    <header class="nav-container" id="navbar">
+        <th:block th:include="~{fragments/nav}"></th:block>
+    </header>
+
+    <th:block th:include="~{fragments/background}"></th:block>
+
+    <main>
+        <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Деатайли</span></h1>
+        <hr class="my-3"/>
+        <div class="container-fluid bg-dark w-25 m-auto ">
+            <div class="row justify-content-center ">
+                <div th:object="${food}" class="card" style="width: 18rem;">
+                    <img class="card-img-top" th:src="*{imageUrl}" alt="Card image cap">
+                    <div class="card-body bg-gray align-content-center text-center">
+                        <h6 th:text="*{name}">Храна</h6>
+                        <h6 th:text="*{category}">Храна</h6>
+                        <h6 th:text="*{calories}">Калории</h6>
+                        <h6 th:text="*{proteins}">Протеини</h6>
+                        <h6 th:text="*{carbohydrates}">Въглехидрати</h6>
+                        <h6 th:text="*{fats}">Мазнини</h6>
+                        <!--                        <a th:href="@{/items/delete/{id}(id = *{id})}" class="btn btn-danger" >Delete</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="footer">
+        <th:block th:include="~{fragments/footer}"></th:block>
+    </footer>
+</div>
+</div>
+</div>
+
+
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>

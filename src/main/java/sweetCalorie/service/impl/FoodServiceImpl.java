@@ -7,12 +7,14 @@ import org.springframework.stereotype.Service;
 import sweetCalorie.constant.GlobalConstants;
 import sweetCalorie.model.binding.FoodAddBindingModel;
 import sweetCalorie.model.entity.Food;
+import sweetCalorie.model.service.FoodServiceModel;
 import sweetCalorie.repository.FoodRepository;
 import sweetCalorie.service.FoodService;
 import sweetCalorie.util.ValidationUtil;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -66,8 +68,22 @@ public class FoodServiceImpl implements FoodService {
     }
 
     @Override
-    public List<Food> findAllFoods() {
-        return this.foodRepository.findAll();
+    public List<FoodServiceModel> findAllFoods() {
+        List<FoodServiceModel> allFoods = new LinkedList<>();
+        this.foodRepository.findAll().forEach(food -> {
+            FoodServiceModel foodServiceModel = modelMapper.map(food, FoodServiceModel.class);
+            allFoods.add(foodServiceModel);
+        });
+        return allFoods;
+    }
 
+    @Override
+    public FoodServiceModel findById(String id) {
+        return (FoodServiceModel) this.foodRepository.findById(id)
+                .map(food ->{
+                    FoodServiceModel foodServiceModel = this.modelMapper.map(
+                            food,FoodServiceModel.class);
+                    return foodServiceModel;
+                }).orElse(null);
     }
 }
