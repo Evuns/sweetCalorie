@@ -7,6 +7,7 @@ import javax.validation.constraints.Positive;
 public class IngredientBindingModel {
     private int quantity;
     private String food;
+    private String units;
 
     public IngredientBindingModel() {
     }
@@ -28,5 +29,13 @@ public class IngredientBindingModel {
 
     public void setFood(String food) {
         this.food = food;
+    }
+
+    public String getUnits() {
+        return units;
+    }
+
+    public void setUnits(String units) {
+        this.units = units;
     }
 }

@@ -1,22 +1,25 @@
-package sweetCalorie.model.entity;
+package sweetCalorie.model.service;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import sweetCalorie.model.entity.Food;
 
-@Entity
-@Table(name = "ingredients")
-public class Ingredient extends BaseEntity {
+public class IngredientServiceModel {
 
+    private String id;
     private int quantity;
     private String food;
     private String units;
 
-    public Ingredient() {
+    public IngredientServiceModel() {
     }
 
-    @Column(nullable = false)
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -25,7 +28,6 @@ public class Ingredient extends BaseEntity {
         this.quantity = quantity;
     }
 
-    @Column(nullable = false)
     public String getFood() {
         return food;
     }
@@ -34,7 +36,6 @@ public class Ingredient extends BaseEntity {
         this.food = food;
     }
 
-    @Column(nullable = false)
     public String getUnits() {
         return units;
     }

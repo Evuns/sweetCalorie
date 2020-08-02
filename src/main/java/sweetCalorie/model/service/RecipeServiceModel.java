@@ -1,24 +1,18 @@
-package sweetCalorie.model.entity;
+package sweetCalorie.model.service;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.hibernate.validator.constraints.Length;
+import sweetCalorie.model.binding.IngredientBindingModel;
+import sweetCalorie.model.entity.Comment;
+import sweetCalorie.service.IngredientService;
 
-import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-@Table(name = "recipes")
-public class Recipe extends BaseEntity {
+public class RecipeServiceModel {
 
-
+    private String id;
     private String title;
     private String description;
     private String imageUrl;
-    private Date postDate;
-    private LocalDate updateDate;
-    private List<Ingredient> ingredients;
     private int calories;
     private int carbohydrates;
     private int fats;
@@ -26,13 +20,23 @@ public class Recipe extends BaseEntity {
     private int time;
     private int servings;
     private String difficulty;
+    private List<IngredientServiceModel> ingredients;
     private List<Comment> comments;
 
-    public Recipe() {
+    private Date postDate;
+
+
+    public RecipeServiceModel() {
     }
 
-    @Column(nullable = false, unique = true)
-    @Length(min = 3)
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -41,7 +45,6 @@ public class Recipe extends BaseEntity {
         this.title = title;
     }
 
-    @Column(nullable = false, columnDefinition = "TEXT")
     public String getDescription() {
         return description;
     }
@@ -50,7 +53,6 @@ public class Recipe extends BaseEntity {
         this.description = description;
     }
 
-    @Column(name = "image")
     public String getImageUrl() {
         return imageUrl;
     }
@@ -59,8 +61,14 @@ public class Recipe extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    @Column(name = "post_date")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    public List<IngredientServiceModel> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<IngredientServiceModel> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     public Date getPostDate() {
         return postDate;
     }
@@ -69,26 +77,6 @@ public class Recipe extends BaseEntity {
         this.postDate = postDate;
     }
 
-    @Column(name = "update_date")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public LocalDate getUpdateDate() {
-        return updateDate;
-    }
-
-    public void setUpdateDate(LocalDate updateDate) {
-        this.updateDate = updateDate;
-    }
-
-    @OneToMany
-    public List<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    @OneToMany
     public List<Comment> getComments() {
         return comments;
     }
@@ -97,7 +85,6 @@ public class Recipe extends BaseEntity {
         this.comments = comments;
     }
 
-    @Column(nullable = false)
     public int getCalories() {
         return calories;
     }
@@ -106,7 +93,6 @@ public class Recipe extends BaseEntity {
         this.calories = calories;
     }
 
-    @Column(nullable = false)
     public int getCarbohydrates() {
         return carbohydrates;
     }
@@ -115,7 +101,6 @@ public class Recipe extends BaseEntity {
         this.carbohydrates = carbohydrates;
     }
 
-    @Column(nullable = false)
     public int getFats() {
         return fats;
     }
@@ -124,7 +109,6 @@ public class Recipe extends BaseEntity {
         this.fats = fats;
     }
 
-    @Column(nullable = false)
     public int getProteins() {
         return proteins;
     }
@@ -133,7 +117,6 @@ public class Recipe extends BaseEntity {
         this.proteins = proteins;
     }
 
-    @Column(nullable = false)
     public int getTime() {
         return time;
     }
@@ -142,7 +125,6 @@ public class Recipe extends BaseEntity {
         this.time = time;
     }
 
-    @Column(nullable = false)
     public int getServings() {
         return servings;
     }
@@ -151,7 +133,6 @@ public class Recipe extends BaseEntity {
         this.servings = servings;
     }
 
-    @Column(nullable = false)
     public String getDifficulty() {
         return difficulty;
     }
