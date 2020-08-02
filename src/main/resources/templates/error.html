@@ -1,0 +1,44 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Exception</title>
+  <th:block th:include="~{fragments/head}"></th:block>
+</head>
+
+<body>
+<div class="empty"></div>
+<header class="nav-container" id="navbar">
+  <th:block th:include="~{fragments/nav}"></th:block>
+</header>
+
+<th:block th:include="~{fragments/background}"></th:block>
+
+    <div class="login-register-conteiner">
+    <main class="login-register page-404" >
+      <h1 class="" th:text="${statusCode}">
+        404
+      </h1>
+      <h3>
+        Страницата не е намерена
+      </h3>
+      <hr class="">
+      <p class="normal-text">
+        Линкът който се опитвате да достъпите може би е грешен или страницата е преместена.
+      </p>
+      <div class="recepe-grid__image" >
+        <img class="soft-shadow" th:src="'https://http.cat/' + ${statusCode}" alt="Cat">
+      </div>
+
+      <div class="">
+          <button type="submit" class="" onclick="history.back()">Върни назад!</button>
+      </div>
+    </main>
+  </div>
+
+<footer class="footer">
+  <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>
