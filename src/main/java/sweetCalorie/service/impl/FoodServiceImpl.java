@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import sweetCalorie.constant.GlobalConstants;
 import sweetCalorie.model.binding.FoodAddBindingModel;
 import sweetCalorie.model.entity.Food;
+import sweetCalorie.model.entity.FoodCategory;
 import sweetCalorie.model.service.FoodServiceModel;
 import sweetCalorie.repository.FoodRepository;
 import sweetCalorie.service.FoodService;
@@ -14,6 +15,8 @@ import sweetCalorie.util.ValidationUtil;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -74,16 +77,43 @@ public class FoodServiceImpl implements FoodService {
             FoodServiceModel foodServiceModel = modelMapper.map(food, FoodServiceModel.class);
             allFoods.add(foodServiceModel);
         });
+        allFoods.sort(new Sort());
+        return allFoods;
+    }
+
+    @Override
+    public List<FoodServiceModel> findAllFoodsByCategory(FoodCategory foodCategory) {
+        List<FoodServiceModel> allFoods = new LinkedList<>();
+        this.foodRepository.findAllByCategory(foodCategory).forEach(food -> {
+            FoodServiceModel foodServiceModel = modelMapper.map(food, FoodServiceModel.class);
+            allFoods.add(foodServiceModel);
+        });
+        allFoods.sort(new Sort());
         return allFoods;
     }
 
     @Override
     public FoodServiceModel findById(String id) {
         return (FoodServiceModel) this.foodRepository.findById(id)
-                .map(food ->{
+                .map(food -> {
                     FoodServiceModel foodServiceModel = this.modelMapper.map(
-                            food,FoodServiceModel.class);
+                            food, FoodServiceModel.class);
                     return foodServiceModel;
                 }).orElse(null);
     }
+
+    @Override
+    public void deleteById(String id) {
+        if (this.foodRepository.findById(id).isPresent()) {
+            this.foodRepository.deleteById(id);
+        }
+    }
+
+    static class Sort implements Comparator<FoodServiceModel> {
+        @Override
+        public int compare(FoodServiceModel o1, FoodServiceModel o2) {
+            return o1.getName().compareTo(o2.getName());
+        }
+    }
 }
+

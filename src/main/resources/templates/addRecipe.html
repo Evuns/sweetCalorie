@@ -1,0 +1,128 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Рецепта</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+
+<body>
+<div class="empty"></div>
+<header class="nav-container" id="navbar">
+    <th:block th:include="~{fragments/nav}"></th:block>
+</header>
+
+<div style="opacity: 0.15;">
+    <th:block th:include="~{fragments/background}"></th:block>
+</div>
+
+<div class="login-register-conteiner">
+    <main class="login-register new-recepe">
+        <h1 class="">Вашета рецепта</h1>
+        <hr class=""/>
+        <form class="">
+
+            <div class="" >
+              <h3 class="new-recepe__heading">Рецепта</h3>
+              <div  class="">
+                  <label  class="">Име на рецептата</label>
+                  <input type="text" class=""   placeholder="Птиче месо с прясно зеле в глинен съд" />
+              </div>
+
+            </div>
+            <div>
+              <h3 class="new-recepe__heading">Хранително съдържание</h3>
+              <div  class="new-recepe__nut">
+                <label class="">Калорий</label>
+                <input  type="text" class=""   placeholder="360" />
+
+                <label class="">Мазнини</label>
+                <input type="text" class=""   placeholder="23" />
+
+                <label class="">Въглехидрати</label>
+                <input type="text" class=""   placeholder="43" />
+
+                <label class="">Протеини</label>
+                <input type="text" class=""   placeholder="12" />
+              </div>
+            </div>
+              <br>
+              <div  class="new-recepe__nut">
+
+
+                <label class="">Порции</label>
+                <input  type="text" class=""   placeholder="4" />
+
+                <label class="">Приготвяне</label>
+                <input type="text" class=""   placeholder="30мин" />
+
+                <label class="">Трудност</label>
+                <input type="text" class=""   placeholder="Лесно" />
+
+
+
+              </div>
+
+            <div >
+                <h3 class="new-recepe__heading">НАЧИН НА ПРИГОТВЯНЕ</h3>
+                <div  class="">
+                    <label class="">Напътствия за приготвяне</label>
+                    <textarea  class="form-textarea"  cols="40" rows="6" data-component="textarea" placeholder="..."></textarea>
+                </div>
+            </div>
+
+            <div >
+                <h3 class="new-recepe__heading">Необходими съставки</h3>
+                <div  class="new-recepe__nut">
+                    <label class="">Съставка №1</label>
+                    <input type="text" class=""   placeholder="1 кг разфасовано птиче месо" />
+
+                    <label class="">Съставка №2</label>
+                    <input type="text" class=""   placeholder="растително масло - 3 с.л." />
+
+                    <label class="">Съставка №3</label>
+                    <input type="text" class=""   placeholder="зелка - 1 средно голяма" />
+
+                    <label class="">Съставка №4</label>
+                    <input type="text" class=""   placeholder="чушки - 3 червени" />
+
+                    <label class="">Съставка №5</label>
+                    <input type="text" class=""   placeholder="моркови - 1 бр." />
+
+                    <label class="">Съставка №6</label>
+                    <input type="text" class=""   placeholder="домати - 1 добре узрял" />
+
+                    <label class="">Съставка №7</label>
+                    <input type="text" class=""   placeholder="целина - 4 стръка" />
+
+                    <label class="">Съставка №8</label>
+                    <input type="text" class=""   placeholder="червен пипер - 2 ч.л." />
+
+                    <label class="">Съставка №9</label>
+                    <input type="text" class=""   placeholder="черен пипер - 1 ч.л. смлян" />
+
+                    <label class="">Съставка №10</label>
+                    <input type="text" class=""   placeholder="сол" />
+                </div>
+
+            </div>
+
+            <h3 class="new-recepe__heading">Снимка на рецепта</h3>
+            <label  class="">Постави линк към изображението</label>
+            <input type="text" class=""   placeholder="https://www.pexels.com/photo/close-up-food-freshness-garden-594059/" />
+
+
+        <button type="submit" class="contact100-form-btn">
+          Създай рецепта
+          </button>
+
+        </form>
+    </main>
+  </div>
+
+<footer class="footer">
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>

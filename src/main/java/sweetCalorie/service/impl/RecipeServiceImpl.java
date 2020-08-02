@@ -9,6 +9,8 @@ import sweetCalorie.model.binding.RecipeAddBindingModel;
 import sweetCalorie.model.entity.Food;
 import sweetCalorie.model.entity.Ingredient;
 import sweetCalorie.model.entity.Recipe;
+import sweetCalorie.model.service.FoodServiceModel;
+import sweetCalorie.model.service.RecipeServiceModel;
 import sweetCalorie.repository.RecipeRepository;
 import sweetCalorie.service.FoodService;
 import sweetCalorie.service.IngredientService;
@@ -18,9 +20,7 @@ import sweetCalorie.util.ValidationUtil;
 import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class RecipeServiceImpl implements RecipeService {
@@ -61,25 +61,47 @@ public class RecipeServiceImpl implements RecipeService {
                     List<Ingredient> ingredients = new LinkedList<>();
                     for (int i = 0; i < recipeAdd.getIngredients().size(); i++) {
                         IngredientBindingModel ingredientBindingModel = recipeAdd.getIngredients().get(i);
-                        Food food = this.foodService.findByName(
-                                ingredientBindingModel.getFood());
-                        if (food != null) {
-                            Ingredient ingredient = this.modelMapper.map(ingredientBindingModel, Ingredient.class);
-                            ingredient.setFood(food);
-                            this.ingredientService.addNewIngredient(ingredient);
-                            ingredients.add(ingredient);
-                        } else {
-                            //ToDo
-                            //  this.foodService.addNewFood();
-                        }
-                    }
-                    recipe.setIngredients(ingredients);
-                    recipe.setPostDate(new Date());
-                    this.recipeRepository.saveAndFlush(recipe);
+                        Ingredient ingredient = this.modelMapper.map(ingredientBindingModel, Ingredient.class);
+                        this.ingredientService.addNewIngredient(ingredient);
+                        ingredients.add(ingredient);
                 }
+                recipe.setIngredients(ingredients);
+                recipe.setPostDate(new Date());
+                this.recipeRepository.saveAndFlush(recipe);
             }
         }
-
     }
 }
+
+    @Override
+    public RecipeServiceModel findById(String id) {
+        return (RecipeServiceModel) this.recipeRepository.findById(id)
+                .map(recipe -> {
+                    IngredientBindingModel ingredientBindingModel = this.modelMapper
+                            .map(recipe.getIngredients(), IngredientBindingModel.class);
+                    RecipeServiceModel recipeServiceModel = this.modelMapper.map(
+                            recipe, RecipeServiceModel.class);
+                    return recipeServiceModel;
+                }).orElse(null);
+    }
+
+    @Override
+    public List<RecipeServiceModel> findAllRecipes() {
+        List<RecipeServiceModel> allRecipes = new LinkedList<>();
+        this.recipeRepository.findAll().forEach(recipe -> {
+            RecipeServiceModel recipeServiceModel = modelMapper.map(recipe, RecipeServiceModel.class);
+            allRecipes.add(recipeServiceModel);
+        });
+        allRecipes.sort(new RecipeServiceImpl.Sort());
+        return allRecipes;
+    }
+
+static class Sort implements Comparator<RecipeServiceModel> {
+    @Override
+    public int compare(RecipeServiceModel o1, RecipeServiceModel o2) {
+        return o1.getPostDate().compareTo(o2.getPostDate());
+    }
+}
+}
+
 

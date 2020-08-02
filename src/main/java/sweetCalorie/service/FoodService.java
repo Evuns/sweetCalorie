@@ -1,6 +1,7 @@
 package sweetCalorie.service;
 
 import sweetCalorie.model.entity.Food;
+import sweetCalorie.model.entity.FoodCategory;
 import sweetCalorie.model.service.FoodServiceModel;
 
 import java.io.IOException;
@@ -20,5 +21,9 @@ public interface FoodService {
 
     List<FoodServiceModel> findAllFoods();
 
+    List<FoodServiceModel> findAllFoodsByCategory(FoodCategory foodCategory);
+
     FoodServiceModel findById(String id);
+
+    void deleteById(String id);
 }
