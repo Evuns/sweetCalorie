@@ -8,12 +8,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sweetCalorie.model.service.UserEmailServiceModel;
-import sweetCalorie.model.service.UserServiceModel;
 import sweetCalorie.service.EmailService;
-
 import javax.validation.Valid;
 
 @Controller
@@ -43,7 +40,6 @@ public class ContactsController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
             return "redirect:contacts";
         }
-
         try {
             this.emailService.sendEmail(userEmailServiceModel);
             return "sendEmail";
@@ -51,7 +47,6 @@ public class ContactsController {
             e.getCause();
             return "error";
         }
-
     }
 }
 

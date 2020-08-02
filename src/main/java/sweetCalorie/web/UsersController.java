@@ -16,8 +16,6 @@ import sweetCalorie.model.binding.UserRegisterBindingModel;
 import sweetCalorie.model.service.UserServiceModel;
 import sweetCalorie.service.UserService;
 import sweetCalorie.validation.UserRegisterValidator;
-
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -49,7 +47,6 @@ public class UsersController {
     public String registerConfirm(@Valid @ModelAttribute("userRegisterBindingModel")
                                           UserRegisterBindingModel userRegisterBindingModel,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-
         this.userRegisterValidator.validate(userRegisterBindingModel, bindingResult);
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);

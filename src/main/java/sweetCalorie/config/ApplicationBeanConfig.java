@@ -6,8 +6,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import sweetCalorie.model.service.FoodServiceModel;
 import sweetCalorie.util.ValidationUtil;
 import sweetCalorie.util.ValidationUtilImpl;
+
+import java.util.Comparator;
 
 @Configuration
 public class ApplicationBeanConfig {
@@ -33,6 +36,4 @@ public class ApplicationBeanConfig {
     public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 }

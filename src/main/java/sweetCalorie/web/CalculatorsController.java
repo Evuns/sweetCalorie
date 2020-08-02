@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sweetCalorie.model.binding.CalculatorBinding;
 import sweetCalorie.model.service.BMICalculatorServiceModel;
-import sweetCalorie.model.service.UserEmailServiceModel;
-
 import javax.validation.Valid;
 
 @Controller

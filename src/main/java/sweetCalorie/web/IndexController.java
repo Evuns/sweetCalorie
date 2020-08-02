@@ -1,5 +1,6 @@
 package sweetCalorie.web;
 
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ public class IndexController {
 
     @GetMapping("/")
     public ModelAndView index(ModelAndView modelAndView) {
-        if(SecurityContextHolder.getContext().getAuthentication() == null) {
+        if(SecurityContextHolder.getContext().getAuthentication() instanceof AnonymousAuthenticationToken) {
             modelAndView.setViewName("index");
         } else{
             modelAndView.setViewName("home");
