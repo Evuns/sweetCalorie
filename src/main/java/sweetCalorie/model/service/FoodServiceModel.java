@@ -6,7 +6,7 @@ public class FoodServiceModel {
     private String id;
     private String name;
     private String category;
-    private String imageUrl;
+    private String image;
     private double calories;
     private double proteins;
     private double carbohydrates;
@@ -41,12 +41,12 @@ public class FoodServiceModel {
         this.category = category;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public double getCalories() {

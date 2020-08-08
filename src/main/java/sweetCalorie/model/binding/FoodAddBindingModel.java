@@ -1,5 +1,7 @@
 package sweetCalorie.model.binding;
 
+import org.hibernate.validator.constraints.Length;
+import sweetCalorie.constant.GlobalConstants;
 import sweetCalorie.model.entity.FoodCategory;
 
 import javax.persistence.Column;
@@ -7,12 +9,13 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Positive;
 
 public class FoodAddBindingModel {
 
     private String name;
     private String category;
-    private String imageUrl;
+    private String image;
     private double calories;
     private double proteins;
     private double carbohydrates;
@@ -22,7 +25,9 @@ public class FoodAddBindingModel {
     public FoodAddBindingModel() {
     }
 
-    @NotNull
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @Length(min = 2, max = 20, message = GlobalConstants.FIELD_LENGTH)
+    @Pattern(regexp = "^\\p{L}+$", message = GlobalConstants.FIELD_PATTERN)
     public String getName() {
         return name;
     }
@@ -31,7 +36,7 @@ public class FoodAddBindingModel {
         this.name = name;
     }
 
-    @NotNull
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
     public String getCategory() {
         return category;
     }
@@ -40,17 +45,16 @@ public class FoodAddBindingModel {
         this.category = category;
     }
 
-
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    @NotNull
-    @Min(0)
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @Min(value = 0, message = "Полето с калории " + GlobalConstants.POSITIVE_NUMBER)
     public double getCalories() {
         return calories;
     }
@@ -59,8 +63,8 @@ public class FoodAddBindingModel {
         this.calories = calories;
     }
 
-    @NotNull
-    @Min(0)
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @Min(value = 0, message = "Полето с протеини " + GlobalConstants.POSITIVE_NUMBER)
     public double getProteins() {
         return proteins;
     }
@@ -69,8 +73,8 @@ public class FoodAddBindingModel {
         this.proteins = proteins;
     }
 
-    @NotNull
-    @Min(0)
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @Min(value = 0, message = "Полето с въглехидрати " + GlobalConstants.POSITIVE_NUMBER)
     public double getCarbohydrates() {
         return carbohydrates;
     }
@@ -79,7 +83,8 @@ public class FoodAddBindingModel {
         this.carbohydrates = carbohydrates;
     }
 
-    @Min(0)
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @Min(value = 0, message = "Полето със захари " + GlobalConstants.POSITIVE_NUMBER)
     public double getSugars() {
         return sugars;
     }
@@ -88,8 +93,8 @@ public class FoodAddBindingModel {
         this.sugars = sugars;
     }
 
-    @NotNull
-    @Min(0)
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @Min(value = 0, message = "Полето с мазнини " + GlobalConstants.POSITIVE_NUMBER)
     public double getFats() {
         return fats;
     }

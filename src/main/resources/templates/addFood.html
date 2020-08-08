@@ -1,0 +1,104 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Рецепта</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+
+<body>
+<div class="empty"></div>
+<header class="nav-container" id="navbar">
+    <th:block th:include="~{fragments/nav}"></th:block>
+</header>
+
+<div style="opacity: 0.15;">
+    <th:block th:include="~{fragments/background}"></th:block>
+</div>
+
+<div class="login-register-conteiner">
+    <main class="login-register new-recepe">
+        <h1 class="">Нова храна</h1>
+        <hr class=""/>
+        <form class="" th:object="${foodAddBindingModel}" th:action="@{/foods/add}" method="POST">
+            <div class="">
+                <h3 class="new-recepe__heading">Храна</h3>
+                <div class="">
+                    <label for="name" class="">Име</label>
+                    <input th:field="*{name}" th:errorclass="bg-danger" type="text" class="" id="name"
+                           name="name" placeholder="Наименование на храна"/>
+                    <small th:each="e : ${#fields.errors('name')}" th:text="${e}" class="text-danger">Грешно
+                        заглавие</small>
+                </div>
+                <div class="">
+                    <label for="category" class="">Категория</label>
+                    <select th:field="*{category}" id="category" class="form-control">
+                        <option value="null">- Изберете категория -</option>
+                        <option th:each="category : ${T(sweetCalorie.model.entity.FoodCategory).values()}"
+                                th:value="${category}"
+                                th:text="${category}" th:selected="${foodAddBindingModel.category == category}">
+                            Категория
+                        </option>
+                    </select>
+                    <p th:if="${#fields.hasErrors('category')}" th:errors="*{category}"
+                       class="text-danger">
+                        Категорията е задължителна.
+                    </p>
+                </div>
+                <div class="">
+                    <label for="image" class="">Постави линк към изображението</label>
+                    <input th:field="*{image}" th:errorclass="bg-danger" type="text" class="" id="image"
+                           name="image" placeholder="Снимка"/>
+                    <small th:each="e : ${#fields.errors('image')}" th:text="${e}" class="text-danger"></small>
+                </div>
+                <div class="">
+                    <label for="calories" class="">Калории</label>
+                    <input th:field="*{calories}" th:errorclass="bg-danger" type="text" class="" id="calories"
+                           name="calories" placeholder="cal"/>
+                    <small th:each="e : ${#fields.errors('calories')}" th:text="${e}" class="text-danger"></small>
+                </div>
+                <div class="">
+                    <label for="proteins" class="">Протеини</label>
+                    <input th:field="*{proteins}" th:errorclass="bg-danger" type="text" id="proteins"
+                           def
+                           name="proteins" placeholder="гр."/>
+                    <small th:each="e : ${#fields.errors('proteins')}" th:text="${e}" class="text-danger"></small>
+                </div>
+                <div class="">
+                    <label for="carbohydrates" class="">Въглехидрати</label>
+                    <input th:field="*{carbohydrates}" th:errorclass="bg-danger" type="text" class="" id="carbohydrates"
+                           name="carbohydrates" placeholder="гр."/>
+                    <small th:each="e : ${#fields.errors('carbohydrates')}" th:text="${e}" class="text-danger"></small>
+                </div>
+                <div class="">
+                    <label for="sugars" class="">Захари</label>
+                    <input th:field="*{sugars}" th:errorclass="bg-danger" type="text" class="" id="sugars"
+                           name="sugars" placeholder="гр."/>
+                    <small th:each="e : ${#fields.errors('sugars')}" th:text="${e}" class="text-danger"></small>
+                </div>
+                <div class="">
+                    <label for="fats" class="">Мазнини</label>
+                    <input th:field="*{fats}" th:errorclass="bg-danger" type="text" class="" id="fats"
+                           name="fats" placeholder="гр."/>
+                    <small th:each="e : ${#fields.errors('fats')}" th:text="${e}" class="text-danger"></small>
+                </div>
+
+
+            </div>
+
+            <button type="submit" class="contact100-form-btn">
+                Добави храна
+            </button>
+            <button onclick="window.history.back()" type="submit">Назад</button>
+        </form>
+    </main>
+</div>
+
+<footer class="footer">
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+
+</html>
+

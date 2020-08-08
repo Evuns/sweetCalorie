@@ -62,13 +62,13 @@ public class FoodServiceImpl implements FoodService {
         return this.foodRepository.findByName(name);
     }
 
-    @Override
-    public void addNewFood(String name, String category, String imageUrl,
-                           double calories, double proteins, double carbohydrates,
-                           double sugars, double fats) {
-        Food food = new Food(name, category, imageUrl, calories,
-                proteins, carbohydrates, sugars, fats);
-    }
+//    @Override
+//    public void addNewFood(String name, String category, String image,
+//                           double calories, double proteins, double carbohydrates,
+//                           double sugars, double fats) {
+//        Food food = new Food(name, category, image, calories,
+//                proteins, carbohydrates, sugars, fats);
+//    }
 
     @Override
     public List<FoodServiceModel> findAllFoods() {
@@ -106,6 +106,14 @@ public class FoodServiceImpl implements FoodService {
     public void deleteById(String id) {
         if (this.foodRepository.findById(id).isPresent()) {
             this.foodRepository.deleteById(id);
+        }
+    }
+
+    @Override
+    public void addFood(FoodServiceModel foodServiceModel) {
+        if(this.foodRepository.findByName(foodServiceModel.getName()) == null){
+           Food food = this.modelMapper.map(foodServiceModel, Food.class);
+           this.foodRepository.saveAndFlush(food);
         }
     }
 

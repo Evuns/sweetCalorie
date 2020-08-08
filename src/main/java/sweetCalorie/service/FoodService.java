@@ -15,9 +15,9 @@ public interface FoodService {
 
     Food findByName(String name);
 
-    void addNewFood(String name, String category, String imageUrl,
-                    double calories, double proteins, double carbohydrates,
-                    double sugars, double fats);
+//    void addNewFood(String name, String category, String imageUrl,
+//                    double calories, double proteins, double carbohydrates,
+//                    double sugars, double fats);
 
     List<FoodServiceModel> findAllFoods();
 
@@ -26,4 +26,6 @@ public interface FoodService {
     FoodServiceModel findById(String id);
 
     void deleteById(String id);
+
+    void addFood(FoodServiceModel foodServiceModel);
 }

@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 
 @Entity
 @Table(name = "foods")
@@ -12,7 +13,7 @@ public class Food extends BaseEntity {
 
     private String name;
     private FoodCategory category;
-    private String imageUrl;
+    private String image;
     private double calories;
     private double proteins;
     private double carbohydrates;
@@ -22,12 +23,12 @@ public class Food extends BaseEntity {
     public Food() {
     }
 
-    public Food( String name, String category, String imageUrl,
+    public Food( String name, String category, String image,
                  double calories, double proteins, double carbohydrates,
                  double sugars, double fats){
         this.name = name;
         this.category = FoodCategory.valueOf(category.toUpperCase());
-        this.imageUrl = imageUrl;
+        this.image = image;
         this.calories = calories;
         this.proteins = proteins;
         this.carbohydrates = carbohydrates;
@@ -54,17 +55,17 @@ public class Food extends BaseEntity {
         this.category = category;
     }
 
-    @Column(name = "image")
-    public String getImageUrl() {
-        return imageUrl;
+    @Column()
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Column(nullable = false)
-    @Min(0)
+    @Positive
     public double getCalories() {
         return calories;
     }
@@ -74,7 +75,7 @@ public class Food extends BaseEntity {
     }
 
     @Column(nullable = false)
-    @Min(0)
+    @Positive
     public double getProteins() {
         return proteins;
     }
@@ -84,7 +85,7 @@ public class Food extends BaseEntity {
     }
 
     @Column(nullable = false)
-    @Min(0)
+    @Positive
     public double getCarbohydrates() {
         return carbohydrates;
     }
@@ -94,7 +95,7 @@ public class Food extends BaseEntity {
     }
 
     @Column(nullable = false)
-    @Min(0)
+    @Positive
     public double getFats() {
         return fats;
     }
@@ -104,7 +105,7 @@ public class Food extends BaseEntity {
     }
 
     @Column
-    @Min(0)
+    @Positive
     public double getSugars() {
         return sugars;
     }
