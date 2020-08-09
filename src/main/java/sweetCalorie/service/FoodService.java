@@ -28,4 +28,6 @@ public interface FoodService {
     void deleteById(String id);
 
     void addFood(FoodServiceModel foodServiceModel);
+
+    void editFood(FoodServiceModel foodServiceModel);
 }

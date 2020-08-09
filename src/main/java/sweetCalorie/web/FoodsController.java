@@ -94,13 +94,6 @@ public class FoodsController {
     }
 
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    @GetMapping("/edit/{id}")
-    public String delete(@PathVariable("id") String id) {
-        this.foodService.deleteById(id);
-        return "redirect:/foods";
-    }
-
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @GetMapping("/add")
     public String addFood(Model model) {
         if (!model.containsAttribute("foodAddBindingModel")) {
@@ -110,11 +103,12 @@ public class FoodsController {
         return "addFood";
     }
 
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
     @PostMapping("/add")
     public String successfullyAdd(@Valid @ModelAttribute("foodAddBindingModel")
                                           FoodAddBindingModel foodAddBindingModel,
                                   BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        this.foodAddValidator.validate(foodAddBindingModel,bindingResult);
+        this.foodAddValidator.validate(foodAddBindingModel, bindingResult);
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("foodAddBindingModel", foodAddBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.foodAddBindingModel", bindingResult);
@@ -123,6 +117,37 @@ public class FoodsController {
 
         this.foodService.addFood(this.modelMapper
                 .map(foodAddBindingModel, FoodServiceModel.class));
+        return "redirect:/foods";
+    }
+
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @GetMapping("/edit/")
+    public String edit(@RequestParam String id, Model model) {
+        if(!model.containsAttribute("foodServiceModel")){
+            model.addAttribute("foodServiceModel", this.foodService.findById(id));
+        }
+        return "editFood";
+    }
+
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @PostMapping("/edit/")
+    public String successfullyEdited(@RequestParam String id, @Valid @ModelAttribute("foodServiceModel")
+            FoodServiceModel foodServiceModel,
+                                     BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("foodServiceModel", foodServiceModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.foodServiceModel", bindingResult);
+            return "redirect:/edit/{id}" + foodServiceModel.getId();
+        }
+        this.foodService.editFood(this.modelMapper
+                .map(foodServiceModel, FoodServiceModel.class));
+        return "redirect:/foods";
+    }
+
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") String id) {
+        this.foodService.deleteById(id);
         return "redirect:/foods";
     }
 }

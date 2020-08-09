@@ -27,7 +27,7 @@ public class FoodAddBindingModel {
 
     @NotNull(message = GlobalConstants.FIELD_NEEDED)
     @Length(min = 2, max = 20, message = GlobalConstants.FIELD_LENGTH)
-    @Pattern(regexp = "^\\p{L}+$", message = GlobalConstants.FIELD_PATTERN)
+    @Pattern(regexp = "^\\p{L}+\\s*\\p{L}+\\s*\\p{L}+$", message = GlobalConstants.FIELD_PATTERN)
     public String getName() {
         return name;
     }

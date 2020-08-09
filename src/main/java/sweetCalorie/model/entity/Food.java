@@ -65,7 +65,7 @@ public class Food extends BaseEntity {
     }
 
     @Column(nullable = false)
-    @Positive
+    @Min(0)
     public double getCalories() {
         return calories;
     }
@@ -75,7 +75,7 @@ public class Food extends BaseEntity {
     }
 
     @Column(nullable = false)
-    @Positive
+    @Min(0)
     public double getProteins() {
         return proteins;
     }
@@ -85,7 +85,7 @@ public class Food extends BaseEntity {
     }
 
     @Column(nullable = false)
-    @Positive
+    @Min(0)
     public double getCarbohydrates() {
         return carbohydrates;
     }
@@ -95,7 +95,7 @@ public class Food extends BaseEntity {
     }
 
     @Column(nullable = false)
-    @Positive
+    @Min(0)
     public double getFats() {
         return fats;
     }
@@ -105,7 +105,7 @@ public class Food extends BaseEntity {
     }
 
     @Column
-    @Positive
+    @Min(0)
     public double getSugars() {
         return sugars;
     }

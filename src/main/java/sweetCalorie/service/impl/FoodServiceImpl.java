@@ -15,10 +15,7 @@ import sweetCalorie.util.ValidationUtil;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class FoodServiceImpl implements FoodService {
@@ -49,8 +46,9 @@ public class FoodServiceImpl implements FoodService {
 
         for (FoodAddBindingModel foodAdd : foodAddBindingModels) {
             if (this.validationUtil.isValid(foodAdd)) {
-                if (this.foodRepository.findByName(foodAdd.getName()) == null) {
+                if (this.foodRepository.findByName(foodAdd.getName().toLowerCase()) == null) {
                     Food food = this.modelMapper.map(foodAdd, Food.class);
+                    food.setName(foodAdd.getName().toLowerCase());
                     this.foodRepository.saveAndFlush(food);
                 }
             }
@@ -59,7 +57,7 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public Food findByName(String name) {
-        return this.foodRepository.findByName(name);
+        return this.foodRepository.findByName(name.toLowerCase());
     }
 
 //    @Override
@@ -113,7 +111,25 @@ public class FoodServiceImpl implements FoodService {
     public void addFood(FoodServiceModel foodServiceModel) {
         if(this.foodRepository.findByName(foodServiceModel.getName()) == null){
            Food food = this.modelMapper.map(foodServiceModel, Food.class);
+           food.setName(foodServiceModel.getName().toLowerCase());
            this.foodRepository.saveAndFlush(food);
+        }
+    }
+
+    @Override
+    public void editFood(FoodServiceModel foodServiceModel) {
+        Optional foodOptional = this.foodRepository.findById(foodServiceModel.getId());
+        if(foodOptional.isPresent()) {
+            Food food = (Food)foodOptional.get();
+            food.setName(foodServiceModel.getName().toLowerCase());
+            food.setImage(foodServiceModel.getImage());
+            food.setCalories(foodServiceModel.getCalories());
+            food.setCarbohydrates(foodServiceModel.getCarbohydrates());
+            food.setCategory(FoodCategory.valueOf(foodServiceModel.getCategory()));
+            food.setFats(foodServiceModel.getFats());
+            food.setSugars(foodServiceModel.getSugars());
+            food.setProteins(foodServiceModel.getProteins());
+            this.foodRepository.saveAndFlush(food);
         }
     }
 
