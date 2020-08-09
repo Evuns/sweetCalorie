@@ -6,10 +6,9 @@ import org.springframework.stereotype.Service;
 import sweetCalorie.constant.GlobalConstants;
 import sweetCalorie.model.binding.IngredientBindingModel;
 import sweetCalorie.model.binding.RecipeAddBindingModel;
-import sweetCalorie.model.entity.Food;
 import sweetCalorie.model.entity.Ingredient;
 import sweetCalorie.model.entity.Recipe;
-import sweetCalorie.model.service.FoodServiceModel;
+import sweetCalorie.model.service.IngredientServiceModel;
 import sweetCalorie.model.service.RecipeServiceModel;
 import sweetCalorie.repository.RecipeRepository;
 import sweetCalorie.service.FoodService;
@@ -19,7 +18,6 @@ import sweetCalorie.util.ValidationUtil;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -64,14 +62,14 @@ public class RecipeServiceImpl implements RecipeService {
                         Ingredient ingredient = this.modelMapper.map(ingredientBindingModel, Ingredient.class);
                         this.ingredientService.addNewIngredient(ingredient);
                         ingredients.add(ingredient);
+                    }
+                    recipe.setIngredients(ingredients);
+                    recipe.setPostDate(new Date());
+                    this.recipeRepository.saveAndFlush(recipe);
                 }
-                recipe.setIngredients(ingredients);
-                recipe.setPostDate(new Date());
-                this.recipeRepository.saveAndFlush(recipe);
             }
         }
     }
-}
 
     @Override
     public RecipeServiceModel findById(String id) {
@@ -96,12 +94,35 @@ public class RecipeServiceImpl implements RecipeService {
         return allRecipes;
     }
 
-static class Sort implements Comparator<RecipeServiceModel> {
     @Override
-    public int compare(RecipeServiceModel o1, RecipeServiceModel o2) {
-        return o1.getPostDate().compareTo(o2.getPostDate());
+    public void addRecipe(RecipeServiceModel recipeServiceModel) {
+        Recipe recipe = this.modelMapper.map(recipeServiceModel, Recipe.class);
+        List<Ingredient> ingredients = new LinkedList<>();
+        for (int i = 0; i < recipeServiceModel.getIngredients().size(); i++) {
+            IngredientServiceModel ingredientServiceModel = recipeServiceModel.getIngredients().get(i);
+            Ingredient ingredient = this.modelMapper.map(ingredientServiceModel, Ingredient.class);
+            this.ingredientService.addNewIngredient(ingredient);
+            ingredients.add(ingredient);
+        }
+        recipe.setIngredients(ingredients);
+        recipe.setPostDate(new Date());
+        this.recipeRepository.saveAndFlush(recipe);
     }
-}
+
+    @Override
+    public void deleteById(String id) {
+       if(this.recipeRepository.findById(id).isPresent()){
+           this.recipeRepository.deleteById(id);
+       }
+    }
+
+    static class Sort implements Comparator<RecipeServiceModel> {
+        @Override
+        public int compare(RecipeServiceModel o1, RecipeServiceModel o2) {
+            return o1.getPostDate().compareTo(o2.getPostDate());
+        }
+    }
+
 }
 
 

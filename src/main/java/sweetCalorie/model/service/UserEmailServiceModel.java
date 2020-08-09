@@ -33,7 +33,7 @@ public class UserEmailServiceModel {
         this.email = email;
     }
 
-    @NotNull(message = GlobalConstants.MESSAGE_NEEDED)
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
     public String getMessage() {
         return message;
     }

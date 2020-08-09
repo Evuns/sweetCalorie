@@ -67,6 +67,7 @@ public class UsersController {
         }
         return "login";
     }
+
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/logout")
     public String logout(HttpSession httpSession){
