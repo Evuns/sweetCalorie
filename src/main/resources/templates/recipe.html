@@ -15,16 +15,13 @@
 </div>
 
 <div class="wrapper">
-    <div class="">
-        <button type="submit" class="" onclick="history.back()">Назад</button>
-    </div>
-
     <div class="section recepe-grid" th:object="${recipe}">
 
         <div>
             <div class=" recepe-grid__image">
                 <img class="soft-shadow" th:src="*{imageUrl}" alt="Food image">
             </div>
+            <button type="submit" class="button-big" onclick="history.back()">Назад</button>
             <a href="#" class="button-big">
                 Добави в любими
             </a>
@@ -43,7 +40,7 @@
             </h3>
             <div class="recepe-nutri">
                 <div class="recepe-nutri__box">
-                    <a class="recepe-nutri__type" >calories</a>
+                    <a class="recepe-nutri__type">calories</a>
                     <hr>
                     <a class="recepe-nutri__count" th:text="|*{calories} кал|">390kcal</a>
                 </div>
@@ -134,6 +131,13 @@
                 Зелката и останалите зеленчуци, без едната чушка, нарежете на ситно. Посолете и омачкайте с ръце.
                 Прибавете червен и черен пипер, мазнината и объркайте с птичето месо.
             </p>
+            <div>
+                <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
+                    <a th:href="@{/recipes/delete/{id}(id = *{id})}" class="button-big">
+                        Изтрий
+                    </a>
+                </th:if>
+            </div>
         </div>
 
 

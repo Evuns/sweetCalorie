@@ -17,7 +17,7 @@
         <div class="mouse-arrow"></div>
     </div>
 
-    <div class="wrapper"  >
+    <div class="wrapper">
         <div class="hero-sec-grid">
             <div class="hero-sec-grid__info">
                 <h1>
@@ -32,7 +32,7 @@
                     да следиш своя прогрес или да си харесаш някоя от здравословните ни рецепти.
                 </p>
                 <div class="hero-sec-grid__info--link-container">
-<!--         ToDo           -->
+                    <!--         ToDo           -->
                     <a href="users/profile" class="button-big button-big--red">
                         Профил
                     </a>
@@ -66,7 +66,7 @@
 
             </div>
             <div class="hero-sec-grid__image">
-                <img height="22" width="22" src="../images/hero-imaget.png" alt="Sweetcalories yoga"/>
+                <img height="22" width="22" src="../images/hero-imagetLog.png" alt="Sweetcalories yoga"/>
             </div>
         </div>
     </div>
@@ -215,7 +215,7 @@
                     приготвена храна.
                     Нашите предложения са лесни за приготвяне, вкусни и здравословни.
                 </p>
-                <a href="#" class="button-big">
+                <a href="/recipes" class="button-big">
                     Към рецептите
                 </a>
                 <div class="social-icons">
@@ -272,66 +272,9 @@
                     количества и
                     кои храни трябва да ограничите.
                 </p>
-                <div class="food-category">
-                    <a href="#" class="food-category__category">
-                        <div class="food-category__icon category__icon--tomato">
-                        </div>
-                        <p class="small-text">
-                            Зеленчуци
-                        </p>
-                    </a>
+                <th:block th:include="~{fragments/foodsCategory}"></th:block>
 
-                    <a href="#" class="food-category__category">
-                        <div class="food-category__icon category__icon--meat">
-                        </div>
-                        <p class="small-text">
-                            Животински
-                        </p>
-                    </a>
-                    <a href="#" class="food-category__category">
-                        <div class="food-category__icon category__icon--sweet">
-                        </div>
-                        <p class="small-text">
-                            Сладки
-                        </p>
-                    </a>
-                    <a href="#" class="food-category__category">
-                        <div class="food-category__icon category__icon--drink">
-                        </div>
-                        <p class="small-text">
-                            Напитки
-                        </p>
-                    </a>
-                    <a href="#" class="food-category__category">
-                        <div class="food-category__icon category__icon--fruit">
-                        </div>
-                        <p class="small-text">
-                            Плодове
-                        </p>
-                    </a>
-                    <a href="#" class="food-category__category">
-                        <div class="food-category__icon category__icon--fish">
-                        </div>
-                        <p class="small-text">
-                            Риба
-                        </p>
-                    </a>
-                    <a href="#" class="food-category__category">
-                        <div class="food-category__icon category__icon--pasta">
-                        </div>
-                        <p class="small-text">
-                            Тестени
-                        </p>
-                    </a>
-                    <a href="#" class="food-category__category">
-                        <div class="food-category__icon category__icon--dairy">
-                        </div>
-                        <p class="small-text">
-                            Млечни
-                        </p>
-                    </a>
-                </div>
-                <a href="#" class="button-big">
+                <a href="/foods" class="button-big">
                     Виж всички храни
                 </a>
             </div>
@@ -340,20 +283,17 @@
     </div>
 
 </div>
-<!--<div class="banner">-->
-<!--    <div class="wrapper">-->
-<!--        <div class="banner__section">-->
-<!--            <h3 class="noselect">-->
-<!--                Никога не е късно да започнеш да се грижиш за себе си!-->
-<!--            </h3>-->
-<!--            <a href="/users/register" class="button-big">-->
-<!--                Започни днес-->
-<!--            </a>-->
-<!--            <div class="banner__img">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div class="banner">
+    <div class="wrapper">
+        <div class="banner__section">
+            <h3 class="noselect">
+                Никога не е късно да започнеш да се грижиш за себе си!
+            </h3>
+            <div class="banner__img">
+            </div>
+        </div>
+    </div>
+</div>
 
 <footer class="footer">
     <th:block th:include="~{fragments/footer}"></th:block>

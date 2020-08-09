@@ -4,29 +4,46 @@
     <div class="wrapper">
         <div class="topnav" id="myTopnav">
             <div class="logo-container">
-                <img height="20" width="141" src="../images/logo.png" alt="Sweetcalories logo"/>
+                <a href="/">
+                    <img height="20" width="141" src="/images/logo.png" alt="Sweetcalories logo"/>
+                </a>
             </div>
             <div>
-                <a href="/" class="active">Начало</a>
-                <a href="#news">За нас</a>
-                <a href="#about">Храни</a>
-                <a href="#about">Kалкулатори</a>
+                <a href="/">Начало</a>
+                <a href="/about">За нас</a>
+                <a href="/foods">Храни</a>
+                <a href="/recipes">Рецепти</a>
+                <a href="/calculators">Kалкулатори</a>
                 <a href="/contacts">Kонтакти</a>
                 <th:block sec:authorize="isAnonymous()">
                     <a href="/users/login" class="sign-in">Вход</a>
                     <a href="/users/register" class="nav-button">Регистрация</a>
                 </th:block>
                 <th:block sec:authorize="isAuthenticated()">
-                    <a href="users/profile" class="user-profile">Профил</a>
+                    <a href="/users/profile" class="user-profile">Профил</a>
+                    <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
+                        <a href="/admin/profile" class="user-profile">Админ</a>
+                    </th:if>
                     <a th:href="@{/users/logout}" class="sign-out">Изход</a>
                 </th:block>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-                    <img height="14" width="20" src="../images/burger-icon.svg" alt="Burger Icon"/>
+                    <img height="14" width="20" src="/images/burger-icon.svg" alt="Burger Icon"/>
                 </a>
-                <a href="" class="user_icon">
-                    <img height="22" width="22" src="../images/user_icon.svg" alt="User Icon"/>
+                <a href="users/profile" class="user_icon">
+                    <img height="22" width="22" src="/images/user_icon.svg" alt="User Icon"/>
                 </a>
             </div>
         </div>
     </div>
+    <script>
+        const currentLocation = location.href;
+        const menuItem = document.querySelectorAll('a');
+        const menuLength = menuItem.length
+        for (let i = 0; i < menuLength; i++) {
+            if (menuItem[i].href === currentLocation) {
+                menuItem[i].className = "active"
+            }
+        }
+    </script>
 </th:block>
+
