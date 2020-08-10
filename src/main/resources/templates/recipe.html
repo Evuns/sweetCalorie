@@ -132,6 +132,7 @@
                 Прибавете червен и черен пипер, мазнината и объркайте с птичето месо.
             </p>
             <div>
+                <br>
                 <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
                     <a th:href="@{/recipes/delete/{id}(id = *{id})}" class="button-big">
                         Изтрий

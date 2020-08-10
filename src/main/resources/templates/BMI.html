@@ -3,8 +3,8 @@
 <head>
     <title>BMI калкулатор</title>
     <th:block th:include="~{fragments/head}"></th:block>
-</head>
 
+</head>
 <body data-ng-controller="bmiController">
 <div class="container">
 
@@ -17,54 +17,89 @@
     <div class="login-register-conteiner">
         <main class="login-register">
             <div class="col-md-12">
-                <h1 class=""><span class="">BMI Калкулатор</span></h1>
-
-
-                <form th:object="${bmiCalculatorServiceModel}"
-                      th:action="@{/calculators/BMI}" method="GET">
-                    <div class="login-form offset-lg-3 col-lg-6">
-                        <div class="form-group">
-                            <label for="weight">Тегло (kg):</label>
-                            <input type="number" class="form-control"
-                                   placeholder="Тегло в kg" id="weight"
-                                   name="weight" required>
-                        </div>
-                        <small th:each="e : ${#fields.errors('weight')}" th:text="${e}" class="text-danger"></small>
-
-                        <div class="form-group">
-                            <label for="height">Височина (cm):</label>
-                            <input type="number" class="form-control"
-                                   placeholder="Височина в cm" id="height"
-                                   name="weight" required>
-                        </div>
-                        <small th:each="e : ${#fields.errors('weight')}" th:text="${e}" class="text-danger"></small>
-
-                        <button type="submit">Изчисли</button>
-                        <button onclick="window.history.back()" type="submit">Назад</button>
-                    </div>
+                <h1 class=""><span class="">Изчисли BMI</span></h1>
+                <form onsubmit="return calcBMI();">
+                    Тегло (кг):
+                    <input id="bmi-weight" type="number" min="1" max="300" required placeholder="кг"/>
+                    Височина (см):
+                    <input id="bmi-height" type="number" min="60" max="300" required placeholder="см"/>
+                    <input class="button-big" type="submit" value="Изчисли">
+                    <div id="bmi-results"></div>
                 </form>
             </div>
         </main>
     </div>
+    <div>
+        <h2 class="category_heading">
+            BMI калкулатор
+            <span class="paint-pen">
+        </span>
+        </h2>
+        <br>
+        <p class="normal-text">
+            BMI е показател, който използва височината и теглото на човек, за да изчисли мазнините в
+            организма (при възрастните индивиди).
+        </p>
+        <br>
+        <p class="normal-text">
+            Хора с BMI от 26 до 27 обикновено са носителни на умерен риск за здравето си.
+            BMI със стойности над 30,0 се разглежда като наднормено тегло.
+            Още по-високите стойности са индикатор за висок риск и наличие на допълнително здравни
+            проблеми. Сърдечно-съдовите заболявания, диабетът и високото кръвно налягане са все болести
+            свързани с наднорменото тегло.
+        </p>
+        <br>
+        <p class="normal-text">
+            Хората, които са с тегло над нормалните граници, но които не са застрашени от други фактори за здравето
+            (като например високо ниво на холестерола в
+            кръвта и др.) трябва да се хранят здравословно и да правят упражнения, за да не увеличат
+            килограмите.
+        </p>
+        <br>
+        <p class="normal-text">
+            За хората с наднормено тегло и други здравни рискове се препоръчва колкото е
+            възможно по-бързо махане на излишните килограми. Но преди да се започне каквато и да е
+            програма (спортна или за премахване на излишните килограми), необходим е консулт с личния
+            лекар или друг здравен професионалист. При BMI равен на 24 или по-малко се приема, че
+            теглото е в нормални граници и не е опасно за здравето ни. За стойности от 25,0 до 29,9,
+            теглото вече се определя като наднормено. За хора с BMI в границите 25,0 - 34,9, и с
+            обиколка на талията съответно над 102 см при мъжете и 88 см при жените, се смята, че рискът
+            от здравословни проблеми е особено висок.
+        </p>
+        <br>
+    </div>
     <script>
-        let foodList = document.getElementsByClassName(food)
-    </script>
+        function calcBMI() {
+            let bmi = null,
+                weight = parseInt(document.getElementById("bmi-weight").value),
+                height = parseInt(document.getElementById("bmi-height").value),
+                results = document.getElementById("bmi-results");
 
+            height = height / 100;
+            bmi = weight / (height * height);
+            bmi = Math.round(bmi * 100) / 100;
+
+            if (bmi < 18.5) {
+                results.innerHTML = bmi + " - Поднормено тегло.";
+            } else if (bmi < 25) {
+                results.innerHTML = bmi + " - Нормално (Здравословно) тегло.";
+            } else if (bmi < 30) {
+                results.innerHTML = bmi + " - Наднормено тегло.";
+            } else if (bmi < 35) {
+                results.innerHTML = bmi + " - Умерено затлъстяване.";
+            } else if (bmi < 40) {
+                results.innerHTML = bmi + " - Сериозно затлъстяване.";
+            } else {
+                results.innerHTML = bmi + " - Болестно състояние.";
+            }
+            return false;
+        }
+    </script>
     <footer class="footer">
         <th:block th:include="~{fragments/footer}"></th:block>
     </footer>
 </div>
-</div>
-</div>
-
-
 <th:block th:include="~{fragments/function}"></th:block>
 
 </body>
 </html>
-
-class BMI{
-constructor(weight,height){
-
-}
-}

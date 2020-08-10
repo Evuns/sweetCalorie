@@ -1,0 +1,149 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Процент на телесни мазнини</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+
+</head>
+<body data-ng-controller="bmiController">
+<div class="container">
+
+    <header class="nav-container" id="navbar">
+        <th:block th:include="~{fragments/nav}"></th:block>
+    </header>
+
+    <th:block th:include="~{fragments/background}"></th:block>
+
+    <div class="login-register-conteiner">
+        <main class="login-register">
+            <div class="col-md-12">
+                <h1 class=""><span class="">Процент на телесни мазнини</span></h1>
+                <form onsubmit="return calcFatPercentage();">
+                    Пол:
+                    <label>
+                        <input type="radio" id="male" name="gender" checked/> Мъж
+                    </label>
+                    <label>
+                        <input type="radio" id="female" name="gender"/> Жена
+                    </label>
+                    <br><br>
+                    Тегло (кг):
+                    <input id="weight" type="number" min="1" max="300" required placeholder="кг"/>
+                    Височина (см):
+                    <input id="height" type="number" min="60" max="300" required placeholder="см"/>
+                    Талия (см):
+                    <input id="waist" type="number" min="40" max="300" required placeholder="см"/>
+                    Бедро (см):
+                    <input id="hip" type="number" min="30" max="150" required placeholder="см"/>
+                    Врат (см):
+                    <input id="neck" type="number" min="5" max="80" required placeholder="см"/>
+                    Години:
+                    <input id="years" type="number" min="16" max="120" required placeholder="г"/>
+                    <input class="button-big" type="submit" value="Изчисли">
+                    <div id="results"></div>
+                </form>
+            </div>
+        </main>
+        <div>
+            <h2 class="category_heading">
+                Процент на телесни мазнини
+                <span class="paint-pen">
+        </span>
+            </h2>
+            <br>
+            <p class="normal-text">
+            <table>
+                <thead>
+                <tr>
+                    <th>Описание</th>
+                    <th>Жени</th>
+                    <th>Мъже</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Жизнено необходими </td>
+                    <td>10% - 13%</td>
+                    <td>2% - 5%</td>
+                </tr>
+                <tr>
+                    <td>Атлети</td>
+                    <td>14% - 20%</td>
+                    <td>6% - 13%</td>
+                </tr>
+                <tr>
+                    <td>Споритсти</td>
+                    <td>21% - 24%</td>
+                    <td>14% - 17%</td>
+                </tr>
+                <tr>
+                    <td>Нормално</td>
+                    <td>25% - 31%</td>
+                    <td>18% - 24%</td>
+                </tr>
+                <tr>
+                    <td>Наднормено</td>
+                    <td>над 31%</td>
+                    <td>над 25%</td>
+                </tr>
+                </tbody>
+            </table>
+            </p>
+            <br>
+            <p class="normal-text">
+               За определяне на телесните мазнини е ползвана формулата, която ползват във
+                военно въздушните сили на САЩ. Въпреки че, няма по- точен метод от определянето на
+                процента на мазнини в тялото от водния метод, тази формула дава достатъчно точна представа.
+                Отклонението с нея е в рамките на 2-3% за повечето хора.
+            </p>
+            <br>
+            <p class="normal-text">
+                Не всички мазнини са вредни. За да функционира правилно нашето тяло се нуждае от мазнини.
+                Процентът на жизнено необходими мазнини за мъжете и жените е различен. Това се дължи на фактът,
+                че мазнините се използват за поддържане на основните функции и репрудоктивните органи.
+            </p>
+            <br>
+            <p class="normal-text">
+                Напето тяло съхранява в мастната тъкан мазнини, които при нужда да може да използва.
+                Освен за резерв те служат и за предпазване на вътрешните органи (гърдите, корема и др.).
+                Минималният препоръчителен процент на телесни мазнини е доста по- голям от необходимия на тялото ни
+                да функционира.
+            </p>
+            <br>
+        </div>
+
+
+    </div>
+    <script>
+        function calcFatPercentage() {
+            let bodyFat = null,
+                fatKilos = null,
+                gender = document.getElementById("male").checked,
+                weight = parseInt(document.getElementById("weight").value),
+                height = parseInt(document.getElementById("height").value),
+                waist = parseInt(document.getElementById("waist").value),
+                hip = parseInt(document.getElementById("hip").value),
+                neck = parseInt(document.getElementById("neck").value),
+                years = parseInt(document.getElementById("years").value),
+                results = document.getElementById("results");
+
+            if (gender) {
+                bodyFat = 563 / (1.29579 - 0.35004 * Math.log10(waist - neck) + 0.22100 * Math.log10(height)) - 450;
+            } else {
+                bodyFat = 520 / (1.29579 - 0.35004 * Math.log10(waist + hip - neck) + 0.22100 * Math.log10(height)) - 450;
+            }
+
+            fatKilos = bodyFat / 100 * weight;
+            results.innerHTML = Math.round(bodyFat * 100) / 100 + "% което се равнява на " + Math.round(fatKilos * 100) / 100 + "кг";
+            return false;
+        }
+    </script>
+
+    <footer class="footer">
+        <th:block th:include="~{fragments/footer}"></th:block>
+    </footer>
+</div>
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>

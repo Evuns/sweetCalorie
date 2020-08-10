@@ -1,0 +1,108 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Основна метаболитна скорост</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+
+</head>
+<body data-ng-controller="bmiController">
+<div class="container">
+
+    <header class="nav-container" id="navbar">
+        <th:block th:include="~{fragments/nav}"></th:block>
+    </header>
+
+    <th:block th:include="~{fragments/background}"></th:block>
+
+    <div class="login-register-conteiner">
+        <main class="login-register">
+            <div class="col-md-12">
+                <h1 class=""><span class="">Основна метаболитна скорост</span></h1>
+                <form onsubmit="return calcBMR();">
+                    Пол:
+                    <label>
+                        <input type="radio" id="male" name="gender" checked/> Мъж
+                    </label>
+                    <label>
+                        <input type="radio" id="female" name="gender"/> Жена
+                    </label>
+                    <br><br>
+                    Тегло (кг):
+                    <input id="weight" type="number" min="1" max="300" required placeholder="кг"/>
+                    Височина (см):
+                    <input id="height" type="number" min="60" max="300" required placeholder="см"/>
+                    Години:
+                    <input id="years" type="number" min="16" max="120" required placeholder="г"/>
+                    <input class="button-big" type="submit" value="Изчисли">
+                    <div id="results"></div>
+                </form>
+            </div>
+        </main>
+        <div>
+            <h2 class="category_heading">
+                Основна метаболитна скорост
+                <span class="paint-pen">
+        </span>
+            </h2>
+            <br>
+            <p class="normal-text">
+                Калкулаторът измерва вашата основна метаболитна норма (basic metabolic rate - BMR),
+                която представлява оценка на изгорените калории по време на покой
+                - познато още като скорост на метаболизма в покой.
+                Той се измерва в кило джоули на час на килограм телесна маса.
+            </p>
+            <br>
+            <p class="normal-text">
+                Хората изгаряме енергия денонощно, независимо от това,
+                на каква дейност се подлагаме (включително повреме на сън). Изчисляването на BMR не
+                взема предвид никакъв вид допълнителна физическа активност, различна от състояние
+                на спокойствие на тялото. Състоянието на спокойствие се отнася до енергията, достатъчна само
+                за функционирането на жизненоважните органи: сърцето, белите дробове, нервната система,
+                бъбреците, черния дроб, червата, половите органи, мускулите, мозъка и кожата.
+            </p>
+            <br>
+            <p class="normal-text">
+                Вашият BMR се забавя с приблизително 2% на всеки 10 години след 20-годишна възраст.
+                Ето защо много хора наддават на тегло,
+                въпреки че поддържат същия калориен прием.
+            </p>
+            <br>
+            <p class="normal-text">
+                BMR калкулаторът не взема предвид телесния състав, който е мярка за процентите на
+                мускулите и мазнините, съставящи тялото ви. Следователно е по-малко точно, ако имате
+                завишено количество мускули или сте атлетичен човек.
+                Причината за това е, че мускулите изгарят калории, а мазнините не.
+            </p>
+            <br>
+        </div>
+
+
+    </div>
+    <script>
+        function calcBMR() {
+            let calorieIntake = null,
+                gender = document.getElementById("male").checked,
+                weight = parseInt(document.getElementById("weight").value),
+                height = parseInt(document.getElementById("height").value),
+                years = parseInt(document.getElementById("years").value),
+                results = document.getElementById("results");
+
+            if (gender) {
+                calorieIntake = 66.4730 + (13.7516 * weight) + (5.0033 * height) - (6.7550 * years);
+            } else {
+                calorieIntake = 655.0955 + (9.5634 * weight) + (1.8496 * height) - (4.6756 * years);
+            }
+
+            results.innerHTML = Math.floor(calorieIntake) + " cKal/d";
+            return false;
+        }
+    </script>
+
+    <footer class="footer">
+        <th:block th:include="~{fragments/footer}"></th:block>
+    </footer>
+</div>
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>

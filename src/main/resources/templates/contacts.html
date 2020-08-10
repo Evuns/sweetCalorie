@@ -22,10 +22,11 @@
                     Ако имате въпроси или нужда от помощ, не се колебайте да се свържете с нас а.
                 </p>
                 <div class="">
-                    <label for="username" class="">Вашето име</label>
+                    <label for="username" class="" >Вашето име</label>
                 </div>
                 <div class="" data-validate="Name is required">
                     <input th:field="*{username}" th:errorclass="bg-danger" type="text" class="" id="username" name="username" placeholder="Име">
+                    <small th:each="e : ${#fields.errors('username')}" th:text="${e}" class="text-danger">Името е задължително</small>
                     <span class=""></span>
                     <span class=""></span>
                 </div>
@@ -34,6 +35,7 @@
                 </div>
                 <div class="" data-validate="Valid email is required: ex@abc.xyz">
                     <input th:field="*{email}" th:errorclass="bg-danger" type="text" class="" id="email" name="email" placeholder="Емайл">
+                    <small th:each="e : ${#fields.errors('email')}" th:text="${e}" class="text-danger">Грешен имейл</small>
                     <span class=""></span>
                     <span class=""></span>
                 </div>
@@ -43,6 +45,7 @@
                 <div class="" data-validate="Message is required">
                     <textarea th:field="*{message}" th:errorclass="bg-danger" type="text" class="" id="message"
                               name="message" placeholder="..."></textarea>
+                    <small th:each="e : ${#fields.errors('message')}" th:text="${e}" class="text-danger">Полето е задължително</small>
                     <span class=""></span>
                     <span class=""></span>
                 </div>

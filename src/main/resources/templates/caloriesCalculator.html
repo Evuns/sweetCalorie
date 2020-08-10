@@ -1,0 +1,144 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Прием на калории</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+
+</head>
+<body data-ng-controller="bmiController">
+<div class="container">
+
+    <header class="nav-container" id="navbar">
+        <th:block th:include="~{fragments/nav}"></th:block>
+    </header>
+
+    <th:block th:include="~{fragments/background}"></th:block>
+
+    <div class="login-register-conteiner">
+        <main class="login-register">
+            <div class="col-md-12">
+                <h1 class=""><span class="">Калорийна нужда</span></h1>
+                <form onsubmit="return calcCalorie();">
+                    Пол:
+                    <label>
+                        <input type="radio" id="male" name="gender" checked/> Мъж
+                    </label>
+                    <label>
+                        <input type="radio" id="female" name="gender"/> Жена
+                    </label>
+                    <br><br>
+                    Тегло (кг):
+                    <input id="weight" type="number" min="1" max="300" required placeholder="кг"/>
+                    Височина (см):
+                    <input id="height" type="number" min="60" max="300" required placeholder="см"/>
+                    Години:
+                    <input id="years" type="number" min="16" max="120" required placeholder="г"/>
+                    <label for="activity">Активност</label>
+                    <select id="activity" name="activity" class="form-control">
+                        <option value="1">Заседналост - малко или без физическо натоварване</option>
+                        <option value="2">Слабо активен - упражнения или спортуване (1–3 пъти седмично)</option>
+                        <option value="3">Сравнително активен - упражнения/спортуване (3–5 пъти седмично)</option>
+                        <option value="4">Много активен - упражнения/спорт всеки ден</option>
+                        <option value="5">Спортист - тежки тренировки, по два пъти на ден</option>
+                    </select>
+                    <input class="button-big" type="submit" value="Изчисли">
+                    <div id="results"></div>
+                </form>
+            </div>
+        </main>
+        <div>
+            <h2 class="category_heading">
+                Прием на калории
+                <span class="paint-pen">
+        </span>
+            </h2>
+            <br>
+            <p class="normal-text">
+                За да можете да се грижите правилно за тялото си е необходимо да знаете от какво количество
+                храна се нуждае то.
+            </p>
+            <br>
+            <p class="normal-text">
+                С помощта на този калкулатор можете да определите нуждата на тялото си от енергия. Ако искате
+                да намалите теглото си е необходимо да намалите получените калории. За отслабване с около
+                половин килограм
+                на
+                седмица, трябва да приемате с 500 cKal по малко от получените. Ако желаете да сваляте с по 1 кг
+                на седмица,
+                дневният прием трябва да спадне с около 1000 cKal. Не е желателно да падате под необходимите
+                калории за
+                основни
+                физиологични дейности. Това са калориите, които изразходва вашето тяло, за да функционира
+                правилно.
+            </p>
+            <br>
+            <p class="normal-text">
+                Ако искате да качвате маса е необходимо да се храните със завишен калориен прием. Това не
+                означава да се
+                храните
+                с високо калорични и не здравословни неща. За правилно качване на маса е необходимо калориините
+                ннужди да се
+                набавят
+                от здравословни храни, за да може те да спомагат на тялото ви да образува мускулна маса, а не да
+                натрупва
+                мазнини.
+            </p>
+            <br>
+            <p class="normal-text">
+                Разбира се външния вид е важен за всички, но крайностите не водят до нищо добро. Ако приемате
+                много малко
+                калории
+                това може да доведе до забавяне на вашия метаболизъм и здравословни проблеми. Полученият дневен
+                прием на
+                калории
+                е на базата на формулата на Харис- Бенедикт. Имайки предвид, че всеки човек е различен и тялото
+                ни реагира
+                по различен
+                начин е хубаво да определите сами дневния си прием, като ползвате за ориентир полуените от
+                калкулатора
+                стойности.
+            </p>
+            <br>
+        </div>
+
+
+    </div>
+    <script>
+        function calcCalorie() {
+            let calorieIntake = null,
+                gender = document.getElementById("male").checked,
+                weight = parseInt(document.getElementById("weight").value),
+                height = parseInt(document.getElementById("height").value),
+                years = parseInt(document.getElementById("years").value),
+                results = document.getElementById("results"),
+                activity = document.getElementById("activity"),
+                dependency = activity.value;
+
+            if (gender) {
+                calorieIntake = 66.4730 + (13.7516 * weight) + (5.0033 * height) - (6.7550 * years);
+            } else {
+                calorieIntake = 655.0955 + (9.5634 * weight) + (1.8496 * height) - (4.6756 * years);
+            }
+            if (dependency === "1") {
+                results.innerHTML = Math.floor(calorieIntake * 1.2) + " cKal/d, за запазване на килограмите";
+            } else if (dependency === "2") {
+                results.innerHTML = Math.floor(calorieIntake * 1.375) + " cKal/d, за запазване на килограмите";
+            } else if (dependency === "3") {
+                results.innerHTML = Math.floor(calorieIntake * 1.55) + " cKal/d, за запазване на килограмите";
+            } else if (dependency === "4") {
+                results.innerHTML = Math.floor(calorieIntake * 1.725) + " cKal/d, за запазване на килограмите";
+            } else {
+                results.innerHTML = Math.floor(calorieIntake * 1.9) + " cKal/d, за запазване на килограмите";
+            }
+            return false;
+        }
+    </script>
+
+    <footer class="footer">
+        <th:block th:include="~{fragments/footer}"></th:block>
+    </footer>
+</div>
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>
