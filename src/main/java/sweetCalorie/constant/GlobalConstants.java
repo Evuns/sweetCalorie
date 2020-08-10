@@ -12,7 +12,7 @@ public class GlobalConstants {
     public static final String USERNAME_PASSWORD = "Грешно потреботелско име или парола!";
     public static final String USERNAME_NOT_FOUND = "Няма регистриран потребител с такова потребителско име";
 
-    public static final String EMAIL_NEEDED = "Емайл адресът е задълвителен!";
+    public static final String EMAIL_NEEDED = "Емайл адресът е задължителен!";
     public static final String VALID_EMAIL = "Моля въведете валиден емайл адрес!";
     public static final String EMAIL_IN_DB = "Вече има регистриран потребител с този емайл адрес.";
 
@@ -26,6 +26,7 @@ public class GlobalConstants {
     public static final String FIELD_PATTERN = "Полето трябва да съдържа само букви.";
     public static final String AUTOMATION_EMAIL = "Това е автоматичен емаил, съдържащ вашето запитване";
     public static final String EMAIL_REQUEST = "Въпрос от потребител ";
+    public static final String EMAIL_LENGTH = "Въпросът трябва да е от поне 10 символа. ";
     public static final String POSITIVE_NUMBER = " трябва да е позитивно число.";
 
     public static final String WEIGHT_OBESE = "Препоръчваме ви да се консултирате с лекар.Това тегло води до други здравеословни проблеми. Важно е да свалите голяма част от него, но няма причина за депресия. Щом сте посетили нашия сайт имате желание да подобрите здравословноти си състояние, а това е всичко от което се нуждаете! Желание и воля.";

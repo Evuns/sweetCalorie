@@ -1,8 +1,11 @@
 package sweetCalorie.model.service;
 
+import org.hibernate.validator.constraints.Length;
 import sweetCalorie.constant.GlobalConstants;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class UserEmailServiceModel {
@@ -14,7 +17,9 @@ public class UserEmailServiceModel {
 
     public UserEmailServiceModel() {
     }
-    @NotNull(message = GlobalConstants.USERNAME_NEEDED)
+
+    @NotEmpty(message = GlobalConstants.USERNAME_NEEDED)
+    @Length(min = 2, max = 20, message = GlobalConstants.FIELD_LENGTH)
     public String getUsername() {
         return username;
     }
@@ -23,8 +28,8 @@ public class UserEmailServiceModel {
         this.username = username;
     }
 
-    @Email
-    @NotNull(message = GlobalConstants.EMAIL_NEEDED)
+    @Email(message = GlobalConstants.VALID_EMAIL)
+    @NotEmpty(message = GlobalConstants.EMAIL_NEEDED)
     public String getEmail() {
         return email;
     }
@@ -33,7 +38,8 @@ public class UserEmailServiceModel {
         this.email = email;
     }
 
-    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @NotEmpty(message = GlobalConstants.FIELD_NEEDED)
+    @Length(min = 10, message = GlobalConstants.EMAIL_LENGTH)
     public String getMessage() {
         return message;
     }

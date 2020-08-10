@@ -10,9 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sweetCalorie.model.binding.RecipeAddBindingModel;
 import sweetCalorie.model.service.RecipeServiceModel;
-import sweetCalorie.model.service.UserServiceModel;
 import sweetCalorie.service.RecipeService;
-
 import javax.validation.Valid;
 import java.util.List;
 

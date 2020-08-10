@@ -15,7 +15,7 @@
     <description>Site with recipes and foods` macros in which you can track your weight, set goal and track your progress. </description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>13</java.version>
     </properties>
 
     <dependencies>

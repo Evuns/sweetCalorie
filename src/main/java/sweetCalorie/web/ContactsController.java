@@ -36,8 +36,8 @@ public class ContactsController {
                                     UserEmailServiceModel userEmailServiceModel,
                             BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userEmailServiceModel);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
+            redirectAttributes.addFlashAttribute("userEmailServiceModel", userEmailServiceModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userEmailServiceModel", bindingResult);
             return "redirect:contacts";
         }
         try {
