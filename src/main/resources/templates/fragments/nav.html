@@ -21,9 +21,9 @@
                 </th:block>
                 <th:block sec:authorize="isAuthenticated()">
                     <a href="/users/profile" class="user-profile">Профил</a>
-                    <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
-                        <a href="/admin/profile" class="user-profile">Админ</a>
-                    </th:if>
+                    <th:block sec:authorize="hasRole('ROLE_MODERATOR')">
+                        <a href="/users">Админ</a>
+                    </th:block>
                     <a th:href="@{/users/logout}" class="sign-out">Изход</a>
                 </th:block>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
