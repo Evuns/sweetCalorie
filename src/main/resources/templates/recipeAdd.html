@@ -1,0 +1,209 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Рецепта</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+
+<body>
+<div class="empty"></div>
+<header class="nav-container" id="navbar">
+    <th:block th:include="~{fragments/nav}"></th:block>
+</header>
+
+<div style="opacity: 0.15;">
+    <th:block th:include="~{fragments/background}"></th:block>
+</div>
+
+<div class="login-register-conteiner">
+    <main class="login-register new-recepe">
+        <h1 class="">Вашата рецепта</h1>
+        <hr class=""/>
+        <form class="" th:object="${recipeAddBindingModel}" th:action="@{/recipes/add}" method="POST">
+
+            <div class="">
+                <h3 class="new-recepe__heading">Рецепта</h3>
+                <div class="">
+                    <label for="title" class="">Име</label>
+                    <input th:field="*{title}" th:errorclass="bg-danger" type="text" class="" id="title"
+                           name="title" placeholder="Име на рецептата"/>
+                    <small th:each="e : ${#fields.errors('title')}" th:text="${e}" class="text-danger">Грешно
+                        заглавие</small>
+                </div>
+
+            </div>
+            <div>
+                <h3 class="new-recepe__heading">Хранително съдържание</h3>
+                <div class="new-recepe__nut">
+                    <label class="">Калории</label>
+                    <input th:field="*{calories}" th:errorclass="bg-danger" type="text" class="" id="calories"
+                           name="calories" placeholder="cal"/>
+                    <small th:each="e : ${#fields.errors('calories')}" th:text="${e}" class="text-danger"></small>
+                    <label class="">Мазнини</label>
+                    <input th:field="*{fats}" th:errorclas="bg-danger" type="text" class="" id="fats"
+                           placeholder="гр."/>
+                    <small th:each="e : ${#fields.errors('fats')}" th:text="${e}" class="text-danger"></small>
+                    <label class="">Въглехидрати</label>
+                    <input th:field="*{carbohydrates}" th:errorclas="bg-danger" type="text" class="" id="carbohydrates"
+                           placeholder="гр."/>
+                    <small th:each="e : ${#fields.errors('carbohydrates')}" th:text="${e}" class="text-danger"></small>
+                    <label class="">Протеини</label>
+                    <input th:field="*{proteins}" th:errorclas="bg-danger" type="text" class="" id="proteins"
+                           placeholder="гр."/>
+                    <small th:each="e:${#fields.errors('proteins')}" th:text="${e}" class="text-danger"></small>
+                </div>
+            </div>
+            <br>
+            <div class="new-recepe__nut">
+
+
+                <label class="">Порции</label>
+                <input th:field="*{servings}" th:errorclass="bg-danger" type="text" class="" id="servings"
+                       placeholder="4"/>
+                <small th:each="e:${#fields.errors('servings')}" th:text="${e}" class="text-danger"></small>
+
+                <label class="">Приготвяне</label>
+                <input th:field="*{time}" th:errorclass="bg-danger" type="text" class="" id="time"
+                       placeholder="30 мин"/>
+                <small th:each="e:${#fields.errors('time')}" th:text="${e}" class="text-danger"></small>
+                <label class="">Трудност</label>
+                <input th:field="*{difficulty}" th:errorclass="bg-danger" type="text" class="" id="difficulty"
+                       placeholder="Лесно"/>
+                <small th:each="e:${#fields.errors('difficulty')}" th:text="${e}" class="text-danger"></small>
+
+            </div>
+
+
+            <div>
+                <h3 class="new-recepe__heading">Необходими съставки</h3>
+                <div class="new-recepe__nut" id="ingredients">
+                    <label class="">Съставка</label>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row">
+                                <label class="">Количество</label>
+                                <input th:errorclass="bg-danger" type="text" class="" id="food"
+                                       placeholder="количество"/>
+                                <small th:each="e:${#fields.errors('food')}" th:text="${e}" class="text-danger"></small>
+                                <label class="">Наименование</label>
+                                <input type="text" class="" placeholder="вид храна"/>
+                                <label class="">Мерна единица</label>
+                                <input type="text" class="" placeholder="мерна единица"/>
+                            </div>
+                            <!--&lt;!&ndash;                            <div class="row item"&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                 th:each="ingredient, status : ${recipeAddBindingModel.ingredients}">&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                <div class="col form-group d-none">&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                    <input th:field="*{ingredient[__${status.index}__].quantity}" type="text"&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                           class="form-control">&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                </div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                <div class="col form-group">&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                    <input th:field="*{ingredient[__${status.index}__].food}" type="text"&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                           class="form-control">&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                </div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                <div class="col form-group">&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                    <input th:field="*{ingredient[__${status.index}__].units}" type="text"&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                           class="form-control">&ndash;&gt;-->
+                            <!--&lt;!&ndash;                                </div>&ndash;&gt;-->
+                            <!--                            </div>-->
+                            <!--                        </div>-->
+                            <!--                    </div>-->
+
+                            <!--ADD NEW ROW BUTTON-->
+                            <div class="row">
+                                <div class="col">
+                                    <button type="button" class="button-big" onclick="addRow()">Добави съставка</button>
+                                </div>
+                                <!--                    </div>-->
+                                <!--                    private int quantity;-->
+                                <!--                    private String food;-->
+                                <!--                    private String units;-->
+
+                                <!--                    <label class="">Съставка №2</label>-->
+                                <!--                    <input type="text" class="" placeholder="растително масло - 3 с.л."/>-->
+
+                                <!--                    <label class="">Съставка №3</label>-->
+                                <!--                    <input type="text" class="" placeholder="зелка - 1 средно голяма"/>-->
+
+                                <!--                    <label class="">Съставка №4</label>-->
+                                <!--                    <input type="text" class="" placeholder="чушки - 3 червени"/>-->
+
+                                <!--                    <label class="">Съставка №5</label>-->
+                                <!--                    <input type="text" class="" placeholder="моркови - 1 бр."/>-->
+
+                                <!--                    <label class="">Съставка №6</label>-->
+                                <!--                    <input type="text" class="" placeholder="домати - 1 добре узрял"/>-->
+
+                                <!--                    <label class="">Съставка №7</label>-->
+                                <!--                    <input type="text" class="" placeholder="целина - 4 стръка"/>-->
+
+                                <!--                    <label class="">Съставка №8</label>-->
+                                <!--                    <input type="text" class="" placeholder="червен пипер - 2 ч.л."/>-->
+
+                                <!--                    <label class="">Съставка №9</label>-->
+                                <!--                    <input type="text" class="" placeholder="черен пипер - 1 ч.л. смлян"/>-->
+
+                                <!--                    <label class="">Съставка №10</label>-->
+                                <!--                    <input type="text" class="" placeholder="сол"/>-->
+                            </div>
+
+                        </div>
+                    </div>
+                    <h3 class="new-recepe__heading">Снимка на рецепта</h3>
+                    <label class="">Постави линк към изображението</label>
+                    <input th:field="*{imageUrl}" type="text" class=""
+                           placeholder="..."/>
+
+                    <div>
+                        <h3 class="new-recepe__heading">НАЧИН НА ПРИГОТВЯНЕ</h3>
+                        <div class="">
+                            <label class="">Напътствия за приготвяне</label>
+                            <textarea th:field="*{description}" th:errorclass="bg-danger" type="text" id="description"
+                                      class="form-textarea" cols="40" rows="6" data-component="textarea"
+                                      placeholder="..."></textarea>
+                            <small th:each="e:${#fields.errors('description')}" th:text="${e}"
+                                   class="text-danger"></small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="contact100-form-btn">
+                        Създай рецепта
+                    </button>
+
+        </form>
+    </main>
+</div>
+
+<footer class="footer">
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+
+<script>
+    let addRow = function () {
+        let listName = 'ingredients';
+        let fieldsNames = ['quantity', 'food', 'units'];
+        let rowIndex = document.querySelectorAll('.item').length;
+
+        let row = document.createElement('div');
+        row.classList.add('row', 'item');
+
+        fieldsNames.forEach((fieldName) => {
+            let col = document.createElement('div');
+            col.classList.add('col', 'form-group');
+
+            let input = document.createElement('input');
+            input.type = 'text';
+            input.classList.add('form-control');
+            input.id = listName + rowIndex + '.' + fieldName;
+            input.setAttribute('name', listName + '[' + rowIndex + '].' + fieldName);
+
+            col.appendChild(input);
+            row.appendChild(col);
+        });
+        document.getElementById('ingredients').appendChild(row);
+    };
+</script>
+</html>
+
