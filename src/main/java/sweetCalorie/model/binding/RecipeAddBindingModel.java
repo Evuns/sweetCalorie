@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 import sweetCalorie.constant.GlobalConstants;
 
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class RecipeAddBindingModel {
 
     private String title;
     private String description;
-    private String imageUrl;
+    private String image;
     private List<IngredientBindingModel> ingredients;
     private int calories;
     private int carbohydrates;
@@ -24,7 +25,7 @@ public class RecipeAddBindingModel {
     public RecipeAddBindingModel() {
     }
 
-    @NotNull(message = GlobalConstants.TITLE_NEEDED)
+    @NotEmpty(message = GlobalConstants.TITLE_NEEDED)
     @Length(min = 3, message = GlobalConstants.TITLE_LENGTH)
     public String getTitle() {
         return title;
@@ -34,7 +35,7 @@ public class RecipeAddBindingModel {
         this.title = title;
     }
 
-    @NotNull(message = GlobalConstants.DESCRIPTION_NEEDED)
+    @NotEmpty(message = GlobalConstants.DESCRIPTION_NEEDED)
     public String getDescription() {
         return description;
     }
@@ -43,15 +44,15 @@ public class RecipeAddBindingModel {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    @NotNull(message = GlobalConstants.INGREDIENTS_NEEDED)
+    @NotEmpty(message = GlobalConstants.INGREDIENTS_NEEDED)
     public List<IngredientBindingModel> getIngredients() {
         return ingredients;
     }
@@ -120,7 +121,7 @@ public class RecipeAddBindingModel {
         this.servings = servings;
     }
 
-    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @NotEmpty(message = GlobalConstants.FIELD_NEEDED)
     public String getDifficulty() {
         return difficulty;
     }

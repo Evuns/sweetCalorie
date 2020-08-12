@@ -6,50 +6,48 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import sweetCalorie.constant.GlobalConstants;
-import sweetCalorie.model.entity.Role;
 import sweetCalorie.model.entity.User;
 import sweetCalorie.model.entity.UserProfile;
 import sweetCalorie.model.service.UserServiceModel;
-import sweetCalorie.repository.RoleRepository;
 import sweetCalorie.repository.UserProfileRepository;
 import sweetCalorie.repository.UserRepository;
+import sweetCalorie.service.RoleService;
 import sweetCalorie.service.UserService;
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final UserProfileRepository userProfileRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
 
     public UserServiceImpl(UserRepository userRepository,
-                           RoleRepository roleRepository, UserProfileRepository userProfileRepository,
-                           ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
+                           UserProfileRepository userProfileRepository,
+                           ModelMapper modelMapper, PasswordEncoder passwordEncoder, RoleService roleService) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
         this.userProfileRepository = userProfileRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
 
     @Override
     public void registerUser(UserServiceModel userServiceModel) {
-        this.seedRolesInDB();
+        this.roleService.seedRolesInDB();
+        this.arrangeRoles(userServiceModel);
 
         User user = this.modelMapper.map(userServiceModel, User.class);
         user.setPassword(this.passwordEncoder.encode(userServiceModel.getPassword()));
-        user.setAccountNonExpired(true);
-        user.setAccountNonLocked(true);
-        user.setCredentialsNonExpired(true);
-        user.setEnabled(true);
+        arrangeUserStatus(user);
 
-        this.arrangeRoles(user);
         try {
+            this.userRepository.saveAndFlush(user);
             UserProfile userProfile = new UserProfile();
             userProfile.setUser(user);
             this.userProfileRepository.saveAndFlush(userProfile);
-            this.modelMapper.map(this.userRepository.saveAndFlush(user), UserServiceModel.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -61,27 +59,12 @@ public class UserServiceImpl implements UserService {
                 () -> new UsernameNotFoundException(GlobalConstants.USERNAME_NOT_FOUND));
     }
 
-    private void seedRolesInDB() {
-        if (this.roleRepository.count() == 0) {
-            Role admin = new Role();
-            admin.setAuthority("ROLE_ADMIN");
-            Role moderator = new Role();
-            moderator.setAuthority("ROLE_MODERATOR");
-            Role user = new Role();
-            user.setAuthority("ROLE_USER");
-
-            this.roleRepository.saveAndFlush(admin);
-            this.roleRepository.saveAndFlush(moderator);
-            this.roleRepository.saveAndFlush(user);
-        }
-    }
-
-    private void arrangeRoles(User user) {
+    private void arrangeRoles(UserServiceModel userServiceModel) {
         if (this.userRepository.count() == 0) {
-            this.roleRepository.findAll().forEach(role ->
-                    user.getAuthorities().add(role));
+            this.roleService.findAll().forEach(role ->
+                    userServiceModel.getAuthorities().add(role));
         } else {
-            user.getAuthorities().add(this.roleRepository.findByAuthority("ROLE_USER"));
+            userServiceModel.getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
         }
     }
 
@@ -97,5 +80,55 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.findByEmail(email).map(
                 user -> this.modelMapper.map(user, UserServiceModel.class))
                 .orElse(null);
+    }
+
+    @Override
+    public List<UserServiceModel> findAllUsers() {
+        List<UserServiceModel> allUsers = new LinkedList<>();
+        this.userRepository.findAll().forEach(user -> {
+            UserServiceModel userServiceModel = modelMapper.map(user, UserServiceModel.class);
+            allUsers.add(userServiceModel);
+        });
+        return allUsers;
+    }
+
+    @Override
+    public void setUserRole(String id, String role) {
+        User user = this.userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Incorrect id!"));
+
+        UserServiceModel userServiceModel = this.modelMapper.map(user, UserServiceModel.class);
+        userServiceModel.getAuthorities().clear();
+
+        switch (role) {
+            case "user":
+                userServiceModel.getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
+                break;
+            case "moderator":
+                userServiceModel.getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
+                userServiceModel.getAuthorities().add(this.roleService.findByAuthority("ROLE_MODERATOR"));
+                break;
+        }
+
+        User userChangeAuthority = this.modelMapper.map(userServiceModel, User.class);
+        arrangeUserStatus(userChangeAuthority);
+        this.userRepository.saveAndFlush(userChangeAuthority);
+    }
+
+    @Override
+    public void deleteUser(String id) {
+        User user = this.userRepository.findById(id).orElse(null);
+        UserProfile userProfile = this.userProfileRepository.findByUserId(id);
+
+        user.getAuthorities().remove(user);
+        this.userProfileRepository.delete(userProfile);
+        this.userRepository.delete(user);
+    }
+
+    private void arrangeUserStatus(User user) {
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
+        user.setCredentialsNonExpired(true);
+        user.setEnabled(true);
     }
 }

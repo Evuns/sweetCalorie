@@ -18,4 +18,9 @@ public class IngredientServiceImpl implements IngredientService {
     public void addNewIngredient(Ingredient ingredient) {
         this.ingredientRepository.saveAndFlush(ingredient);
     }
+
+    @Override
+    public void deleteById(String id) {
+        this.ingredientRepository.deleteById(id);
+    }
 }

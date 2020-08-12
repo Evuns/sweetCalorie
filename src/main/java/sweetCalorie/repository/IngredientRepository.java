@@ -6,4 +6,6 @@ import sweetCalorie.model.entity.Ingredient;
 
 @Repository
 public interface IngredientRepository extends JpaRepository<Ingredient, String> {
+
+    void deleteById(String id);
 }

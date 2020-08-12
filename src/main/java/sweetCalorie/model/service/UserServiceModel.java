@@ -1,7 +1,11 @@
 package sweetCalorie.model.service;
 
 import sweetCalorie.constant.GlobalConstants;
+import sweetCalorie.model.entity.Role;
+
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserServiceModel {
 
@@ -9,8 +13,10 @@ public class UserServiceModel {
     private String username;
     private String password;
     private String email;
+    private Set<Role> authorities;
 
     public UserServiceModel() {
+        this.authorities = new HashSet<>();
     }
 
     public String getId() {
@@ -49,4 +55,11 @@ public class UserServiceModel {
         this.email = email;
     }
 
+    public Set<Role> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Role> authorities) {
+        this.authorities = authorities;
+    }
 }

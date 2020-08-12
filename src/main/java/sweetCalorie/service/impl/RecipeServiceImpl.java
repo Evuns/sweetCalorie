@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import sweetCalorie.constant.GlobalConstants;
 import sweetCalorie.model.binding.IngredientBindingModel;
 import sweetCalorie.model.binding.RecipeAddBindingModel;
+import sweetCalorie.model.entity.Comment;
 import sweetCalorie.model.entity.Ingredient;
 import sweetCalorie.model.entity.Recipe;
+import sweetCalorie.model.service.CommentServiceModel;
 import sweetCalorie.model.service.IngredientServiceModel;
 import sweetCalorie.model.service.RecipeServiceModel;
 import sweetCalorie.repository.RecipeRepository;
@@ -18,6 +20,7 @@ import sweetCalorie.util.ValidationUtil;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.*;
 
 @Service
@@ -111,9 +114,65 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public void deleteById(String id) {
-       if(this.recipeRepository.findById(id).isPresent()){
-           this.recipeRepository.deleteById(id);
-       }
+        if (this.recipeRepository.findById(id).isPresent()) {
+            this.recipeRepository.deleteById(id);
+        }
+    }
+
+    @Override
+    public void addComment(RecipeServiceModel recipe, CommentServiceModel commentServiceModel) {
+        Recipe r = this.recipeRepository.findById(recipe.getId()).orElse(null);
+        if (r != null) {
+            r.getComments().add(this.modelMapper.map(commentServiceModel, Comment.class));
+            r.setComments(r.getComments());
+        }
+    }
+
+    @Override
+    public void deleteComment(RecipeServiceModel recipeServiceModel, CommentServiceModel commentServiceModel) {
+        Recipe r = this.recipeRepository.findById(recipeServiceModel.getId()).orElse(null);
+        if (r != null) {
+            List<Comment> newComments = r.getComments();
+            for (Comment comment : r.getComments()) {
+                if (comment.getId().equals(commentServiceModel.getId())) {
+                    newComments.remove(comment);
+                    break;
+                }
+            }
+            r.setComments(newComments);
+        }
+    }
+
+    @Override
+    public void editRecipe(RecipeServiceModel recipeServiceModel) {
+        Recipe recipe = this.recipeRepository.findById(
+                recipeServiceModel.getId()).orElse(null);
+        if (recipe != null) {
+            recipe.setTitle(recipeServiceModel.getTitle());
+            recipe.setImage(recipeServiceModel.getImage());
+            recipe.setCalories(recipeServiceModel.getCalories());
+            recipe.setCarbohydrates(recipeServiceModel.getCarbohydrates());
+            recipe.setFats(recipeServiceModel.getFats());
+            recipe.setProteins(recipeServiceModel.getProteins());
+            recipe.setTime(recipeServiceModel.getTime());
+            recipe.setServings(recipeServiceModel.getServings());
+            recipe.setDifficulty(recipeServiceModel.getDifficulty());
+            recipe.setDescription(recipeServiceModel.getDescription());
+            recipe.setUpdateDate(new Date());
+
+            for (int i = 0; i < recipeServiceModel.getIngredients().size() ; i++) {
+                IngredientServiceModel ingredientServiceModel = recipeServiceModel.getIngredients().get(i);
+                Ingredient ingredient = recipe.getIngredients().get(i);
+                if(!ingredientServiceModel.getFood().equals(ingredient.getFood()) ||
+                        ingredientServiceModel.getQuantity() != ingredient.getQuantity() ||
+                        !ingredientServiceModel.getUnits().equals(ingredient.getUnits())){
+                    ingredient.setFood(ingredientServiceModel.getFood());
+                    ingredient.setQuantity(ingredientServiceModel.getQuantity());
+                    ingredient.setUnits(ingredientServiceModel.getUnits());
+                }
+            }
+            this.recipeRepository.saveAndFlush(recipe);
+        }
     }
 
     static class Sort implements Comparator<RecipeServiceModel> {

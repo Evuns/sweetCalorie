@@ -28,6 +28,10 @@ public class UserProfile extends BaseEntity {
     }
 
     @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "users_id",
+            referencedColumnName = "id"
+    )
     public User getUser() {
         return user;
     }

@@ -1,5 +1,6 @@
 package sweetCalorie.service;
 
+import sweetCalorie.model.service.CommentServiceModel;
 import sweetCalorie.model.service.RecipeServiceModel;
 
 import java.io.IOException;
@@ -18,4 +19,10 @@ public interface RecipeService {
     void addRecipe(RecipeServiceModel recipeServiceModel);
 
     void deleteById(String id);
+
+    void addComment(RecipeServiceModel recipe, CommentServiceModel commentServiceModel);
+
+    void deleteComment(RecipeServiceModel recipeServiceModel, CommentServiceModel commentServiceModel);
+
+    void editRecipe(RecipeServiceModel recipeServiceModel);
 }

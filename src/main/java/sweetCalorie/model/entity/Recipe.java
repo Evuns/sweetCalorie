@@ -15,9 +15,9 @@ public class Recipe extends BaseEntity {
 
     private String title;
     private String description;
-    private String imageUrl;
+    private String image;
     private Date postDate;
-    private LocalDate updateDate;
+    private Date updateDate;
     private List<Ingredient> ingredients;
     private int calories;
     private int carbohydrates;
@@ -51,12 +51,12 @@ public class Recipe extends BaseEntity {
     }
 
     @Column(name = "image")
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String imageUrl) {
+        this.image = imageUrl;
     }
 
     @Column(name = "post_date")
@@ -71,11 +71,11 @@ public class Recipe extends BaseEntity {
 
     @Column(name = "update_date")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public LocalDate getUpdateDate() {
+    public Date getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(LocalDate updateDate) {
+    public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
 
@@ -88,7 +88,8 @@ public class Recipe extends BaseEntity {
         this.ingredients = ingredients;
     }
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "recipe", orphanRemoval = true)
     public List<Comment> getComments() {
         return comments;
     }

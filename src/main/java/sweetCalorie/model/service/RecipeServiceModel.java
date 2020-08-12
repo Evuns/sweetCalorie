@@ -1,9 +1,6 @@
 package sweetCalorie.model.service;
 
-import sweetCalorie.model.binding.IngredientBindingModel;
-import sweetCalorie.model.entity.Comment;
-import sweetCalorie.service.IngredientService;
-
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +9,10 @@ public class RecipeServiceModel {
     private String id;
     private String title;
     private String description;
-    private String imageUrl;
+    private String image;
+    private Date postDate;
+    private LocalDate updateDate;
+    private List<IngredientServiceModel> ingredients;
     private int calories;
     private int carbohydrates;
     private int fats;
@@ -20,10 +20,7 @@ public class RecipeServiceModel {
     private int time;
     private int servings;
     private String difficulty;
-    private List<IngredientServiceModel> ingredients;
-    private List<Comment> comments;
-
-    private Date postDate;
+    private List<CommentServiceModel> comments;
 
 
     public RecipeServiceModel() {
@@ -53,12 +50,12 @@ public class RecipeServiceModel {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImage() {
+        return image;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public List<IngredientServiceModel> getIngredients() {
@@ -77,11 +74,19 @@ public class RecipeServiceModel {
         this.postDate = postDate;
     }
 
-    public List<Comment> getComments() {
+    public LocalDate getUpdateDate() {
+        return updateDate;
+    }
+
+    public void setUpdateDate(LocalDate updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public List<CommentServiceModel> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(List<CommentServiceModel> comments) {
         this.comments = comments;
     }
 
