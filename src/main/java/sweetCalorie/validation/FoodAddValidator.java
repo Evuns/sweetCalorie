@@ -27,12 +27,12 @@ public class FoodAddValidator implements org.springframework.validation.Validato
     @Override
     public void validate(Object o, Errors errors) {
         FoodAddBindingModel foodAddBindingModel = (FoodAddBindingModel) o;
-        if (this.foodService.findByName(foodAddBindingModel.getName()) != null) {
-            errors.rejectValue(
-                    "name",
-                    GlobalConstants.FOOD_IN_DB,
-                    GlobalConstants.FOOD_IN_DB);
-        }
+//        if (this.foodService.findByName(foodAddBindingModel.getName()) != null) {
+//            errors.rejectValue(
+//                    "name",
+//                    GlobalConstants.FOOD_IN_DB,
+//                    GlobalConstants.FOOD_IN_DB);
+//        }
         if(foodAddBindingModel.getCategory().equals("null")){
             errors.rejectValue(
                     "category",

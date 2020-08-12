@@ -18,7 +18,7 @@
     <main class="login-register new-recepe">
         <h1 class="">Редактиане</h1>
         <hr class=""/>
-        <form class="" th:object="${foodServiceModel}" th:action="@{/foods/edit/(id=*{id})}" method="POST">
+        <form class="" th:object="${foodServiceModel}" th:action="@{/foods/edit/{id}(id=*{id})}" method="POST">
             <div class="">
                 <h3 class="new-recepe__heading">Храна</h3>
                 <div class="">
@@ -58,7 +58,6 @@
                 <div class="">
                     <label for="proteins" class="">Протеини</label>
                     <input th:field="*{proteins}" th:errorclass="bg-danger" type="text" id="proteins"
-                           def
                            name="proteins" placeholder="гр."/>
                     <small th:each="e : ${#fields.errors('proteins')}" th:text="${e}" class="text-danger"></small>
                 </div>

@@ -137,6 +137,7 @@ public class FoodServiceImpl implements FoodService {
             if (food.getProteins() != foodServiceModel.getProteins()) {
                 food.setProteins(foodServiceModel.getProteins());
             }
+            this.foodRepository.saveAndFlush(food);
         }
     }
 

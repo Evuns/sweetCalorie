@@ -121,28 +121,31 @@ public class FoodsController {
     }
 
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    @GetMapping("/edit/")
-    public String edit(@RequestParam String id, Model model) {
-        if(!model.containsAttribute("foodServiceModel")){
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable String id, Model model) {
+        if (!model.containsAttribute("foodServiceModel")) {
             model.addAttribute("foodServiceModel", this.foodService.findById(id));
         }
         return "foodEdit";
     }
 
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    @PostMapping("/edit/")
-    public String successfullyEdited(@RequestParam String id, @Valid @ModelAttribute("foodServiceModel")
-            FoodServiceModel foodServiceModel,
-                                     BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    @PostMapping("/edit/{id}")
+    public String successfullyEdited(@PathVariable String id,
+                                     @ModelAttribute("foodServiceModel")
+                                     @Valid FoodServiceModel foodServiceModel, BindingResult bindingResult,
+                                     Model model,
+                                     RedirectAttributes redirectAttributes) {
+        this.foodAddValidator.validate(this.modelMapper.map(foodServiceModel, FoodAddBindingModel.class),bindingResult);
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("foodServiceModel", foodServiceModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.foodServiceModel", bindingResult);
-            return "redirect:/foods/edit/{id}" + foodServiceModel.getId();
+            return "redirect:/foods/edit/" + id;
         }
 
         this.foodService.editFood(this.modelMapper
                 .map(foodServiceModel, FoodServiceModel.class));
-        return "redirect:/foods/{id}" + id;
+        return "redirect:/foods/details/?id=" + id;
     }
 
     @PreAuthorize("hasRole('ROLE_MODERATOR')")

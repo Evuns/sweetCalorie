@@ -70,7 +70,7 @@
 
         <div class="delete_btn">
         <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
-            <a th:href="@{/foods/edit/(id = *{id})}" class="button-big">
+            <a th:href="@{/foods/edit/{id}(id = *{id})}" class="button-big">
                 Редактирай
             </a>
         </th:if>

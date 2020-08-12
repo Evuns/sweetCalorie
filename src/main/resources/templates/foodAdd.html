@@ -58,7 +58,6 @@
                 <div class="">
                     <label for="proteins" class="">Протеини</label>
                     <input th:field="*{proteins}" th:errorclass="bg-danger" type="text" id="proteins"
-                           def
                            name="proteins" placeholder="гр."/>
                     <small th:each="e : ${#fields.errors('proteins')}" th:text="${e}" class="text-danger"></small>
                 </div>
