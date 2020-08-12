@@ -101,27 +101,42 @@ public class FoodServiceImpl implements FoodService {
 
     @Override
     public void addFood(FoodServiceModel foodServiceModel) {
-        if(this.foodRepository.findByName(foodServiceModel.getName()) == null){
-           Food food = this.modelMapper.map(foodServiceModel, Food.class);
-           food.setName(foodServiceModel.getName().toLowerCase());
-           this.foodRepository.saveAndFlush(food);
+        if (this.foodRepository.findByName(foodServiceModel.getName()) == null) {
+            Food food = this.modelMapper.map(foodServiceModel, Food.class);
+            food.setName(foodServiceModel.getName().toLowerCase());
+            this.foodRepository.saveAndFlush(food);
         }
     }
 
     @Override
     public void editFood(FoodServiceModel foodServiceModel) {
         Optional foodOptional = this.foodRepository.findById(foodServiceModel.getId());
-        if(foodOptional.isPresent()) {
-            Food food = (Food)foodOptional.get();
-            food.setName(foodServiceModel.getName().toLowerCase());
-            food.setImage(foodServiceModel.getImage());
-            food.setCalories(foodServiceModel.getCalories());
-            food.setCarbohydrates(foodServiceModel.getCarbohydrates());
-            food.setCategory(FoodCategory.valueOf(foodServiceModel.getCategory()));
-            food.setFats(foodServiceModel.getFats());
-            food.setSugars(foodServiceModel.getSugars());
-            food.setProteins(foodServiceModel.getProteins());
-            this.foodRepository.saveAndFlush(food);
+        if (foodOptional.isPresent()) {
+            Food food = (Food) foodOptional.get();
+            if (!food.getName().equals(foodServiceModel.getName())) {
+                food.setName(foodServiceModel.getName().toLowerCase());
+            }
+            if (!food.getImage().equals(foodServiceModel.getImage())) {
+                food.setImage(foodServiceModel.getImage());
+            }
+            if (food.getCalories() != foodServiceModel.getCalories()) {
+                food.setCalories(foodServiceModel.getCalories());
+            }
+            if (food.getCarbohydrates() != foodServiceModel.getCarbohydrates()) {
+                food.setCarbohydrates(foodServiceModel.getCarbohydrates());
+            }
+            if (!food.getCategory().name().equals(foodServiceModel.getCategory())) {
+                food.setCategory(FoodCategory.valueOf(foodServiceModel.getCategory()));
+            }
+            if (food.getFats() != foodServiceModel.getFats()) {
+                food.setFats(foodServiceModel.getFats());
+            }
+            if (food.getSugars() != foodServiceModel.getSugars()) {
+                food.setSugars(foodServiceModel.getSugars());
+            }
+            if (food.getProteins() != foodServiceModel.getProteins()) {
+                food.setProteins(foodServiceModel.getProteins());
+            }
         }
     }
 

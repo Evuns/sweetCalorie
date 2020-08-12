@@ -137,11 +137,12 @@ public class FoodsController {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("foodServiceModel", foodServiceModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.foodServiceModel", bindingResult);
-            return "redirect:/edit/{id}" + foodServiceModel.getId();
+            return "redirect:/foods/edit/{id}" + foodServiceModel.getId();
         }
+
         this.foodService.editFood(this.modelMapper
                 .map(foodServiceModel, FoodServiceModel.class));
-        return "redirect:/foods";
+        return "redirect:/foods/{id}" + id;
     }
 
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
