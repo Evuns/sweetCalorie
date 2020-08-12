@@ -11,29 +11,29 @@ public class CalculatorsController {
     public CalculatorsController() {
     }
 
-    @GetMapping("")
+    @GetMapping()
     public String calculators(){
         return "calculators";
     }
 
     @GetMapping("/BMI")
     public String calculatorBMI() {
-        return "BMI";
+        return "calculatorBMI";
     }
 
     @GetMapping("/BMR")
     public String calculatorBMR() {
-        return "BMR";
+        return "calculatorBMR";
     }
 
     @GetMapping("/caloriesCalculator")
     public String caloriesCalculator() {
-        return "caloriesCalculator";
+        return "calculatorCalories";
     }
 
     @GetMapping("/fatPercentage")
     public String fatPercentageCalc() {
-        return "fatPercentage";
+        return "calculatorFatPercentage";
     }
 
 }

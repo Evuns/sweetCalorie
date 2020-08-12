@@ -14,24 +14,25 @@
 
     <th:block th:include="~{fragments/background}"></th:block>
 
-    <div class="login-register-conteiner">
+    <div class="login-register-conteiner wrapper calculators-grid">
         <main class="login-register">
             <div class="col-md-12">
                 <h1 class=""><span class="">Основна метаболитна скорост</span></h1>
                 <form onsubmit="return calcBMR();">
-                    Пол:
-                    <label>
-                        <input type="radio" id="male" name="gender" checked/> Мъж
-                    </label>
-                    <label>
-                        <input type="radio" id="female" name="gender"/> Жена
-                    </label>
+
+                    <p class="cal-radio__heading">Пол:</p>
+                    <label for="male" class="cal-radio__label">Мъж</label>
+                    <input class="cal-radio__input" type="radio" id="male" name="gender" checked/>
+                    <br>
+                    <label class="cal-radio__label" for="female">Жена</label>
+                        <input class="cal-radio__input" type="radio" id="female" name="gender"/>
+
                     <br><br>
-                    Тегло (кг):
+                    <label for="weight">Тегло (кг):</label>
                     <input id="weight" type="number" min="1" max="300" required placeholder="кг"/>
-                    Височина (см):
+                    <label for="height">Височина (см):</label>
                     <input id="height" type="number" min="60" max="300" required placeholder="см"/>
-                    Години:
+                    <label for="years">Години:</label>
                     <input id="years" type="number" min="16" max="120" required placeholder="г"/>
                     <input class="button-big" type="submit" value="Изчисли">
                     <div id="results"></div>
@@ -97,11 +98,11 @@
             return false;
         }
     </script>
-
+</div>
     <footer class="footer">
         <th:block th:include="~{fragments/footer}"></th:block>
     </footer>
-</div>
+
 <th:block th:include="~{fragments/function}"></th:block>
 
 </body>
