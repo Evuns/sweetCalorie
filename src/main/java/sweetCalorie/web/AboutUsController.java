@@ -15,4 +15,10 @@ public class AboutUsController {
         modelAndView.setViewName("about");
         return modelAndView;
     }
+
+    @GetMapping("/sitemap")
+    public ModelAndView siteMap(ModelAndView modelAndView){
+        modelAndView.setViewName("sitemap");
+        return modelAndView;
+    }
 }

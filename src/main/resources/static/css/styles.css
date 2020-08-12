@@ -730,6 +730,7 @@ header.sticky {
     position: absolute;
     width: 100%;
     z-index: -1;
+    opacity: 0.4;
 }
 
 .info-heading {
@@ -962,6 +963,7 @@ header.sticky {
 .login-register {
     position: relative;
     max-width: 22.500rem;
+    min-width: 20.000rem;
     margin: 10vh auto 25vh auto;
     background: #ffffff;
     padding: 2.500rem 2.500rem 3.750rem 2.500rem;
@@ -1317,7 +1319,7 @@ textarea:-webkit-autofill:focus {
 
 .recepe-nutri {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 0.188rem;
     margin: 1rem auto 3.125rem auto;
 }
@@ -1423,6 +1425,168 @@ textarea:-webkit-autofill:focus {
     bottom: 0;
 }
 
+/* Calculator grid and radio button
+========================================================================== */
+
+.calculators-grid {
+    display: grid;
+    margin: 60px 0;
+    grid-template-columns: 1fr 1fr;
+}
+
+.cal-radio__label {
+    display: inline-block;
+    width: auto;
+    line-height: 1.5;
+    color: #757575;
+}
+
+.cal-radio__input {
+    display: inline-block;
+    width: 20px;
+    line-height: 1;
+    height: auto;
+    margin: 0;
+}
+
+.cal-radio__heading {
+    margin: 0 0 10px 0;
+    font-size: 12pt;
+}
+
+.calculators-grid main {
+    margin: 0 auto auto auto;
+}
+
+.calculators-grid h1 {
+    font-size: 1.6em;
+}
+
+#activity {
+    max-width: 100%;
+    margin: 0 0 20px 0;
+}
+.sitemap {
+    margin-top: 60px;
+}
+
+.sitemap ul {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sitemap li {
+    list-style: none;
+}
+
+.sitemap .sitemap__cat  {
+    font-size: 0.9em;
+    color: #3A3E46;
+}
+.sitemap__list li::before {
+    content: "•"; color: #39ADB6;
+}
+
+.sitemap a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.750em;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #85878C;
+}
+
+.sitemap a:hover {
+    opacity: 0.8;
+}
+
+.category_heading__style {
+    position: relative;
+    font-size: 3em;
+    text-transform: capitalize;
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+.sitemap-container {
+    margin: 80px ;
+}
+
+.sitemap__list {
+    margin-left: 10px;
+}
+
+.wrap-padding {
+    padding: 80px 0;
+}
+
+.users-table {
+    margin: 60px 0;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.750em;
+    color: #85878C;
+    line-height: 1;
+    text-transform: uppercase;
+    text-align: left;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.users-table td, .users-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.users-table tr {
+    transition: 0.25s;
+}
+.users-table tr:nth-child(even){background-color: #f2f2f2;}
+
+.users-table tr:hover {background-color: #e8e8e8;}
+
+.users-table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #37abb4;;
+    color: white;
+}
+
+.users-table form {
+    margin: 0;
+}
+
+.change_authority {
+    background-color: #12b118;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 1.1em;
+    line-height: 1.25;
+    box-shadow: 0 5px 5px 0px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.autority_admin {
+    background-color: #da4940;
+}
+
+.change_authority:hover {
+    background-color: #222222;
+    box-shadow: 0 5px 5px 0px rgba(0,0,0,0.25);
+}
+
+
+
+.users-table-form {}
+.users-table-row {}
+.users-table-head {}
+.users-table-data {
+    color: #3A3E46;
+    text-transform: none;
+}
 
 @media screen and (max-width: 1000px) {
 

@@ -1,0 +1,128 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Карта на сайта</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+
+<body>
+
+<div class="empty"></div>
+<header class="nav-container" id="navbar">
+    <th:block th:include="~{fragments/nav}"></th:block>
+</header>
+
+<th:block th:include="~{fragments/background}"></th:block>
+
+
+<div class="wrapper sitemap-container">
+    <h1 class="category_heading__style">
+        Карта на сайта
+        <span class="paint-pen">
+      </span>
+    </h1>
+    <ul class="sitemap">
+        <li>
+            <ul>
+                <li>
+                    <a class="sitemap__cat" href="/about">Начало</a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <ul>
+                <li>
+                    <a class="sitemap__cat" href="/about">За нас</a>
+                </li>
+            </ul>
+        </li>
+
+        <li>
+            <ul>
+            <li>
+                <a class="sitemap__cat" href="/foods">Храни</a>
+                <ul class="sitemap__list">
+                    <li>
+                        <a href="/foods/vegetables">Зеленчуци</a>
+                    </li>
+                    <li>
+                        <a href="/foods/fruits">Плодове</a>
+                    </li>
+                    <li>
+                        <a href="/foods/meat">Животински</a>
+                    </li>
+                    <li>
+                        <a href="/foods/fishes">Риба</a>
+                    </li>
+                    <li>
+                        <a href="/foods/sweets">Сладки</a>
+                    </li>
+                    <li>
+                        <a href="/foods/pasta">Тестени</a>
+                    </li>
+                    <li>
+                        <a href="/foods/drinks">Напитки</a>
+                    </li>
+                    <li>
+                        <a href="/foods/dairy">Млечни</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        </li>
+        <li>
+        <ul >
+            <li>
+                <a class="sitemap__cat" href="/recipes">Рецепти</a>
+            </li>
+        </ul>
+        </li>
+        <li>
+            <ul >
+            <li>
+                <a class="sitemap__cat" href="/calculators">Kалкулатори</a>
+                <ul class="sitemap__list">
+                    <li>
+                        <a href="/calculators/BMI">BMI Калкулатор</a>
+                    </li>
+                    <li>
+                        <a href="/calculators/BMR">Основна метаболитна скорост</a>
+                    </li>
+                    <li>
+                        <a href="/calculators/fatPercentage">Процент на телесни мазнини</a>
+                    </li>
+                    <li>
+                        <a href="/calculators/caloriesCalculator">Прием на калории</a>
+                    </li>
+                </ul>
+            </li>
+        </ul></li>
+        <li><ul>
+            <li>
+                <a class="sitemap__cat" href="/contacts">Kонтакти</a>
+            </li>
+        </ul></li>
+    </ul>
+</div>
+
+<div class="banner">
+    <div class="wrapper">
+        <div class="banner__section">
+            <h3 class="noselect">
+                Никога не е късно да започнеш да се грижиш за себе си!
+            </h3>
+            <div class="banner__img">
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+
+
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>

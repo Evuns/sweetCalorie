@@ -28,7 +28,7 @@ public class ContactsController {
         if (!model.containsAttribute("userEmailServiceModel")) {
             model.addAttribute("userEmailServiceModel", new UserEmailServiceModel());
         }
-        return "contacts";
+        return "emailContact";
     }
 
     @PostMapping("/contacts")
@@ -42,7 +42,7 @@ public class ContactsController {
         }
         try {
             this.emailService.sendEmail(userEmailServiceModel);
-            return "sendEmail";
+            return "emailSend";
         } catch (MailException e) {
             e.getCause();
             return "error";

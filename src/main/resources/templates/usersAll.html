@@ -13,60 +13,65 @@
 <th:block th:include="~{fragments/background}"></th:block>
 
 <main>
-    <div class="home-page">
-        <h1 class="text-center text-dark">Всички потребители</h1>
-        <hr class="hr-2 bg-dark w-75">
-        <table class="table table-hover w-75 mx-auto">
-            <thead class="table-form">
-            <tr class="row mx-auto">
-                <th class="col-md-2 text-center"> </th>
-                <th class="col-md-2 text-center">Потребител</th>
-                <th class="col-md-2 text-center">Емайл</th>
+    <div class="wrap-padding wrapper">
+
+        <h1 class="category_heading__style">
+            Всички потребители
+            <span class="paint-pen">
+            </span>
+        </h1>
+
+        <table class="users-table">
+            <thead class="users-table-form">
+            <tr class="users-table-row">
+                <th class="users-table-head"> #</th>
+                <th class="users-table-head">Потребител</th>
+                <th class="users-table-head">Емайл</th>
                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                    <th class="col-md-2 text-center">Роли</th>
-                    <th class="col-md-2 text-center">Смени на</th>
-                    <th class="col-md-2 text-center">Изтрий</th>
+                    <th class="users-table-head">Роли</th>
+                    <th class="users-table-head">Смени на</th>
+                    <th class="users-table-head">Изтрий</th>
                 </th:block>
             </tr>
             </thead>
             <tbody>
             <th:block th:each="user, iter : ${users}">
-                <tr class="row mx-auto">
-                    <th class="col-md-2 text-center" th:text="${iter.index + 1}"></th>
-                    <td class="col-md-2 text-center">
+                <tr class="users-table-row">
+                    <th class="users-table-head" th:text="${iter.index + 1}"></th>
+                    <td class="users-table-data">
                         <a th:text="${user.username}" th:href="@{/users/details/{id}(id=${user.id})}">Профил</a>
                     </td>
-                    <td class="col-md-2 text-center" th:text="${user.email}"></td>
+                    <td class="users-table-data" th:text="${user.email}"></td>
                     <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                        <td class="col-md-2 text-center"
+                        <td class="users-table-data"
                             th:text="${#strings.replace(#strings.listJoin(user.authorities, ', '), 'ROLE_', '')}"></td>
-                        <td class="col-md-2 text-center">
+                        <td class="users-table-data">
 
-                            <div class="row d-flex justify-content-center">
+                            <div class="">
                                 <th:block th:if="${#lists.contains(user.authorities, 'ROLE_USER') &&
                             !#lists.contains(user.authorities, 'ROLE_MODERATOR') && !#lists.contains(user.authorities, 'ROLE_ADMIN')
                         }">
                                     <form th:action="@{/users/setModerator/{id}(id=${user.id})}" method="post">
-                                        <button class="btn btn-dark btn-width">Модератор</button>
+                                        <button class="change_authority">Модератор</button>
                                     </form>
                                 </th:block>
                                 <th:block th:if="${#lists.contains(user.authorities, 'ROLE_USER') &&
                             #lists.contains(user.authorities, 'ROLE_MODERATOR') && !#lists.contains(user.authorities, 'ROLE_ADMIN')
                         }">
                                     <form th:action="@{/users/setUser/{id}(id=${user.id})}" method="post">
-                                        <button class="btn btn-success btn-width">Потребител</button>
+                                        <button class="change_authority autority_admin">Потребител</button>
                                     </form>
                                 </th:block>
                             </div>
 
-                        <td class="col-md-2 text-center">
-                            <form id="add-product-form" class="form w-15 mx-auto"
-                                  th:action="@{/users/delete/{id}(id=${user.id})}" method="post">
-                                <div class="button-holder d-flex justify-content-center">
-                                    <button type="submit" class="btn btn-danger">Изтрий потребител</button>
-                                </div>
-                            </form>
-                        </td>
+<!--                        <td class="col-md-2 text-center">-->
+<!--                            <form id="add-product-form" class="form w-15 mx-auto"-->
+<!--                                  th:action="@{/users/delete/{id}(id=${user.id})}" method="post">-->
+<!--                                <div class="button-holder d-flex justify-content-center">-->
+<!--                                    <button type="submit" class="btn btn-danger">Изтрий потребител</button>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </td>-->
                     </th:block>
                 </tr>
             </th:block>
@@ -74,7 +79,7 @@
 
             </tbody>
         </table>
-        <hr class="hr-2 bg-dark">
+
     </div>
 </main>
 <footer class="footer">
