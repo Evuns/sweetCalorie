@@ -22,11 +22,7 @@
         <a href="#" class="button-big">
             Добави в любими
         </a>
-        <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
-            <a th:href="@{/foods/edit/(id = *{id})}" class="button-big">
-                Редактирай
-            </a>
-        </th:if>
+
 
     </div>
 
@@ -58,6 +54,11 @@
                 <a class="recepe-nutri__count" th:text="|*{carbohydrates} гр.|">36g</a>
             </div>
             <div class="recepe-nutri__box">
+                <a class="recepe-nutri__type">Sugars</a>
+                <hr>
+                <a class="recepe-nutri__count" th:text="|*{sugars} гр.|">36g</a>
+            </div>
+            <div class="recepe-nutri__box">
                 <a class="recepe-nutri__type">Protein</a>
                 <hr>
                 <a class="recepe-nutri__count" th:text="|*{proteins} гр.|">12g</a>
@@ -67,11 +68,18 @@
 
         <th:block th:include="~{fragments/socialIcons}"></th:block>
 
+        <div class="delete_btn">
         <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
-            <a th:href="@{/foods/delete/{id}(id = *{id})}" class="button-big delete_btn" >
+            <a th:href="@{/foods/edit/(id = *{id})}" class="button-big">
+                Редактирай
+            </a>
+        </th:if>
+        <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
+            <a th:href="@{/foods/delete/{id}(id = *{id})}" class="button-big " >
                 Изтрий
             </a>
         </th:if>
+        </div>
     </div>
 </div>
 

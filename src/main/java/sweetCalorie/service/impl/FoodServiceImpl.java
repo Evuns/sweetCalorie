@@ -60,14 +60,6 @@ public class FoodServiceImpl implements FoodService {
         return this.foodRepository.findByName(name.toLowerCase());
     }
 
-//    @Override
-//    public void addNewFood(String name, String category, String image,
-//                           double calories, double proteins, double carbohydrates,
-//                           double sugars, double fats) {
-//        Food food = new Food(name, category, image, calories,
-//                proteins, carbohydrates, sugars, fats);
-//    }
-
     @Override
     public List<FoodServiceModel> findAllFoods() {
         List<FoodServiceModel> allFoods = new LinkedList<>();

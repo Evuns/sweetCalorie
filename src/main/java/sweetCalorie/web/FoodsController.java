@@ -35,14 +35,14 @@ public class FoodsController {
     public ModelAndView foods(ModelAndView modelAndView) {
         List<FoodServiceModel> foods = this.foodService.findAllFoods();
         modelAndView.addObject(foods);
-        modelAndView.setViewName("allFood");
+        modelAndView.setViewName("foodsAll");
         return modelAndView;
     }
 
     private ModelAndView getCategory(ModelAndView modelAndView, String category) {
         List<FoodServiceModel> foods = this.foodService.findAllFoodsByCategory(FoodCategory.valueOf(category));
         modelAndView.addObject(foods);
-        modelAndView.setViewName("allFood");
+        modelAndView.setViewName("foodsAll");
         return modelAndView;
     }
 
@@ -100,7 +100,7 @@ public class FoodsController {
             model.addAttribute("foodAddBindingModel", new
                     FoodAddBindingModel());
         }
-        return "addFood";
+        return "foodAdd";
     }
 
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
@@ -126,7 +126,7 @@ public class FoodsController {
         if(!model.containsAttribute("foodServiceModel")){
             model.addAttribute("foodServiceModel", this.foodService.findById(id));
         }
-        return "editFood";
+        return "foodEdit";
     }
 
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
