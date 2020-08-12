@@ -19,7 +19,7 @@
 
         <div>
             <div class=" recepe-grid__image">
-                <img class="soft-shadow" th:src="*{imageUrl}" alt="Food image">
+                <img class="soft-shadow" th:src="*{image}" alt="Food image">
             </div>
             <button type="submit" class="button-big" onclick="history.back()">Назад</button>
             <a href="#" class="button-big">
@@ -112,6 +112,11 @@
             <div>
                 <br>
                 <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
+                    <a th:href="@{/recipes/edit/(id = *{id})}" class="button-big">
+                        Редактирай
+                    </a>
+                </th:if>
+                <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
                     <a th:href="@{/recipes/delete/{id}(id = *{id})}" class="button-big">
                         Изтрий
                     </a>
@@ -120,32 +125,20 @@
         </div>
 
 
-<!--        <div id="newComments">-->
-<!--            <div class="head">-->
-<!--                <h2>Коментари</h2>-->
-<!--            </div>-->
-<!--            <div id="newCommentsForm" data-role="commentMainForm">-->
-<!--                <div th:action="@{/comments/commentRecipe/{id}(id=${recipe.id})}" method="POST">-->
-<!--                    <label for="comment_text">Коментар</label>-->
-<!--                    <textarea id="comment_text" placeholder="Добави коментар тук!" rows="1"-->
-<!--                              data-role="textarea" ></textarea>-->
-<!--                    <button> Коментирай</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <form id="newComments" th:action="@{/comments/commentRecipe/{id}(id=${recipe.id})}" method="POST">
+            <div class="head">
+                <h2>Коментари</h2>
+            </div>
+            <div id="newCommentsForm" data-role="commentMainForm">
+                <div >
+                    <label for="text">Коментар</label>
+                    <textarea id="text" name = "text" placeholder="Добави коментар тук!" rows="1"
+                              data-role="textarea" ></textarea>
+                    <button class="button-big"> Коментирай</button>
+                </div>
+            </div>
+        </form>
 
-<!--        <th:block th:each="comment, iter : ${comments}">-->
-<!--            <ul class="comment-form">-->
-<!--                <li>-->
-<!--                    <h6 th:utext="${#dates.format(comment.getPostDateTime(), 'dd-MM-yyyy')}"></h6>-->
-<!--                    <a class="post-username"-->
-<!--                       th:href="@{/users/details/{id}(id=${comment.author.id})}"-->
-<!--                       th:text="${comment.author.username}"></a>-->
-<!--                    <h5 th:text="${comment.text}"></h5>-->
-<!--                </li>-->
-<!--            </ul>-->
-<!--        </th:block>-->
-        <hr>
         <th:block th:each="comment, iter : ${comments}">
             <ul class="comment-form">
                 <li>
@@ -154,17 +147,15 @@
                        th:href="@{/users/details/{id}(id=${comment.author.id})}"
                        th:text="${comment.author.username}"></a>
                     <h5 th:text="${comment.text}"></h5>
+                    <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
+                        <a th:href="@{/comments/delete/{id}(id=${comment.id})}" class="button-big">
+                            Изтрий коментар
+                        </a>
+                    </th:if>
+
                 </li>
             </ul>
         </th:block>
-        <form id="add-comment" th:action="@{/comments/commentRecipe/{id}(id=${recipe.id})}" method="post">
-            <div class="comment-form">
-                <label class="text-center" for="text">Add Comment</label>
-                <textarea class="form-control" id="text" name="text" row="2"></textarea>
-                <button class="add-comment-recipe btn-info" id="send-comment"> add Comment</button>
-            </div>
-            <hr class="my-3">
-        </form>
 
     </div>
 </div>

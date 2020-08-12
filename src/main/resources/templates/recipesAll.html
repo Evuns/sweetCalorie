@@ -21,7 +21,7 @@
         <div class="food-images__image" th:each= "recipe : ${recipeServiceModelList}" th:object="${recipe}">
             <a th:href="@{/recipes/details/(id = *{id})}">
                 <div class="card-img-top-wrapper">
-                    <img class="food_icon" th:src="*{imageUrl}" alt="image">
+                    <img class="food_icon" th:src="*{image}" alt="image">
                 </div>
                 <div class="card-body pb-1">
                     <h5 class="card-title text-center" th:text="*{title}"></h5>

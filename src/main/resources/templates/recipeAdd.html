@@ -29,8 +29,12 @@
                     <small th:each="e : ${#fields.errors('title')}" th:text="${e}" class="text-danger">Грешно
                         заглавие</small>
                 </div>
-
             </div>
+
+            <h3 class="new-recepe__heading">Снимка на рецепта</h3>
+            <label class="">Постави линк към изображението</label>
+            <input th:field="*{image}" type="text" class=""
+                   placeholder="..."/>
             <div>
                 <h3 class="new-recepe__heading">Хранително съдържание</h3>
                 <div class="new-recepe__nut">
@@ -74,21 +78,24 @@
 
 
             <div>
-                <h3 class="new-recepe__heading">Необходими съставки</h3>
-                <div class="new-recepe__nut" id="ingredients">
-                    <label class="">Съставка</label>
-                    <div class="row">
-                        <div class="col">
-                            <div class="row">
-                                <label class="">Количество</label>
-                                <input th:errorclass="bg-danger" type="text" class="" id="food"
-                                       placeholder="количество"/>
-                                <small th:each="e:${#fields.errors('food')}" th:text="${e}" class="text-danger"></small>
-                                <label class="">Наименование</label>
-                                <input type="text" class="" placeholder="вид храна"/>
-                                <label class="">Мерна единица</label>
-                                <input type="text" class="" placeholder="мерна единица"/>
-                            </div>
+                <label for="difficulty" class="">Необходими съставки</label>
+                <table>
+                    <thead>
+                    <tr>
+                        <th> Съставка</th>
+                        <th> Количество</th>
+                        <th> Мерна единица</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ingredient, itemStat : *{ingredients}">
+                        <td><input th:field="*{ingredients[__${itemStat.index}__].food}" /></td>
+                        <td><input th:field="*{ingredients[__${itemStat.index}__].quantity}" /></td>
+                        <td><input th:field="*{ingredients[__${itemStat.index}__].units}" /></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
                             <!--&lt;!&ndash;                            <div class="row item"&ndash;&gt;-->
                             <!--&lt;!&ndash;                                 th:each="ingredient, status : ${recipeAddBindingModel.ingredients}">&ndash;&gt;-->
                             <!--&lt;!&ndash;                                <div class="col form-group d-none">&ndash;&gt;-->
@@ -145,12 +152,9 @@
                                 <!--                    <input type="text" class="" placeholder="сол"/>-->
                             </div>
 
-                        </div>
-                    </div>
-                    <h3 class="new-recepe__heading">Снимка на рецепта</h3>
-                    <label class="">Постави линк към изображението</label>
-                    <input th:field="*{imageUrl}" type="text" class=""
-                           placeholder="..."/>
+<!--                        </div>-->
+<!--                    </div>-->
+
 
                     <div>
                         <h3 class="new-recepe__heading">НАЧИН НА ПРИГОТВЯНЕ</h3>
