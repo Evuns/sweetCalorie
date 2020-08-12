@@ -1,5 +1,11 @@
 package sweetCalorie.model.service;
 
+import org.hibernate.validator.constraints.Length;
+import sweetCalorie.constant.GlobalConstants;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +40,8 @@ public class RecipeServiceModel {
         this.id = id;
     }
 
+    @NotEmpty(message = GlobalConstants.TITLE_NEEDED)
+    @Length(min = 3, message = GlobalConstants.TITLE_LENGTH)
     public String getTitle() {
         return title;
     }
@@ -42,6 +50,7 @@ public class RecipeServiceModel {
         this.title = title;
     }
 
+    @NotEmpty(message = GlobalConstants.DESCRIPTION_NEEDED)
     public String getDescription() {
         return description;
     }
@@ -58,6 +67,7 @@ public class RecipeServiceModel {
         this.image = image;
     }
 
+    @NotEmpty(message = GlobalConstants.INGREDIENTS_NEEDED)
     public List<IngredientServiceModel> getIngredients() {
         return ingredients;
     }
@@ -90,6 +100,8 @@ public class RecipeServiceModel {
         this.comments = comments;
     }
 
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @Min(value = 0, message = "Калорийната стойност " + GlobalConstants.POSITIVE_NUMBER)
     public int getCalories() {
         return calories;
     }
@@ -98,6 +110,8 @@ public class RecipeServiceModel {
         this.calories = calories;
     }
 
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @Min(value = 0, message = "Стойността на въглехидратите " + GlobalConstants.POSITIVE_NUMBER)
     public int getCarbohydrates() {
         return carbohydrates;
     }
@@ -106,6 +120,8 @@ public class RecipeServiceModel {
         this.carbohydrates = carbohydrates;
     }
 
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @Min(value = 0, message = "Стойността на мазнините " + GlobalConstants.POSITIVE_NUMBER)
     public int getFats() {
         return fats;
     }
@@ -114,6 +130,8 @@ public class RecipeServiceModel {
         this.fats = fats;
     }
 
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @Min(value = 0, message = "Стойността на протеините " + GlobalConstants.POSITIVE_NUMBER)
     public int getProteins() {
         return proteins;
     }
@@ -122,6 +140,8 @@ public class RecipeServiceModel {
         this.proteins = proteins;
     }
 
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @Min(value = 1, message = "Времето за приготвяне " + GlobalConstants.POSITIVE_NUMBER)
     public int getTime() {
         return time;
     }
@@ -130,6 +150,8 @@ public class RecipeServiceModel {
         this.time = time;
     }
 
+    @NotNull(message = GlobalConstants.FIELD_NEEDED)
+    @Min(value = 0, message = "Броят на порциите " + GlobalConstants.POSITIVE_NUMBER)
     public int getServings() {
         return servings;
     }
@@ -138,6 +160,7 @@ public class RecipeServiceModel {
         this.servings = servings;
     }
 
+    @NotEmpty(message = GlobalConstants.FIELD_NEEDED)
     public String getDifficulty() {
         return difficulty;
     }

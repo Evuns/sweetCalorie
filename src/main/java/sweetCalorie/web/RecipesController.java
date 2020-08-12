@@ -80,8 +80,8 @@ public class RecipesController {
     }
 
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    @GetMapping("/edit/")
-    public String edit(@RequestParam String id, Model model) {
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable String id, Model model) {
         if (!model.containsAttribute("recipeServiceModel")) {
             model.addAttribute("recipeServiceModel", this.recipeService.findById(id));
         }
@@ -89,18 +89,18 @@ public class RecipesController {
     }
 
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    @PostMapping("/edit/")
-    public String successfullyEdited(@RequestParam String id,
+    @PostMapping("/edit/{id}")
+    public String successfullyEdited(@PathVariable String id,
                                      @Valid @ModelAttribute("recipeServiceModel")
                                              RecipeServiceModel recipeServiceModel,
-                                     BindingResult bindingResult,
+                                     BindingResult bindingResult, Model model,
                                      RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("recipeServiceModel", recipeServiceModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.recipeServiceModel", bindingResult);
-            return "redirect:/edit/{id}" + recipeServiceModel.getId();
+            return "redirect:/recipes/edit/" + id;
         }
         this.recipeService.editRecipe(recipeServiceModel);
-        return "redirect:/recipes";
+        return "redirect:/recipes/details/?id=" + id;
     }
 }
