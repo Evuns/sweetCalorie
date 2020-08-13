@@ -20,7 +20,7 @@
                     <a href="/users/register" class="nav-button">Регистрация</a>
                 </th:block>
                 <th:block sec:authorize="isAuthenticated()">
-                    <a href="/users/profile" class="user-profile">Профил</a>
+                    <a href="/users/details/profile" class="user-profile">Профил</a>
                     <th:block sec:authorize="hasRole('ROLE_MODERATOR')">
                         <a href="/users">Админ</a>
                     </th:block>

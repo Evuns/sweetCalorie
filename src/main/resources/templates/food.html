@@ -19,9 +19,10 @@
             <img class="soft-shadow" th:src="*{image}" alt="Food image">
         </div>
         <button onclick="window.history.back()" type="submit" class="button-big">Назад</button>
-        <a href="#" class="button-big">
-            Добави в любими
-        </a>
+
+        <form id="addToFavourite" th:action="@{/favourites/food/{id}(id=${food.id})}" method="POST">
+            <button class="button-big"> Добави в любими</button>
+        </form>
 
 
     </div>
@@ -75,7 +76,7 @@
             </a>
         </th:if>
         <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
-            <a th:href="@{/foods/delete/{id}(id = *{id})}" class="button-big " >
+            <a th:href="@{/foods/delete/{id}(id = *{id})}" class="button-big" onclick="return confirm('Сигурни ли , че искате да изтриете записът?')">
                 Изтрий
             </a>
         </th:if>
