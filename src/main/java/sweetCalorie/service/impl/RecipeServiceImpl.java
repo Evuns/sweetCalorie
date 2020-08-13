@@ -4,23 +4,21 @@ import com.google.gson.Gson;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import sweetCalorie.constant.GlobalConstants;
+import sweetCalorie.model.binding.CommentAddBindingModel;
 import sweetCalorie.model.binding.IngredientBindingModel;
 import sweetCalorie.model.binding.RecipeAddBindingModel;
-import sweetCalorie.model.entity.Comment;
-import sweetCalorie.model.entity.Ingredient;
-import sweetCalorie.model.entity.Recipe;
+import sweetCalorie.model.entity.*;
 import sweetCalorie.model.service.CommentServiceModel;
 import sweetCalorie.model.service.IngredientServiceModel;
 import sweetCalorie.model.service.RecipeServiceModel;
+import sweetCalorie.model.service.UserProfileServiceModel;
 import sweetCalorie.repository.RecipeRepository;
-import sweetCalorie.service.FoodService;
-import sweetCalorie.service.IngredientService;
-import sweetCalorie.service.RecipeService;
+import sweetCalorie.service.*;
 import sweetCalorie.util.ValidationUtil;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.security.Principal;
 import java.util.*;
 
 @Service
@@ -30,19 +28,27 @@ public class RecipeServiceImpl implements RecipeService {
     private final ValidationUtil validationUtil;
     private final RecipeRepository recipeRepository;
     private final Gson gson;
-    private final FoodService foodService;
     private final IngredientService ingredientService;
+    private final UserService userService;
+    private final CommentService commentService;
+    private final UserProfileService userProfileService;
+
 
     public RecipeServiceImpl(ModelMapper modelMapper,
                              ValidationUtil validationUtil,
                              RecipeRepository recipeRepository, Gson gson,
-                             FoodService foodService, IngredientService ingredientService) {
+                             IngredientService ingredientService,
+                             UserService userService,
+                             CommentService commentService,
+                             UserProfileService userProfileService) {
         this.modelMapper = modelMapper;
         this.validationUtil = validationUtil;
         this.recipeRepository = recipeRepository;
         this.gson = gson;
-        this.foodService = foodService;
         this.ingredientService = ingredientService;
+        this.userService = userService;
+        this.commentService = commentService;
+        this.userProfileService = userProfileService;
     }
 
     @Override
@@ -80,9 +86,8 @@ public class RecipeServiceImpl implements RecipeService {
                 .map(recipe -> {
                     IngredientBindingModel ingredientBindingModel = this.modelMapper
                             .map(recipe.getIngredients(), IngredientBindingModel.class);
-                    RecipeServiceModel recipeServiceModel = this.modelMapper.map(
+                    return this.modelMapper.map(
                             recipe, RecipeServiceModel.class);
-                    return recipeServiceModel;
                 }).orElse(null);
     }
 
@@ -120,12 +125,24 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    public void addComment(RecipeServiceModel recipe, CommentServiceModel commentServiceModel) {
-        Recipe r = this.recipeRepository.findById(recipe.getId()).orElse(null);
-        if (r != null) {
-            r.getComments().add(this.modelMapper.map(commentServiceModel, Comment.class));
+    public CommentServiceModel addComment(CommentAddBindingModel commentAddBindingModel,
+                           RecipeServiceModel recipe, Principal principal) {
+        CommentServiceModel commentServiceModel = this.modelMapper
+                .map(commentAddBindingModel, CommentServiceModel.class);
+
+        commentServiceModel.setAuthor(
+                this.userService.findByUsername(principal.getName()));
+
+        commentServiceModel.setPostDateTime(new Date());
+        if (recipe != null) {
+            commentServiceModel.setRecipeServiceModel(recipe);
+            this.commentService.createComment(commentServiceModel);
+            Recipe r = this.recipeRepository.findById(recipe.getId()).orElse(null);
+            Comment comment = this.modelMapper.map(commentServiceModel, Comment.class);
+            r.getComments().add(comment);
             r.setComments(r.getComments());
         }
+        return commentServiceModel;
     }
 
     @Override
@@ -160,12 +177,12 @@ public class RecipeServiceImpl implements RecipeService {
             recipe.setDescription(recipeServiceModel.getDescription());
             recipe.setUpdateDate(new Date());
 
-            for (int i = 0; i < recipeServiceModel.getIngredients().size() ; i++) {
+            for (int i = 0; i < recipeServiceModel.getIngredients().size(); i++) {
                 IngredientServiceModel ingredientServiceModel = recipeServiceModel.getIngredients().get(i);
                 Ingredient ingredient = recipe.getIngredients().get(i);
-                if(!ingredientServiceModel.getFood().equals(ingredient.getFood()) ||
+                if (!ingredientServiceModel.getFood().equals(ingredient.getFood()) ||
                         ingredientServiceModel.getQuantity() != ingredient.getQuantity() ||
-                        !ingredientServiceModel.getUnits().equals(ingredient.getUnits())){
+                        !ingredientServiceModel.getUnits().equals(ingredient.getUnits())) {
                     ingredient.setFood(ingredientServiceModel.getFood());
                     ingredient.setQuantity(ingredientServiceModel.getQuantity());
                     ingredient.setUnits(ingredientServiceModel.getUnits());

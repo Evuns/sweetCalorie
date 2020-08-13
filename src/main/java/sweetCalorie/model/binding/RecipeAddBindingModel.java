@@ -6,6 +6,7 @@ import sweetCalorie.constant.GlobalConstants;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeAddBindingModel {
@@ -23,6 +24,7 @@ public class RecipeAddBindingModel {
     private String difficulty;
 
     public RecipeAddBindingModel() {
+        ingredients = new ArrayList<>(15);
     }
 
     @NotEmpty(message = GlobalConstants.TITLE_NEEDED)
@@ -112,7 +114,7 @@ public class RecipeAddBindingModel {
     }
 
     @NotNull(message = GlobalConstants.FIELD_NEEDED)
-    @Min(value = 0, message = "Броят на порциите " + GlobalConstants.POSITIVE_NUMBER)
+    @Min(value = 1, message = "Броят на порциите " + GlobalConstants.POSITIVE_NUMBER)
     public int getServings() {
         return servings;
     }

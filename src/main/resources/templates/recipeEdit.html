@@ -49,9 +49,11 @@
                     </div>
                     <div class="">
                         <label for="carbohydrates" class="">Въглехидрати</label>
-                        <input th:field="*{carbohydrates}" th:errorclass="bg-danger" type="text" class="" id="carbohydrates"
+                        <input th:field="*{carbohydrates}" th:errorclass="bg-danger" type="text" class=""
+                               id="carbohydrates"
                                name="carbohydrates" placeholder="гр."/>
-                        <small th:each="e : ${#fields.errors('carbohydrates')}" th:text="${e}" class="text-danger"></small>
+                        <small th:each="e : ${#fields.errors('carbohydrates')}" th:text="${e}"
+                               class="text-danger"></small>
                     </div>
                     <div class="">
                         <label for="fats" class="">Мазнини</label>
@@ -79,7 +81,7 @@
                     </div>
 
                     <div>
-                        <label for="difficulty" class="">Необходими съставки</label>
+                        <label class="">Необходими съставки</label>
                         <table>
                             <thead>
                             <tr>
@@ -90,19 +92,25 @@
                             </thead>
                             <tbody>
                             <tr th:each="ingredient, itemStat : *{ingredients}">
-                                <td><input th:field="*{ingredients[__${itemStat.index}__].food}" /></td>
-                                <td><input th:field="*{ingredients[__${itemStat.index}__].quantity}" /></td>
-                                <td><input th:field="*{ingredients[__${itemStat.index}__].units}" /></td>
+                                <td>
+                                    <label>
+                                        <input th:field="*{ingredients[__${itemStat.index}__].food}"/>
+                                    </label>
+                                </td>
+                                <td>
+                                    <label>
+                                        <input th:field="*{ingredients[__${itemStat.index}__].quantity}"/>
+                                    </label>
+                                </td>
+                                <td>
+                                    <label>
+                                        <input th:field="*{ingredients[__${itemStat.index}__].units}"/>
+                                    </label>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-<!--                    <div class="">-->
-<!--                        <label for="description" class="">Описание</label>-->
-<!--                        <input th:field="*{description}" th:errorclass="bg-danger" type="text" class="" id="description"-->
-<!--                               name="description"  class="form-textarea" cols="40" rows="6" data-component="textarea" placeholder="..."/>-->
-<!--                        <small th:each="e : ${#fields.errors('description')}" th:text="${e}" class="text-danger"></small>-->
-<!--                    </div>-->
 
                     <div class="">
                         <label for="description" class="">Напътствия за приготвяне</label>

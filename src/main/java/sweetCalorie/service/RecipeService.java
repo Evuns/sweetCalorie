@@ -1,9 +1,11 @@
 package sweetCalorie.service;
 
+import sweetCalorie.model.binding.CommentAddBindingModel;
 import sweetCalorie.model.service.CommentServiceModel;
 import sweetCalorie.model.service.RecipeServiceModel;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 public interface RecipeService {
@@ -20,7 +22,7 @@ public interface RecipeService {
 
     void deleteById(String id);
 
-    void addComment(RecipeServiceModel recipe, CommentServiceModel commentServiceModel);
+    CommentServiceModel addComment(CommentAddBindingModel commentAddBindingModel, RecipeServiceModel recipe, Principal principal);
 
     void deleteComment(RecipeServiceModel recipeServiceModel, CommentServiceModel commentServiceModel);
 

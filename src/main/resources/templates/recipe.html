@@ -22,9 +22,11 @@
                 <img class="soft-shadow" th:src="*{image}" alt="Food image">
             </div>
             <button type="submit" class="button-big" onclick="history.back()">Назад</button>
-            <a href="#" class="button-big">
-                Добави в любими
-            </a>
+
+            <form id="addToFavourite" th:action="@{/favourites/{id}(id=${recipe.id})}" method="POST">
+                <button class="button-big"> Добави в любими</button>
+            </form>
+
         </div>
 
         <div>
@@ -117,7 +119,8 @@
                     </a>
                 </th:if>
                 <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
-                    <a th:href="@{/recipes/delete/{id}(id = *{id})}" class="button-big">
+                    <a th:href="@{/recipes/delete/{id}(id = *{id})}" class="button-big"
+                       onclick="return confirm('Сигурни ли , че искате да изтриете записът?')">
                         Изтрий
                     </a>
                 </th:if>
@@ -130,34 +133,34 @@
                 <h2>Коментари</h2>
             </div>
             <div id="newCommentsForm" data-role="commentMainForm">
-                <div >
+                <div>
                     <label for="text">Коментар</label>
-                    <textarea id="text" name = "text" placeholder="Добави коментар тук!" rows="1"
-                              data-role="textarea" ></textarea>
+                    <textarea id="text" name="text" placeholder="Добави коментар тук!" rows="1"
+                              data-role="textarea"></textarea>
                     <button class="button-big"> Коментирай</button>
                 </div>
             </div>
         </form>
-
-        <th:block th:each="comment, iter : ${comments}">
-            <ul class="comment-form">
-                <li>
-                    <h6 th:utext="${#dates.format(comment.postDateTime, 'dd-MM-yyyy')}"></h6>
-                    <a class="post-username"
-                       th:href="@{/users/details/{id}(id=${comment.author.id})}"
-                       th:text="${comment.author.username}"></a>
-                    <h5 th:text="${comment.text}"></h5>
-                    <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
-                        <a th:href="@{/comments/delete/{id}(id=${comment.id})}" class="button-big">
-                            Изтрий коментар
-                        </a>
-                    </th:if>
-
-                </li>
-            </ul>
-        </th:block>
-
     </div>
+    <th:block th:each="comment, iter : ${comments}">
+        <ul class="comment-form">
+            <li>
+                <p th:utext="${#dates.format(comment.postDateTime, 'dd-MM-yyyy')}"></p>
+                <a class="post-username"
+
+                   th:text="${comment.author.username}"></a>
+                <p class="comment-form__comment" th:text="${comment.text}"></p>
+                <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
+                    <a th:href="@{/comments/delete/{id}(id=${comment.id})}" class="button-big"
+                       onclick="return confirm('Сигурни ли , че искате да изтриете коментарът?')">
+                        Изтрий коментар
+                    </a>
+                </th:if>
+
+            </li>
+        </ul>
+    </th:block>
+
 </div>
 
 <footer class="footer">

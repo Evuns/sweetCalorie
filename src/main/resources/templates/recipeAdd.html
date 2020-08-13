@@ -19,159 +19,129 @@
         <h1 class="">Вашата рецепта</h1>
         <hr class=""/>
         <form class="" th:object="${recipeAddBindingModel}" th:action="@{/recipes/add}" method="POST">
-
-            <div class="">
-                <h3 class="new-recepe__heading">Рецепта</h3>
+            <input type="submit" value="Създай рецепта" class="add_btn button-big"/>
+            <div>
                 <div class="">
-                    <label for="title" class="">Име</label>
-                    <input th:field="*{title}" th:errorclass="bg-danger" type="text" class="" id="title"
-                           name="title" placeholder="Име на рецептата"/>
-                    <small th:each="e : ${#fields.errors('title')}" th:text="${e}" class="text-danger">Грешно
-                        заглавие</small>
-                </div>
-            </div>
+                    <h3 class="new-recepe__heading">Рецепта</h3>
+                    <div class="">
+                        <label for="title" class="">Име</label>
+                        <div>
+                            <small th:each="e : ${#fields.errors('title')}" th:text="${e}" class="text-danger">Грешно
+                                заглавие</small>
+                            <input th:field="*{title}" th:errorclass="bg-danger" type="text" class="" id="title"
+                                   name="title" placeholder="Име на рецептата"/>
 
-            <h3 class="new-recepe__heading">Снимка на рецепта</h3>
-            <label class="">Постави линк към изображението</label>
-            <input th:field="*{image}" type="text" class=""
-                   placeholder="..."/>
-            <div>
-                <h3 class="new-recepe__heading">Хранително съдържание</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="new-recepe__heading">Снимка на рецепта</h3>
+                <label for="image">Постави линк към изображението</label>
+                <input th:field="*{image}" type="text" class="" id="image"
+                       placeholder="..."/>
+                <div>
+                    <h3 class="new-recepe__heading">Хранително съдържание</h3>
+                    <div class="new-recepe__nut">
+                        <label for="calories">Калории</label>
+                        <div>
+                            <small th:each="e : ${#fields.errors('calories')}" th:text="${e}"
+                                   class="text-danger"></small>
+                            <input th:field="*{calories}" th:errorclass="bg-danger" type="text" class="" id="calories"
+                                   name="calories" placeholder="cal"/>
+                        </div>
+                        <label for="fats">Мазнини</label>
+                        <div>
+                            <small th:each="e : ${#fields.errors('fats')}" th:text="${e}" class="text-danger"></small>
+                            <input th:field="*{fats}" th:errorclas="bg-danger" type="text" class="" id="fats"
+                                   placeholder="гр."/>
+                        </div>
+                        <label for="carbohydrates">Въглехидрати</label>
+                        <div>
+                            <small th:each="e : ${#fields.errors('carbohydrates')}" th:text="${e}"
+                                   class="text-danger"></small>
+                            <input th:field="*{carbohydrates}" th:errorclas="bg-danger" type="text" class=""
+                                   id="carbohydrates"
+                                   placeholder="гр."/>
+                        </div>
+                        <label for="proteins">Протеини</label>
+                        <div>
+                            <small th:each="e:${#fields.errors('proteins')}" th:text="${e}" class="text-danger"></small>
+                            <input th:field="*{proteins}" th:errorclas="bg-danger" type="text" class="" id="proteins"
+                                   placeholder="гр."/>
+                        </div>
+                    </div>
+                </div>
+                <br>
                 <div class="new-recepe__nut">
-                    <label class="">Калории</label>
-                    <input th:field="*{calories}" th:errorclass="bg-danger" type="text" class="" id="calories"
-                           name="calories" placeholder="cal"/>
-                    <small th:each="e : ${#fields.errors('calories')}" th:text="${e}" class="text-danger"></small>
-                    <label class="">Мазнини</label>
-                    <input th:field="*{fats}" th:errorclas="bg-danger" type="text" class="" id="fats"
-                           placeholder="гр."/>
-                    <small th:each="e : ${#fields.errors('fats')}" th:text="${e}" class="text-danger"></small>
-                    <label class="">Въглехидрати</label>
-                    <input th:field="*{carbohydrates}" th:errorclas="bg-danger" type="text" class="" id="carbohydrates"
-                           placeholder="гр."/>
-                    <small th:each="e : ${#fields.errors('carbohydrates')}" th:text="${e}" class="text-danger"></small>
-                    <label class="">Протеини</label>
-                    <input th:field="*{proteins}" th:errorclas="bg-danger" type="text" class="" id="proteins"
-                           placeholder="гр."/>
-                    <small th:each="e:${#fields.errors('proteins')}" th:text="${e}" class="text-danger"></small>
-                </div>
-            </div>
-            <br>
-            <div class="new-recepe__nut">
-
-
-                <label class="">Порции</label>
-                <input th:field="*{servings}" th:errorclass="bg-danger" type="text" class="" id="servings"
-                       placeholder="4"/>
-                <small th:each="e:${#fields.errors('servings')}" th:text="${e}" class="text-danger"></small>
-
-                <label class="">Приготвяне</label>
-                <input th:field="*{time}" th:errorclass="bg-danger" type="text" class="" id="time"
-                       placeholder="30 мин"/>
-                <small th:each="e:${#fields.errors('time')}" th:text="${e}" class="text-danger"></small>
-                <label class="">Трудност</label>
-                <input th:field="*{difficulty}" th:errorclass="bg-danger" type="text" class="" id="difficulty"
-                       placeholder="Лесно"/>
-                <small th:each="e:${#fields.errors('difficulty')}" th:text="${e}" class="text-danger"></small>
-
-            </div>
-
-
-            <div>
-                <label for="difficulty" class="">Необходими съставки</label>
-                <table>
-                    <thead>
-                    <tr>
-                        <th> Съставка</th>
-                        <th> Количество</th>
-                        <th> Мерна единица</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="ingredient, itemStat : *{ingredients}">
-                        <td><input th:field="*{ingredients[__${itemStat.index}__].food}" /></td>
-                        <td><input th:field="*{ingredients[__${itemStat.index}__].quantity}" /></td>
-                        <td><input th:field="*{ingredients[__${itemStat.index}__].units}" /></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-                            <!--&lt;!&ndash;                            <div class="row item"&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                 th:each="ingredient, status : ${recipeAddBindingModel.ingredients}">&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                <div class="col form-group d-none">&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                    <input th:field="*{ingredient[__${status.index}__].quantity}" type="text"&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                           class="form-control">&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                <div class="col form-group">&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                    <input th:field="*{ingredient[__${status.index}__].food}" type="text"&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                           class="form-control">&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                <div class="col form-group">&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                    <input th:field="*{ingredient[__${status.index}__].units}" type="text"&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                           class="form-control">&ndash;&gt;-->
-                            <!--&lt;!&ndash;                                </div>&ndash;&gt;-->
-                            <!--                            </div>-->
-                            <!--                        </div>-->
-                            <!--                    </div>-->
-
-                            <!--ADD NEW ROW BUTTON-->
-                            <div class="row">
-                                <div class="col">
-                                    <button type="button" class="button-big" onclick="addRow()">Добави съставка</button>
-                                </div>
-                                <!--                    </div>-->
-                                <!--                    private int quantity;-->
-                                <!--                    private String food;-->
-                                <!--                    private String units;-->
-
-                                <!--                    <label class="">Съставка №2</label>-->
-                                <!--                    <input type="text" class="" placeholder="растително масло - 3 с.л."/>-->
-
-                                <!--                    <label class="">Съставка №3</label>-->
-                                <!--                    <input type="text" class="" placeholder="зелка - 1 средно голяма"/>-->
-
-                                <!--                    <label class="">Съставка №4</label>-->
-                                <!--                    <input type="text" class="" placeholder="чушки - 3 червени"/>-->
-
-                                <!--                    <label class="">Съставка №5</label>-->
-                                <!--                    <input type="text" class="" placeholder="моркови - 1 бр."/>-->
-
-                                <!--                    <label class="">Съставка №6</label>-->
-                                <!--                    <input type="text" class="" placeholder="домати - 1 добре узрял"/>-->
-
-                                <!--                    <label class="">Съставка №7</label>-->
-                                <!--                    <input type="text" class="" placeholder="целина - 4 стръка"/>-->
-
-                                <!--                    <label class="">Съставка №8</label>-->
-                                <!--                    <input type="text" class="" placeholder="червен пипер - 2 ч.л."/>-->
-
-                                <!--                    <label class="">Съставка №9</label>-->
-                                <!--                    <input type="text" class="" placeholder="черен пипер - 1 ч.л. смлян"/>-->
-
-                                <!--                    <label class="">Съставка №10</label>-->
-                                <!--                    <input type="text" class="" placeholder="сол"/>-->
-                            </div>
-
-<!--                        </div>-->
-<!--                    </div>-->
+                    <label for="servings">Порции</label>
+                    <div>
+                        <small th:each="e:${#fields.errors('servings')}" th:text="${e}" class="text-danger"></small>
+                        <input th:field="*{servings}" th:errorclass="bg-danger" type="text" class="" id="servings"
+                               placeholder="4"/>
+                    </div>
+                    <label for="time">Приготвяне</label>
+                    <div>
+                        <small th:each="e:${#fields.errors('time')}" th:text="${e}" class="text-danger"></small>
+                        <input th:field="*{time}" th:errorclass="bg-danger" type="text" class="" id="time"
+                               placeholder="30 мин"/>
+                    </div>
+                    <label for="difficulty">Трудност</label>
+                    <div>
+                        <small th:each="e:${#fields.errors('difficulty')}" th:text="${e}" class="text-danger"></small>
+                        <input th:field="*{difficulty}" th:errorclass="bg-danger" type="text" class="" id="difficulty"
+                               placeholder="Лесно"/>
+                    </div>
 
 
                     <div>
-                        <h3 class="new-recepe__heading">НАЧИН НА ПРИГОТВЯНЕ</h3>
-                        <div class="">
-                            <label class="">Напътствия за приготвяне</label>
-                            <textarea th:field="*{description}" th:errorclass="bg-danger" type="text" id="description"
-                                      class="form-textarea" cols="40" rows="6" data-component="textarea"
-                                      placeholder="..."></textarea>
-                            <small th:each="e:${#fields.errors('description')}" th:text="${e}"
-                                   class="text-danger"></small>
-                        </div>
+                        <form>
+                            <label for="food">Храна</label>
+                            <input id="food" placeholder="Наименование"
+                                   th:field="*{ingredients[0].food}" type="text">
+                            <label for="quantity">Количество</label>
+                            <input id="quantity" placeholder="Наименование"
+                                   th:field="*{ingredients[0].quantity}" type="text">
+                            <label for="units">Мерна единица</label>
+                            <input id="units" placeholder="Наименование"
+                                   th:field="*{ingredients[0].units}" type="text">
+                            <input type="button" class="add-row button-big" value="Добави съставка">
+                        </form>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Избери</th>
+                                <th>Наименование</th>
+                                <th>Количество</th>
+                                <th>Мерна единица</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr></tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="delete-row">Изтрий съставка</button>
+
+
                     </div>
 
-                    <button type="submit" class="contact100-form-btn">
-                        Създай рецепта
-                    </button>
+                </div>
 
+
+                <!--            <button type="submit" class="contact100-form-btn">-->
+                <!--                Създай рецепта-->
+                <!--            </button>-->
+                <div>
+                    <h3 class="new-recepe__heading">НАЧИН НА ПРИГОТВЯНЕ</h3>
+                    <div class="">
+                        <label for="description">Начин на приготвяне</label>
+                        <textarea th:field="*{description}" th:errorclass="bg-danger" type="text" id="description"
+                                  class="form-textarea" cols="40" rows="6" data-component="textarea"
+                                  placeholder="..."></textarea>
+                        <small th:each="e:${#fields.errors('description')}" th:text="${e}"
+                               class="text-danger"></small>
+                    </div>
+                </div>
+            </div>
         </form>
     </main>
 </div>
@@ -184,30 +154,25 @@
 
 </body>
 
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script>
-    let addRow = function () {
-        let listName = 'ingredients';
-        let fieldsNames = ['quantity', 'food', 'units'];
-        let rowIndex = document.querySelectorAll('.item').length;
-
-        let row = document.createElement('div');
-        row.classList.add('row', 'item');
-
-        fieldsNames.forEach((fieldName) => {
-            let col = document.createElement('div');
-            col.classList.add('col', 'form-group');
-
-            let input = document.createElement('input');
-            input.type = 'text';
-            input.classList.add('form-control');
-            input.id = listName + rowIndex + '.' + fieldName;
-            input.setAttribute('name', listName + '[' + rowIndex + '].' + fieldName);
-
-            col.appendChild(input);
-            row.appendChild(col);
+    $(document).ready(function () {
+        $(".add-row").click(function () {
+            var food = $("#food").val();
+            var quantity = $("#quantity").val();
+            var units = $("#units").val();
+            var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + food + "</td><td>" + quantity + "</td><td>" + units + "</td></tr>";
+            $("table tbody").append(markup);
         });
-        document.getElementById('ingredients').appendChild(row);
-    };
+
+        $(".delete-row").click(function () {
+            $("table tbody").find('input[name="record"]').each(function () {
+                if ($(this).is(":checked")) {
+                    $(this).parents("tr").remove();
+                }
+            });
+        });
+    });
 </script>
 </html>
 

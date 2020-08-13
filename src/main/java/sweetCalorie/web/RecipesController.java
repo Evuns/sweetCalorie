@@ -8,9 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import sweetCalorie.model.binding.IngredientBindingModel;
 import sweetCalorie.model.binding.RecipeAddBindingModel;
-import sweetCalorie.model.service.FoodServiceModel;
 import sweetCalorie.model.service.RecipeServiceModel;
 import sweetCalorie.service.RecipeService;
 
@@ -56,11 +54,10 @@ public class RecipesController {
     }
 
     @PostMapping("/add")
-    public String successfullyAdd(@Valid @ModelAttribute("recipeAddBindingModel")
-                                          RecipeAddBindingModel recipeAddBindingModel,
-                                  @ModelAttribute("ingredientBindingModel")
-                                          IngredientBindingModel ingredientBindingModel,
-                                  BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String successfullyAdd(@ModelAttribute("recipeAddBindingModel")
+                                  @Valid RecipeAddBindingModel recipeAddBindingModel,
+                                  BindingResult bindingResult, Model model,
+                                  RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("recipeAddBindingModel", recipeAddBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.recipeAddBindingModel", bindingResult);
@@ -69,7 +66,7 @@ public class RecipesController {
 
         this.recipeService.addRecipe(this.modelMapper
                 .map(recipeAddBindingModel, RecipeServiceModel.class));
-        return "redirect:allRecipes";
+        return "redirect:/recipes";
     }
 
     @PreAuthorize("hasRole('ROLE_MODERATOR')")

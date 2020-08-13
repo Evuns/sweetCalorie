@@ -26,11 +26,9 @@
                 <div class="card-body pb-1">
                     <h5 class="card-title text-center" th:text="*{title}"></h5>
                 </div>
-
             </a>
         </div>
     </div>
-</div>
 </div>
     <button onclick="window.history.back()" type="submit" class="button-big">Назад</button>
     <th:if sec:authorize="hasRole('ROLE_MODERATOR')">
@@ -38,6 +36,8 @@
             Добави нова
         </a>
     </th:if>
+</div>
+
 </div>
 <footer class="footer">
     <th:block th:include="~{fragments/footer}"></th:block>
