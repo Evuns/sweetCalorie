@@ -21,7 +21,7 @@ public class Comment extends BaseEntity {
     public Comment() {
     }
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     public User getAuthor() {
         return author;
     }

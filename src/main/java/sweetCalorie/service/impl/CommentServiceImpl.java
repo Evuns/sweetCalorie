@@ -8,6 +8,7 @@ import sweetCalorie.model.service.CommentServiceModel;
 import sweetCalorie.model.service.RecipeServiceModel;
 import sweetCalorie.repository.CommentRepository;
 import sweetCalorie.service.CommentService;
+import sweetCalorie.service.UserProfileService;
 import sweetCalorie.service.UserService;
 
 import java.util.List;
@@ -19,18 +20,21 @@ public class CommentServiceImpl implements CommentService {
     private final ModelMapper modelMapper;
     private final CommentRepository commentRepository;
     private final UserService userService;
+    private final UserProfileService userProfileService;
 
     public CommentServiceImpl(ModelMapper modelMapper, CommentRepository commentRepository,
-                              UserService userService) {
+                              UserService userService, UserProfileService userProfileService) {
         this.modelMapper = modelMapper;
         this.commentRepository = commentRepository;
         this.userService = userService;
+        this.userProfileService = userProfileService;
     }
 
     @Override
     public CommentServiceModel createComment(CommentServiceModel commentServiceModel) {
         Comment comment = this.modelMapper.map(commentServiceModel, Comment.class);
-        return this.modelMapper.map(this.commentRepository.saveAndFlush(comment), CommentServiceModel.class);
+        this.commentRepository.saveAndFlush(comment);
+        return this.modelMapper.map(comment, CommentServiceModel.class);
     }
 
     @Override

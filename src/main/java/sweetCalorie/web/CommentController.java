@@ -9,16 +9,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sweetCalorie.model.binding.CommentAddBindingModel;
-import sweetCalorie.model.entity.Recipe;
+import sweetCalorie.model.entity.User;
+import sweetCalorie.model.entity.UserProfile;
 import sweetCalorie.model.service.CommentServiceModel;
 import sweetCalorie.model.service.RecipeServiceModel;
+import sweetCalorie.model.service.UserProfileServiceModel;
 import sweetCalorie.service.CommentService;
 import sweetCalorie.service.RecipeService;
+import sweetCalorie.service.UserProfileService;
 import sweetCalorie.service.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Date;
 
 @Controller
 @RequestMapping("/comments")
@@ -28,13 +30,15 @@ public class CommentController {
     private final UserService userService;
     private final CommentService commentService;
     private final RecipeService recipeService;
+    private final UserProfileService userProfileService;
 
     public CommentController(ModelMapper modelMapper, UserService userService,
-                             CommentService commentService, RecipeService recipeService) {
+                             CommentService commentService, RecipeService recipeService, UserProfileService userProfileService) {
         this.modelMapper = modelMapper;
         this.userService = userService;
         this.commentService = commentService;
         this.recipeService = recipeService;
+        this.userProfileService = userProfileService;
     }
 
     @PostMapping("/commentRecipe/{id}")
@@ -46,20 +50,12 @@ public class CommentController {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("commentAddBindingModel", commentAddBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.commentAddBindingModel", bindingResult);
-        return "redirect:/recipes/details/?id=" + id;
+            return "redirect:/recipes/details/?id=" + id;
         }
-        CommentServiceModel commentServiceModel = this.modelMapper
-                .map(commentAddBindingModel, CommentServiceModel.class);
-        commentServiceModel.setAuthor(
-                this.userService.findByUsername(principal.getName()));
+        this.recipeService.addComment(commentAddBindingModel,
+                this.recipeService.findById(id),
+                principal);
 
-        commentServiceModel.setPostDateTime(new Date());
-        if (this.recipeService.findById(id) != null) {
-            RecipeServiceModel recipe = this.recipeService.findById(id);
-            commentServiceModel.setRecipeServiceModel(recipe);
-            CommentServiceModel com = this.commentService.createComment(commentServiceModel);
-            this.recipeService.addComment(recipe, this.commentService.findById(com.getId()));
-        }
         return "redirect:/recipes/details/?id=" + id;
     }
 
