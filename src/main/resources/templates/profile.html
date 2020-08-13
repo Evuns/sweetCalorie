@@ -1,0 +1,100 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Карта на сайта</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+
+<body>
+
+<div class="empty"></div>
+<header class="nav-container" id="navbar">
+    <th:block th:include="~{fragments/nav}"></th:block>
+</header>
+
+<th:block th:include="~{fragments/background}"></th:block>
+
+
+<div class="wrapper wrap-padding" th:object="${userProfileServiceModel}">
+
+    <h1 class="category_heading__style">
+        Профил
+        <span class="paint-pen">
+      </span>
+    </h1>
+
+    <div class="profile_container">
+
+        <button class="collapsible">Любими рецепти</button>
+        <div class="content">
+
+            <!--            <div class="food-images__image" th:each= "recipe : ${recipeServiceModelList}" th:object="${recipe}">-->
+            <!--                <a th:href="@{/recipes/details/(id = *{id})}">-->
+            <!--                    <div class="card-img-top-wrapper">-->
+            <!--                        <img class="food_icon" th:src="*{image}" alt="image">-->
+            <!--                    </div>-->
+            <!--                    <div class="card-body pb-1">-->
+            <!--                        <h5 class="card-title text-center" th:text="*{title}"></h5>-->
+            <!--                    </div>-->
+
+            <!--                </a>-->
+            <!--            </div>-->
+            <ul class="content_list" th:each="recipe: ${userProfileServiceModel.getRecipes()}" th:object="${recipe}">
+                <li>
+                    <a th:href="@{/recipes/details/(id = *{id})}" th:text="*{title}">
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <button class="collapsible">Любими храни</button>
+        <div class="content">
+            <ul class="content_list" th:each="food: ${userProfileServiceModel.getFoods()}" th:object="${food}">
+                <li>
+                    <a th:href="@{/foods/details/(id = *{id})}" th:text="*{name}">
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<div class="banner">
+    <div class="wrapper">
+        <div class="banner__section">
+            <h3 class="noselect">
+                Никога не е късно да започнеш да се грижиш за себе си!
+            </h3>
+            <div class="banner__img">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("collapsible_active");
+            var content = this.nextElementSibling;
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        });
+    }
+</script>
+
+
+<footer class="footer">
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+
+
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>
