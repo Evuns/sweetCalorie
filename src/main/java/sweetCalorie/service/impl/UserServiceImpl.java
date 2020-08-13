@@ -117,8 +117,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(String id) {
+        //Todo
         User user = this.userRepository.findById(id).orElse(null);
-        UserProfile userProfile = this.userProfileRepository.findByUserId(id);
+        UserProfile userProfile = this.userProfileRepository.findByUser(user).orElse(null);
 
         user.getAuthorities().remove(user);
         this.userProfileRepository.delete(userProfile);

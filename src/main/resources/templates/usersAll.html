@@ -64,14 +64,18 @@
                                 </th:block>
                             </div>
 
-<!--                        <td class="col-md-2 text-center">-->
-<!--                            <form id="add-product-form" class="form w-15 mx-auto"-->
-<!--                                  th:action="@{/users/delete/{id}(id=${user.id})}" method="post">-->
-<!--                                <div class="button-holder d-flex justify-content-center">-->
-<!--                                    <button type="submit" class="btn btn-danger">Изтрий потребител</button>-->
-<!--                                </div>-->
-<!--                            </form>-->
-<!--                        </td>-->
+                        <td class="col-md-2 text-center">
+                        <th:block th:if="${#lists.contains(user.authorities, 'ROLE_USER') &&
+                         !#lists.contains(user.authorities, 'ROLE_ADMIN')
+                        }">
+                            <form id="add-product-form" class="form w-15 mx-auto"
+                                  th:action="@{/users/delete/{id}(id=${user.id})}" method="post">
+                                <div class="button-holder d-flex justify-content-center">
+                                    <button type="submit" class="change_authority autority_admin">Изтрий потребител</button>
+                                </div>
+                            </form>
+                        </th:block>
+                        </td>
                     </th:block>
                 </tr>
             </th:block>

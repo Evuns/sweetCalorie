@@ -12,8 +12,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import sweetCalorie.model.binding.UserLoginBindingModel;
 import sweetCalorie.model.binding.UserRegisterBindingModel;
 import sweetCalorie.model.entity.Role;
+import sweetCalorie.model.entity.User;
 import sweetCalorie.model.service.UserServiceModel;
 import sweetCalorie.model.view.UserAllViewModel;
+import sweetCalorie.service.UserProfileService;
 import sweetCalorie.service.UserService;
 import sweetCalorie.validation.UserRegisterValidator;
 import javax.servlet.http.HttpSession;
@@ -30,11 +32,13 @@ public class UsersController {
     private final UserService userService;
     private final ModelMapper modelMapper;
     private final UserRegisterValidator userRegisterValidator;
+    private final UserProfileService userProfileService;
 
     @Autowired
-    public UsersController(UserService userService, ModelMapper modelMapper) {
+    public UsersController(UserService userService, ModelMapper modelMapper, UserProfileService userProfileService) {
         this.userService = userService;
         this.modelMapper = modelMapper;
+        this.userProfileService = userProfileService;
         this.userRegisterValidator = new UserRegisterValidator(this.userService);
     }
 
@@ -57,7 +61,6 @@ public class UsersController {
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
             return "redirect:register";
         }
-
         this.userService.registerUser(this.modelMapper
                 .map(userRegisterBindingModel, UserServiceModel.class));
         return "redirect:login";
@@ -74,7 +77,7 @@ public class UsersController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/logout")
-    public String logout(HttpSession httpSession){
+    public String logout(HttpSession httpSession) {
         httpSession.invalidate();
         return "redirect:/users/login";
     }
@@ -112,7 +115,7 @@ public class UsersController {
         modelAndView.addObject("username", principal.getName());
         modelAndView.setViewName("usersAll");
 
-        return  modelAndView;
+        return modelAndView;
     }
 
     @PostMapping("/delete/{id}")
@@ -121,5 +124,16 @@ public class UsersController {
         this.userService.deleteUser(id);
 
         return "redirect:/users";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/details/profile")
+    public String logout(Principal principal, Model model) {
+        if (!model.containsAttribute("userProfileServiceModel")) {
+            model.addAttribute("userProfileServiceModel",
+                    this.userProfileService.findByUser(this.modelMapper.map(
+                            this.userService.findByUsername(principal.getName()), User.class)));
+        }
+        return "profile";
     }
 }

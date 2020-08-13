@@ -32,6 +32,10 @@ public class User extends BaseEntity implements UserDetails {
         this.authorities = new HashSet<>();
     }
 
+    public User(String username, String password, String email) {
+        this.authorities = new HashSet<>();
+    }
+
     @Column(unique = true, nullable = false, updatable = false)
     @Length(min = 5, max = 20)
     @Pattern(regexp = "^[\\p{L}\\d\\w]+$")

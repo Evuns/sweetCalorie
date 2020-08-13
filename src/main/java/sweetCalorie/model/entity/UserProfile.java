@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,15 +17,18 @@ public class UserProfile extends BaseEntity {
 
     private User user;
     private int height;
-    private WeightCalendar weightCalendar;
+    //    private WeightCalendar weightCalendar;
     private Gender gender;
-    private LocalDate dateOfBirth;
+    //    private LocalDate dateOfBirth;
     private int age;
     private ActivityLevel activityLevel;
     private List<Recipe> recipes;
-    private List<Comment> comments;
+    private List<Food> foods;
 
     public UserProfile() {
+        this.recipes = new ArrayList<>();
+        this.foods = new ArrayList<>();
+
     }
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -50,14 +54,14 @@ public class UserProfile extends BaseEntity {
         this.height = height;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
-    public WeightCalendar getWeightCalendar() {
-        return weightCalendar;
-    }
-
-    public void setWeightCalendar(WeightCalendar weightCalendar) {
-        this.weightCalendar = weightCalendar;
-    }
+//    @OneToOne(cascade = CascadeType.ALL)
+//    public WeightCalendar getWeightCalendar() {
+//        return weightCalendar;
+//    }
+//
+//    public void setWeightCalendar(WeightCalendar weightCalendar) {
+//        this.weightCalendar = weightCalendar;
+//    }
 
     @Enumerated
     public Gender getGender() {
@@ -68,17 +72,17 @@ public class UserProfile extends BaseEntity {
         this.gender = gender;
     }
 
+//    @Column
+//    @Past
+//    public LocalDate getDateOfBirth() {
+//        return dateOfBirth;
+//    }
+//
+//    public void setDateOfBirth(LocalDate dateOfBirth) {
+//        this.dateOfBirth = dateOfBirth;
+//    }
+
     @Column
-    @Past
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    @Formula(value = "date_part('year', age(dateOfBirth))")
     public int getAge() {
         return age;
     }
@@ -96,7 +100,8 @@ public class UserProfile extends BaseEntity {
         this.activityLevel = activityLevel;
     }
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true)
     public List<Recipe> getRecipes() {
         return recipes;
     }
@@ -105,12 +110,13 @@ public class UserProfile extends BaseEntity {
         this.recipes = recipes;
     }
 
-    @OneToMany
-    public List<Comment> getComments() {
-        return comments;
+    @OneToMany(cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    public List<Food> getFoods() {
+        return foods;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
+    public void setFoods(List<Food> foods) {
+        this.foods = foods;
     }
 }
