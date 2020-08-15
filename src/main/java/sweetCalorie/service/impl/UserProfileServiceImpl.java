@@ -55,21 +55,6 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public void delete(String id) {
-
-    }
-
-    @Override
-    public List<RecipeServiceModel> findAllRecipes(String id) {
-        return null;
-    }
-
-    @Override
-    public List<FoodServiceModel> findAllFoods(String id) {
-        return null;
-    }
-
-    @Override
     public UserProfileServiceModel findByUser(User user) {
         return this.modelMapper.map(this.userProfileRepository
                 .findByUser(user).orElse(null), UserProfileServiceModel.class);

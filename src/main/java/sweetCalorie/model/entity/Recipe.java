@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,26 @@ public class Recipe extends BaseEntity {
     private List<Comment> comments;
 
     public Recipe() {
+        this.comments = new ArrayList<>();
+        this.ingredients = new ArrayList<>();
+    }
+
+    public Recipe( String title, String description, String image, int calories,
+           int carbohydrates, int fats, int proteins, int time, int servings,
+           String difficulty) {
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.postDate = new Date();
+        this.calories = calories;
+        this.carbohydrates = carbohydrates;
+        this.fats = fats;
+        this.proteins = proteins;
+        this.time = time;
+        this.servings = servings;
+        this.difficulty = difficulty;
+        this.comments = new ArrayList<>();
+        this.ingredients = new ArrayList<>();
     }
 
     @Column(nullable = false, unique = true)

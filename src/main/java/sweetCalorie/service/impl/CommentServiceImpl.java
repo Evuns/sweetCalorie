@@ -31,10 +31,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public CommentServiceModel createComment(CommentServiceModel commentServiceModel) {
+    public void createComment(CommentServiceModel commentServiceModel) {
         Comment comment = this.modelMapper.map(commentServiceModel, Comment.class);
         this.commentRepository.saveAndFlush(comment);
-        return this.modelMapper.map(comment, CommentServiceModel.class);
+        //this.modelMapper.map(comment, CommentServiceModel.class);
     }
 
     @Override

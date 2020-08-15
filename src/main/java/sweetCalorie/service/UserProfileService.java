@@ -12,11 +12,5 @@ public interface UserProfileService {
 
     void addFavouriteFood(UserServiceModel userServiceModel, FoodServiceModel foodServiceModel);
 
-    void delete(String id);
-
-    List<RecipeServiceModel> findAllRecipes(String id);
-
-    List<FoodServiceModel> findAllFoods(String id);
-
     UserProfileServiceModel findByUser(User user);
 }

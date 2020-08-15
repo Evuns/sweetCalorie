@@ -30,10 +30,6 @@ public class UserProfileController {
         this.foodService = foodService;
     }
 
-//    @GetMapping("favourite/{id}")
-//    @PreAuthorize("isAuthenticated()")
-//    public String addToFavouriteRecipe(@PathVariable String id,
-//
 
     @PostMapping("/{id}")
     @PreAuthorize("isAuthenticated()")

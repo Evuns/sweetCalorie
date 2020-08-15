@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrfTokenRepository(csrfTokenRepository())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/css/**", "/images/**", "/contacts", "/").permitAll()
+                .antMatchers("/css/**", "/images/**", "/contacts", "/","/about").permitAll()
                 .antMatchers( "/users/register", "/users/login").anonymous()
                 .antMatchers("/admin/**").hasAnyAuthority("ROLE_MODERATOR")
                 .antMatchers("/new/**").hasAnyAuthority("ROLE_MODERATOR")

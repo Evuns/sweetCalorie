@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CommentService {
 
-    CommentServiceModel createComment(CommentServiceModel commentServiceModel);
+    void createComment(CommentServiceModel commentServiceModel);
 
     CommentServiceModel findById(String id);
 

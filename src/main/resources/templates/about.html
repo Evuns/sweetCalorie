@@ -1,0 +1,66 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Exception</title>
+    <th:block th:include="~{fragments/head}"></th:block>
+</head>
+
+<body>
+<div class="empty"></div>
+<header class="nav-container" id="navbar">
+    <th:block th:include="~{fragments/nav}"></th:block>
+</header>
+
+<th:block th:include="~{fragments/background}"></th:block>
+
+<div class="wrapper">
+    <div class="section recepe-grid">
+
+        <div>
+            <div class=" recepe-grid__image">
+                <img class="soft-shadow" src="../images/hero-imagetLog.png" alt="Hero image">
+            </div>
+            <button type="submit" class="button-big" onclick="history.back()">Назад</button>
+
+        </div>
+
+        <div>
+            <h2>
+                Надявам се сайтът да ви е харесал
+            </h2>
+            <p class="normal-text">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Aliquam animi beatae culpa dicta ducimus ea eius impedit ipsa iusto laudantium libero,
+                modi necessitatibus omnis optio quisquam saepe sequi, tempore voluptatibus!
+            </p>
+            <p class="normal-text">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam assumenda cupiditate
+                distinctio dolorum exercitationem facere magni necessitatibus officiis? Aspernatur ducimus,
+                facilis. Dolore, fuga, vel. Atque fugit ipsum nemo quas ratione?
+            </p>
+            <p class="normal-text">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam assumenda cupiditate
+                distinctio dolorum exercitationem facere magni necessitatibus officiis? Aspernatur ducimus,
+                facilis. Dolore, fuga, vel. Atque fugit ipsum nemo quas ratione?
+            </p>
+            <p class="normal-text">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam assumenda cupiditate
+                distinctio dolorum exercitationem facere magni necessitatibus officiis? Aspernatur ducimus,
+                facilis. Dolore, fuga, vel. Atque fugit ipsum nemo quas ratione?
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+<footer class="footer">
+    <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+
+<th:block th:include="~{fragments/function}"></th:block>
+
+</body>
+</html>

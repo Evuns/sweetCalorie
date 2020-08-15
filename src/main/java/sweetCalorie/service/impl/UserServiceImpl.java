@@ -13,6 +13,7 @@ import sweetCalorie.repository.UserProfileRepository;
 import sweetCalorie.repository.UserRepository;
 import sweetCalorie.service.RoleService;
 import sweetCalorie.service.UserService;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -96,32 +97,27 @@ public class UserServiceImpl implements UserService {
     public void setUserRole(String id, String role) {
         User user = this.userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Incorrect id!"));
-
-        UserServiceModel userServiceModel = this.modelMapper.map(user, UserServiceModel.class);
-        userServiceModel.getAuthorities().clear();
-
+        user.getAuthorities().clear();
         switch (role) {
             case "user":
-                userServiceModel.getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
+                user.getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
                 break;
             case "moderator":
-                userServiceModel.getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
-                userServiceModel.getAuthorities().add(this.roleService.findByAuthority("ROLE_MODERATOR"));
+                user.getAuthorities().add(this.roleService.findByAuthority("ROLE_USER"));
+                user.getAuthorities().add(this.roleService.findByAuthority("ROLE_MODERATOR"));
                 break;
         }
-
-        User userChangeAuthority = this.modelMapper.map(userServiceModel, User.class);
-        arrangeUserStatus(userChangeAuthority);
-        this.userRepository.saveAndFlush(userChangeAuthority);
+        this.userRepository.saveAndFlush(user);
     }
 
     @Override
     public void deleteUser(String id) {
-        //Todo
         User user = this.userRepository.findById(id).orElse(null);
         UserProfile userProfile = this.userProfileRepository.findByUser(user).orElse(null);
 
+        assert user != null;
         user.getAuthorities().remove(user);
+        assert userProfile != null;
         this.userProfileRepository.delete(userProfile);
         this.userRepository.delete(user);
     }
