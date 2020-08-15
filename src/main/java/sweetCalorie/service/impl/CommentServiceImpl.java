@@ -63,14 +63,14 @@ public class CommentServiceImpl implements CommentService {
         this.commentRepository.deleteById(id);
     }
 
-    @Override
-    public CommentServiceModel editComment(String id, CommentServiceModel commentServiceModel) {
-        Comment comment = this.commentRepository.findById(id)
-                .orElseThrow(IllegalArgumentException::new);
-        if (!commentServiceModel.getText().isEmpty()) {
-            comment.setText(commentServiceModel.getText());
-        }
-        return this.modelMapper.map(this.commentRepository.saveAndFlush(comment),
-                CommentServiceModel.class);
-    }
+//    @Override
+//    public CommentServiceModel editComment(String id, CommentServiceModel commentServiceModel) {
+//        Comment comment = this.commentRepository.findById(id)
+//                .orElseThrow(IllegalArgumentException::new);
+//        if (!commentServiceModel.getText().isEmpty()) {
+//            comment.setText(commentServiceModel.getText());
+//        }
+//        return this.modelMapper.map(this.commentRepository.saveAndFlush(comment),
+//                CommentServiceModel.class);
+//    }
 }

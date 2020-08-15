@@ -1,5 +1,7 @@
 package sweetCalorie.service.impl;
 
+import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -8,6 +10,7 @@ import org.mockito.Mockito;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.test.context.support.WithMockUser;
 import sweetCalorie.model.entity.Role;
 import sweetCalorie.model.entity.User;
 import sweetCalorie.model.entity.UserProfile;
@@ -138,6 +141,11 @@ class UserServiceImplTest {
     }
 
 //    @Test
+//    public void deleteById_ShouldWork(){
+//        this.userService.deleteUser("1");
+//        Mockito.verify(userRepository).deleteById("1");
+//    }
+//    @Test
 //    public void deleteByIdShouldDeleteUser() {
 //        UserProfile userProfile = new UserProfile();
 //        userProfile.setUser(user);
@@ -146,4 +154,5 @@ class UserServiceImplTest {
 //        userService.deleteUser("1");
 //        Mockito.verify(userRepository).deleteById("1");
 //    }
+
 }

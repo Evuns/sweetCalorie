@@ -14,5 +14,5 @@ public interface CommentService {
 
     void deleteComment(String id);
 
-    CommentServiceModel editComment(String id, CommentServiceModel commentServiceModel);
+   // CommentServiceModel editComment(String id, CommentServiceModel commentServiceModel);
 }
