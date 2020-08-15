@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Length;
 import sweetCalorie.constant.GlobalConstants;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -28,7 +29,7 @@ public class UserRegisterBindingModel {
         this.username = username;
     }
 
-    @NotNull(message = GlobalConstants.EMAIL_NEEDED)
+    @NotEmpty(message = GlobalConstants.EMAIL_NEEDED)
     @Email(message = GlobalConstants.VALID_EMAIL)
     public String getEmail() {
         return email;
